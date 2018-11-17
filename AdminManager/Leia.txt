@@ -1,0 +1,8 @@
+a pasta a ser selecionada no Fivem - server admin deve ser acima dessa
+
+digamos que estejamos aqui
+
+
+Fivem\NewZentryLife\AdminManager
+ a pasta selecionada deve ser
+Fivem\
