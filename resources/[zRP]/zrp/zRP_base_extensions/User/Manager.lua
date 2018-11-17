@@ -6,4 +6,6 @@
 
 local tables = module("zRP_base_extensions/User/tables")
 
-local tables = module("zRP_base_extensions/User/base")
+local user = module("zRP_base_extensions/User/User")
+
+

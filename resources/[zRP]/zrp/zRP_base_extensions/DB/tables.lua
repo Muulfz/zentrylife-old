@@ -53,3 +53,4 @@ zRP.prepare("zRP/set_whitelisted","UPDATE zrp_users SET whitelisted = @whitelist
 zRP.prepare("zRP/set_last_login","UPDATE zrp_users SET last_login = @last_login WHERE id = @user_id")
 zRP.prepare("zRP/get_last_login","SELECT last_login FROM zrp_users WHERE id = @user_id")
 
+

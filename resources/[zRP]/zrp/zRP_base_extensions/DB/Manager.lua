@@ -126,4 +126,4 @@ end)
 
 
 local mysql_tables = module("zRP_base_extensions/DB/tables")
-
+local Database = module("zRP_base_extensions/DB/Database")
