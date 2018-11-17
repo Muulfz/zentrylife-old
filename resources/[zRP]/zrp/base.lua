@@ -25,107 +25,18 @@ end
 -- init
 zRPclient = Tunnel.getInterface("zRP") -- server -> client tunnel
 
-local user_tables = module("zRP_base_extensions/User/tables") --TODO PCALL
+local user = module("zRP_base_extensions/User/Manager") --TODO PCALL
 
 local db_manager = module("zRP_base_extensions/DB/Manager") --TODO PCALL
--- queries
-zRP.prepare("zRP/base_tables",[[
-CREATE TABLE IF NOT EXISTS zrp_users(
-  id INTEGER AUTO_INCREMENT,
-  last_login VARCHAR(255),
-  whitelisted BOOLEAN,
-  banned BOOLEAN,
-  CONSTRAINT pk_user PRIMARY KEY(id)
-);
-
-CREATE TABLE IF NOT EXISTS zrp_user_ids(
-  identifier VARCHAR(100),
-  user_id INTEGER,
-  CONSTRAINT pk_user_ids PRIMARY KEY(identifier),
-  CONSTRAINT fk_user_ids_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS zrp_user_data(
-  user_id INTEGER,
-  dkey VARCHAR(100),
-  dvalue TEXT,
-  CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
-  CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS zrp_srv_data(
-  dkey VARCHAR(100),
-  dvalue TEXT,
-  CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
-);
-]])
-
-zRP.prepare("zRP/create_user","INSERT INTO zrp_users(whitelisted,banned) VALUES(false,false); SELECT LAST_INSERT_ID() AS id")
-zRP.prepare("zRP/add_identifier","INSERT INTO zrp_user_ids(identifier,user_id) VALUES(@identifier,@user_id)")
-zRP.prepare("zRP/userid_byidentifier","SELECT user_id FROM zrp_user_ids WHERE identifier = @identifier")
-
-zRP.prepare("zRP/set_userdata","REPLACE INTO zrp_user_data(user_id,dkey,dvalue) VALUES(@user_id,@key,@value)")
-zRP.prepare("zRP/get_userdata","SELECT dvalue FROM zrp_user_data WHERE user_id = @user_id AND dkey = @key")
-
-zRP.prepare("zRP/set_srvdata","REPLACE INTO zrp_srv_data(dkey,dvalue) VALUES(@key,@value)")
-zRP.prepare("zRP/get_srvdata","SELECT dvalue FROM zrp_srv_data WHERE dkey = @key")
-
-zRP.prepare("zRP/get_banned","SELECT banned FROM zrp_users WHERE id = @user_id")
-zRP.prepare("zRP/set_banned","UPDATE zrp_users SET banned = @banned WHERE id = @user_id")
-zRP.prepare("zRP/get_whitelisted","SELECT whitelisted FROM zrp_users WHERE id = @user_id")
-zRP.prepare("zRP/set_whitelisted","UPDATE zrp_users SET whitelisted = @whitelisted WHERE id = @user_id")
-zRP.prepare("zRP/set_last_login","UPDATE zrp_users SET last_login = @last_login WHERE id = @user_id")
-zRP.prepare("zRP/get_last_login","SELECT last_login FROM zrp_users WHERE id = @user_id")
 
 -- init tables
 print("[zRP] init base tables")
 async(function()
   zRP.execute("zRP/base_tables")
 end)
-
 -- identification system
 
 --- sql.
--- return user id or nil in case of error (if not found, will create it)
-function zRP.getUserIdByIdentifiers(ids)
-  if ids and #ids then
-    -- search identifiers
-    for i=1,#ids do
-      if not config.ignore_ip_identifier or (string.find(ids[i], "ip:") == nil) then  -- ignore ip identifier
-        local rows = zRP.query("zRP/userid_byidentifier", {identifier = ids[i]})
-        if #rows > 0 then  -- found
-          return rows[1].user_id
-        end
-      end
-    end
-
-    -- no ids found, create user
-    local rows, affected = zRP.query("zRP/create_user", {})
-
-    if #rows > 0 then
-      local user_id = rows[1].id
-      -- add identifiers
-      for l,w in pairs(ids) do
-        if not config.ignore_ip_identifier or (string.find(w, "ip:") == nil) then  -- ignore ip identifier
-          zRP.execute("zRP/add_identifier", {user_id = user_id, identifier = w})
-        end
-      end
-
-      return user_id
-    end
-  end
-end
-
--- return identification string for the source (used for non zRP identifications, for rejected players)
-function zRP.getSourceIdKey(source)
-  local ids = GetPlayerIdentifiers(source)
-  local idk = "idk_"
-  for k,v in pairs(ids) do
-    idk = idk..v
-  end
-
-  return idk
-end
 
 function zRP.getPlayerEndpoint(player)
   return GetPlayerEP(player) or "0.0.0.0"

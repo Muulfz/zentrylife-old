@@ -123,3 +123,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(5000)
     end
 end)
+
+
+local mysql_tables = module("zRP_base_extensions/DB/tables")
+
