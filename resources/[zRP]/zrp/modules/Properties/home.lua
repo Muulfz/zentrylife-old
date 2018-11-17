@@ -4,29 +4,6 @@
 local lang = zRP.lang
 local cfg = module("cfg/Modules/homes")
 
--- sql
-
-zRP.prepare("zRP/home_tables", [[
-CREATE TABLE IF NOT EXISTS zrp_user_homes(
-  user_id INTEGER,
-  home VARCHAR(100),
-  number INTEGER,
-  CONSTRAINT pk_user_homes PRIMARY KEY(user_id),
-  CONSTRAINT fk_user_homes_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE,
-  UNIQUE(home,number)
-);
-]])
-
-zRP.prepare("zRP/get_address","SELECT home, number FROM zrp_user_homes WHERE user_id = @user_id")
-zRP.prepare("zRP/get_home_owner","SELECT user_id FROM zrp_user_homes WHERE home = @home AND number = @number")
-zRP.prepare("zRP/rm_address","DELETE FROM zrp_user_homes WHERE user_id = @user_id")
-zRP.prepare("zRP/set_address","REPLACE INTO zrp_user_homes(user_id,home,number) VALUES(@user_id,@home,@number)")
-
--- init
-async(function()
-  zRP.execute("zRP/home_tables")
-end)
-
 -- api
 
 local components = {}

@@ -29,11 +29,7 @@ local user = module("zRP_base_extensions/User/Manager") --TODO PCALL
 
 local db_manager = module("zRP_base_extensions/DB/Manager") --TODO PCALL
 
--- init tables
-print("[zRP] init base tables")
-async(function()
-  zRP.execute("zRP/base_tables")
-end)
+
 -- identification system
 
 local player = module("zRP_base_extensions/Player/Manager") -- TODO PCALL
