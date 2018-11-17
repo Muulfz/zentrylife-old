@@ -42,17 +42,17 @@ server_scripts{
 client_scripts{
   "lib/utils.lua",
   "client/base.lua",
-  "client/iplloader.lua",
-  "client/gui.lua",
-  "client/player_state.lua",
-  "client/survival.lua",
-  "client/map.lua",
-  "client/identity.lua",
-  "client/basic_garage.lua",
-  "client/police.lua",
-  "client/admin.lua",
-  "client/basic_phone.lua",
-  "client/basic_radio.lua"
+  "client/Environment/iplloader.lua",
+  "client/Interface/gui.lua",
+  "client/Character/player_state.lua",
+  "client/Character/survival.lua",
+  "client/Environment/map.lua",
+  "client/Character/identity.lua",
+  "client/Shop/basic_garage.lua",
+  "client/Jobs/Government/police.lua",
+  "client/Admin/admin.lua",
+  "client/Character/basic_phone.lua",
+  "client/Character/basic_radio.lua"
 }
 
 -- client files
@@ -62,7 +62,7 @@ files{
   "lib/Debug.lua",
   "lib/Luaseq.lua",
   "lib/Tools.lua",
-  "cfg/client.lua",
+  "cfg/Client/base.lua",
   "gui/index.html",
   "gui/design.css",
   "gui/main.js",

@@ -1,4 +1,4 @@
-cfg = module("cfg/client")
+cfg = module("cfg/Client/base")
 
 local Tunnel = module("zrp", "lib/Tunnel")
 local Proxy = module("zrp", "lib/Proxy")
