@@ -20,11 +20,3 @@ end
 async(function()
     task_save_datatables()
 end)
-
--- init tables
-print("[zRP] init base tables")
-async(function()
-    for k,v in pairs(zRPBase.tables) do
-        zRP.execute(v)
-    end
-end)

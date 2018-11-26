@@ -21,8 +21,8 @@ server_scripts{
   "modules/Item/item_transformer.lua",
   "modules/Character/emotes.lua",
   "modules/Jobs/Government/police.lua",
-  "modules/Properties/home.lua",
-  "modules/Properties/home_components.lua",
+  "modules/Home/home.lua",
+  "modules/Home/home_components.lua",
   "modules/Jobs/mission.lua",
   "modules/Character/aptitude.lua",
 

@@ -7,6 +7,34 @@ local htmlEntities = module("lib/htmlEntities")
 local lang = zRP.lang
 
 local sanitizes = module("cfg/Modules/sanitizes")
+
+-- sql
+zRP.prepare("zRP/business_tables",[[
+CREATE TABLE IF NOT EXISTS zrp_user_business(
+  user_id INTEGER,
+  name VARCHAR(30),
+  description TEXT,
+  capital INTEGER,
+  laundered INTEGER,
+  reset_timestamp INTEGER,
+  CONSTRAINT pk_user_business PRIMARY KEY(user_id),
+  CONSTRAINT fk_user_business_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
+);
+]])
+
+zRP.prepare("zRP/create_business","INSERT IGNORE INTO zrp_user_business(user_id,name,description,capital,laundered,reset_timestamp) VALUES(@user_id,@name,'',@capital,0,@time)")
+zRP.prepare("zRP/delete_business","DELETE FROM zrp_user_business WHERE user_id = @user_id")
+zRP.prepare("zRP/get_business","SELECT name,description,capital,laundered,reset_timestamp FROM zrp_user_business WHERE user_id = @user_id")
+zRP.prepare("zRP/add_capital","UPDATE zrp_user_business SET capital = capital + @capital WHERE user_id = @user_id")
+zRP.prepare("zRP/add_laundered","UPDATE zrp_user_business SET laundered = laundered + @laundered WHERE user_id = @user_id")
+zRP.prepare("zRP/get_business_page","SELECT user_id,name,description,capital FROM zrp_user_business ORDER BY capital DESC LIMIT @b,@n")
+zRP.prepare("zRP/reset_transfer","UPDATE zrp_user_business SET laundered = 0, reset_timestamp = @time WHERE user_id = @user_id")
+
+-- init
+async(function()
+zRP.execute("zRP/business_tables")
+end)
+
 -- api
 
 -- return user business data or nil

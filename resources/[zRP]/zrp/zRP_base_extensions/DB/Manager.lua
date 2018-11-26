@@ -12,8 +12,6 @@ local cached_queries = {}
 local prepared_queries = {}
 local db_initialized = false
 
-zRPBase.tables = {}
-
 -- register a DB driver
 --- name: unique name for the driver
 --- on_init(cfg): called when the driver is initialized (connection), should return true on success
@@ -127,5 +125,5 @@ Citizen.CreateThread(function()
 end)
 
 
-local mysql_tables = module("zRP_base_extensions/DB/Queries")
+local mysql_tables = module("zRP_base_extensions/DB/tables")
 local Database = module("zRP_base_extensions/DB/Database")
