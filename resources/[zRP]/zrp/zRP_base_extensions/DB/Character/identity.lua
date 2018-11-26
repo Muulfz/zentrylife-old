@@ -7,7 +7,7 @@
 -- init sql
 zRP.prepare("zRP/identity_tables", [[
 CREATE TABLE IF NOT EXISTS zrp_user_identities(
-  user_id VARCHAR(36),
+  user_id INTEGER,
   registration VARCHAR(20),
   phone VARCHAR(20),
   firstname VARCHAR(50),
@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS zrp_user_identities(
   INDEX(phone)
 );
 ]])
+zRPBase.tables[4] = "zRP/identity_tables"
 
 
 zRP.prepare("zRP/get_user_identity","SELECT * FROM zrp_user_identities WHERE user_id = @user_id")

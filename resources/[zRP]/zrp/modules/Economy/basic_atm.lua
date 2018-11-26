@@ -1,7 +1,6 @@
 
 -- a basic ATM implementation
 
---TODO trocar para Character
 local lang = zRP.lang
 local cfg = module("cfg/Modules/atms")
 local atms = cfg.atms

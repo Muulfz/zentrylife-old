@@ -1,9 +1,6 @@
 
 local client_areas = {}
 
-
---todo event handler extrair
-
 -- free client areas when leaving
 AddEventHandler("zRP:playerLeave",function(user_id,source)
   -- leave areas
@@ -85,8 +82,6 @@ function tzRP.leaveArea(name)
   end
 end
 
-
---TODO event handler extrair
 
 local cfg = module("cfg/Modules/blips_markers")
 

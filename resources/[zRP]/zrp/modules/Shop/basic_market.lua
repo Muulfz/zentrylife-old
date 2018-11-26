@@ -1,5 +1,3 @@
-
---TODO trocar para Character
 -- a basic market implementation
 
 local lang = zRP.lang

@@ -1,5 +1,4 @@
 
---TODO trocar para Character
 -- mission system module
 local lang = zRP.lang
 local cfg = module("cfg/Modules/mission")

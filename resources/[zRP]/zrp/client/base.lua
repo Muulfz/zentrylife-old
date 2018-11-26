@@ -17,12 +17,12 @@ zRPserver = Tunnel.getInterface("zRP")
 Proxy.addInterface("zRP",tzRP)
 
 -- functions
--- todo mudar para character
+
 local user_id
 function tzRP.setUserId(_user_id)
   user_id = _user_id
 end
--- mudar para character id
+
 -- get user id (client-side)
 function tzRP.getUserId()
   return user_id

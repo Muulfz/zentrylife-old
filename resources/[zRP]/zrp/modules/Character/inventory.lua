@@ -23,7 +23,6 @@ function zRP.defInventoryItem(idname,name,description,choices,weight)
   zRP.items[idname] = item
 end
 
---TODO trocar para Character
 -- give action
 function ch_give(idname, player, choice)
   local user_id = zRP.getUserId(player)

@@ -1,5 +1,3 @@
-
---TODO trocar para Character
 local cfg = module("cfg/Modules/player_state")
 local lang = zRP.lang
 

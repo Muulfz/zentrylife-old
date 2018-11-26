@@ -1,5 +1,3 @@
-
---TODO trocar para Character
 local lang = zRP.lang
 
 -- Money module, wallet/bank API

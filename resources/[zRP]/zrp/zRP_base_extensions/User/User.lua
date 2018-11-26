@@ -20,9 +20,8 @@ function zRP.getUserIdByIdentifiers(ids)
             end
         end
 
-        local id = zRP.generateUUID()
         -- no ids found, create user
-        local rows, affected = zRP.query("zRP/create_user", {id = id})
+        local rows, affected = zRP.query("zRP/create_user", {})
 
         if #rows > 0 then
             local user_id = rows[1].id

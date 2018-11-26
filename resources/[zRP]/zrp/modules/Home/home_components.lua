@@ -1,5 +1,4 @@
 
---TODO trocar para Character
 -- define some basic home components
 local lang = zRP.lang
 local sanitizes = module("cfg/Modules/sanitizes")

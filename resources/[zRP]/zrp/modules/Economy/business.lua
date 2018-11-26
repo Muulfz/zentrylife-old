@@ -1,5 +1,4 @@
 
---TODO trocar para Character
 -- module describing business system (company, money laundering)
 
 local cfg = module("cfg/Modules/business")

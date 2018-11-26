@@ -9,26 +9,18 @@ local config = zRPBase.config
 AddEventHandler("zRPcli:playerSpawned", function()
     Debug.log("playerSpawned "..source)
     -- register user sources and then set first spawn to false
-    local user_id = zRP.getUserId(source)  --todo analisar se isso tem que ser trocado para character
+    local user_id = zRP.getUserId(source)
     local player = source
     if user_id then
-        local characters_list = zRP.getCharactersIdsByUser(user_id)
-        local character_id = zRP.getCharacterActiveId(user_id, characters_list)
-        zRP.LoadCharacter(user_id, source, character_id)
         zRP.user_sources[user_id] = source
-        zRP.character_sources[character_id] = source
-        -- trigger character load
-        zRP.user_tables[user_id]["character_isLoading"] = true --todo criar o metodo que vai gerar
-
-        local tmp = zRP.getCharacterTmpTable(character_id) --TODO analisar se isso tem que ser trocado para character
-        tmp.spawns = 0
+        local tmp = zRP.getUserTmpTable(user_id)
         tmp.spawns = tmp.spawns+1
         local first_spawn = (tmp.spawns == 1)
 
         if first_spawn then
             -- first spawn, reference player
             -- send players to new player
-            for k,v in pairs(zRP.character_sources) do
+            for k,v in pairs(zRP.user_sources) do
                 zRPclient._addPlayer(source,v)
             end
             -- send new player to all players
@@ -49,7 +41,7 @@ AddEventHandler("zRPcli:playerSpawned", function()
         end
 
         SetTimeout(2000, function() -- trigger spawn event
-            TriggerEvent("zRP:playerSpawn",user_id,player,first_spawn,character_id)
+            TriggerEvent("zRP:playerSpawn",user_id,player,first_spawn)
         end)
     end
 end)

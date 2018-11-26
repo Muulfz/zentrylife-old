@@ -1,5 +1,3 @@
-
---TODO trocar para Character
 -- a basic garage implementation
 
 -- vehicle db

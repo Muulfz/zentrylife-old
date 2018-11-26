@@ -5,24 +5,10 @@
 ---
 
 -- queries
---todo uma lista de carregamento melhor
-local server_base = module("zRP_base_extensions/DB/Server/Base")
+
+local server_base = module("zRP_base_extensions/DB/Server/Base")  -- 0
 local user_base = module("zRP_base_extensions/DB/User/Base") --1,2,3
 local character_identity = module("zRP_base_extensions/DB/Character/identity") --4
 local character_home = module("zRP_base_extensions/DB/Character/home") --5
 local character_money = module("zRP_base_extensions/DB/Economy/money") -- 6
 local economy_business = module("zRP_base_extensions/DB/Economy/business") -- 7
-local home = module("zRP_base_extensions/DB/Character/basic_garage") -- 8
-local base_character = module("zRP_base_extensions/DB/Character/Base") -- 8
-
-
-zRPBase.tables[0] = "zRP/base_tables"
-zRPBase.tables[1] = "zRP/init_user_table" -- 0
-zRPBase.tables[2] = "zRP/init_user_ID"
-zRPBase.tables[3] = "zRP/init_user_data"
---zRPBase.tables[semnumero] = "zRP/init_user_table"
-zRPBase.tables[4] = "zRP/identity_tables"
-zRPBase.tables[5] = "zRP/home_tables"
-zRPBase.tables[6] = "zRP/money_tables"
-zRPBase.tables[7] = "zRP/business_tables"
-zRPBase.tables[8] = "zRP/business_tables"

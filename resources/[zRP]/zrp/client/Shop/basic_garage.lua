@@ -58,7 +58,7 @@ function tzRP.spawnGarageVehicle(name,pos) -- one vehicle per vname/model allowe
       SetVehicleHasBeenOwnedByPlayer(nveh,true)
 
       -- set decorators
-      DecorSetInt(veh, "zRP_owner", tzRP.getUserId())   --TODO trocar para chacter
+      DecorSetInt(veh, "zRP_owner", tzRP.getUserId())
       DecorSetInt(veh, "zRP_vmodel", veh_models[name])
 
       vehicles[name] = {name,nveh} -- set current vehicule

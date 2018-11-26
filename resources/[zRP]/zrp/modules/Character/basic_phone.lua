@@ -1,7 +1,6 @@
 
 -- basic phone module
 
---TODO trocar para Character
 local lang = zRP.lang
 local cfg = module("cfg/Modules/phone")
 local htmlEntities = module("lib/htmlEntities")

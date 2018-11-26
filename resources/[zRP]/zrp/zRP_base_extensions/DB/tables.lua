@@ -7,27 +7,25 @@
 --TODO INICIAR
 zRP.prepare("zRP/init_user_table",[[
 CREATE TABLE IF NOT EXISTS zrp_users(
-  id VARCHAR(36),
+  id INTEGER AUTO_INCREMENT,
   last_login VARCHAR(255),
   whitelisted BOOLEAN,
   banned BOOLEAN,
-  ip VARCHAR(15),
-  email VARCHAR(255),
-  password VARCHAR(255),
-  Zentry_UUID VARCHAR(36),
   CONSTRAINT pk_user PRIMARY KEY(id)
 );]])
+zRPBase.tables[1] = "zRP/init_user_table"
 
-zRP.prepare("zRP/create_user","INSERT INTO zrp_users(id,whitelisted,banned) VALUES(@id,false,false); SELECT id FROM zrp_users WHERE id = @id")
+zRP.prepare("zRP/create_user","INSERT INTO zrp_users(whitelisted,banned) VALUES(false,false); SELECT LAST_INSERT_ID() AS id")
 
 
 zRP.prepare("zRP/init_user_ID",[[
 CREATE TABLE IF NOT EXISTS zrp_user_ids(
   identifier VARCHAR(100),
-  user_id VARCHAR(36),
+  user_id INTEGER,
   CONSTRAINT pk_user_ids PRIMARY KEY(identifier),
   CONSTRAINT fk_user_ids_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );]])
+zRPBase.tables[2] = "zRP/init_user_ID"
 
 
 zRP.prepare("zRP/add_identifier","INSERT INTO zrp_user_ids(identifier,user_id) VALUES(@identifier,@user_id)")
@@ -36,16 +34,21 @@ zRP.prepare("zRP/userid_byidentifier","SELECT user_id FROM zrp_user_ids WHERE id
 
 zRP.prepare("zRP/init_user_data",[[
 CREATE TABLE IF NOT EXISTS zrp_user_data(
-  user_id VARCHAR(36),
+  user_id INTEGER,
   dkey VARCHAR(100),
   dvalue TEXT,
   CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
   CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );]])
+zRPBase.tables[3] = "zRP/init_user_data"
+
+
 
 
 zRP.prepare("zRP/set_userdata","REPLACE INTO zrp_user_data(user_id,dkey,dvalue) VALUES(@user_id,@key,@value)")
 zRP.prepare("zRP/get_userdata","SELECT dvalue FROM zrp_user_data WHERE user_id = @user_id AND dkey = @key")
+
+
 
 
 zRP.prepare("zRP/get_banned","SELECT banned FROM zrp_users WHERE id = @user_id")
@@ -56,13 +59,3 @@ zRP.prepare("zRP/set_last_login","UPDATE zrp_users SET last_login = @last_login 
 zRP.prepare("zRP/get_last_login","SELECT last_login FROM zrp_users WHERE id = @user_id")
 
 
-zRP.prepare("zRP/init_coins",[[
-CREATE TABLE IF NOT EXISTS zrp_user_coins(
-  user_UUID VARCHAR(36),
-  ZentryCoins INTEGER,
-  NewLifeCoins INTEGER,
-  CONSTRAINT pk_user_moneys PRIMARY KEY(user_UUID),
-  CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_UUID) REFERENCES zrp_users(UUID) ON DELETE CASCADE
-);]])
-
---TODO Implementacao do coins

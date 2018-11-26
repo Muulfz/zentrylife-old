@@ -1,5 +1,3 @@
-
---TODO trocar para Character
 -- a basic skinshop implementation
 
 local cfg = module("cfg/Modules/skinshops")

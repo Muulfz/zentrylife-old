@@ -1,5 +1,4 @@
 
---TODO trocar para Character
 local lang = zRP.lang
 local cfg = module("cfg/Modules/radio")
 
@@ -27,7 +26,7 @@ function zRP.connectRadio(user_id)
     local player = zRP.getUserSource(user_id)
     if player then
       -- send map of players to connect to for this radio
-      local groups = zRP.getCharacterGroups(user_id)
+      local groups = zRP.getUserGroups(user_id)
       local players = {}
       for ruser,_ in pairs(rusers) do -- each radio user
         for k,v in pairs(groups) do -- each player group
@@ -73,7 +72,7 @@ zRP.registerMenuBuilder("main", function(add, data)
   local user_id = zRP.getUserId(player)
   if user_id then
     -- check if in a radio group
-    local groups = zRP.getCharacterGroups(user_id)
+    local groups = zRP.getUserGroups(user_id)
     local ok = false
     for group,_ in pairs(groups) do
       if cgroups[group] then

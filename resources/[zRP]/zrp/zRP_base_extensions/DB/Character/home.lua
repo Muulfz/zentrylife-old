@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS zrp_user_homes(
   UNIQUE(home,number)
 );
 ]])
+zRPBase.tables[5] = "zRP/home_tables"
 
 zRP.prepare("zRP/get_address","SELECT home, number FROM zrp_user_homes WHERE user_id = @user_id")
 zRP.prepare("zRP/get_home_owner","SELECT user_id FROM zrp_user_homes WHERE home = @home AND number = @number")

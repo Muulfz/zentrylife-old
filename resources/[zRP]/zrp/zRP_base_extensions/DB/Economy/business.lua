@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS zrp_user_business(
   CONSTRAINT fk_user_business_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );
 ]])
+zRPBase.tables[7] = "zRP/business_tables"
 -- sql
 
 zRP.prepare("zRP/create_business","INSERT IGNORE INTO zrp_user_business(user_id,name,description,capital,laundered,reset_timestamp) VALUES(@user_id,@name,'',@capital,0,@time)")

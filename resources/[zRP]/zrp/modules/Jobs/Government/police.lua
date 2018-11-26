@@ -1,5 +1,4 @@
 
---TODO trocar para Character
 -- this module define some police tools and functions
 local lang = zRP.lang
 local cfg = module("cfg/Modules/police")
