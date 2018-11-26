@@ -39,6 +39,21 @@ zRP.user_sources = {
     ["SOURCE"] = "e9414a06-8688-45ef-a3b1-c3b18650e859"
 }
 
+zRP.users_loader = {
+    ["user_Id"] = {
+        user_data = true,
+        character_data = true
+    }
+}
+---------------------------------------------
+zRP.character = {
+
+}
+
+zRP.rcharacter = {
+
+}
+
 zRP.character_tables = {
     [1] = {
         ["thirst"] = 100,
@@ -72,16 +87,9 @@ zRP.character_tmp_tables = {
 zRP.character_sources = {
     [1] = "SOURCE"
 }
-
-
-zRP.character_identifiers = {
-
-}
-
-zRP.rcharacter_identifiers = {
-
-}
-
+--------------------------------------
+---
+---
 zRP.character_users = {
     [1] = "e9414a06-8688-45ef-a3b1-c3b18650e859"
 }
@@ -90,9 +98,32 @@ zRP.users_character = {
     ["e9414a06-8688-45ef-a3b1-c3b18650e859"] = "1"
 }
 
-zRP.users_characters_list = {
-    [1] = "e9414a06-8688-45ef-a3b1-c3b18650e859", -- AO CONTRARIO
+
+zRP.users_characters_list = { -- todo salvar na db essas infos
+    ["e9414a06-8688-45ef-a3b1-c3b18650e859"] = {
+        [1] = {
+            name = "Nome",
+            sobrenome = "SOBRE",
+            idade = 0,
+            active = false
+        }
+
+    } -- AO CONTRARIO
 }
+
+zRP.character_time_table ={
+    [1] = {
+        alchool = {
+            quantidade = 1,
+            start_time = 321321321,
+            end_time = 312321321
+        }
+
+
+
+    }
+}
+
 
 --TODO GUARDAR INFOS DA ACOES E DESAFIOS
 zRP.rp_events = {

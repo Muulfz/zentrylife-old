@@ -1,4 +1,5 @@
 
+--TODO trocar para Character
 -- this module describe the group/permission system
 
 -- group functions are used on connected players only
@@ -23,7 +24,7 @@ function zRP.getGroupTitle(group)
 end
 
 -- get groups keys of a connected user
-function zRP.getUserGroups(user_id)
+function zRP.getCharacterGroups(user_id)
   local data = zRP.getUserDataTable(user_id)
   if data then 
     if data.groups == nil then
@@ -39,7 +40,7 @@ end
 -- add a group to a connected user
 function zRP.addUserGroup(user_id,group)
   if not zRP.hasGroup(user_id,group) then
-    local user_groups = zRP.getUserGroups(user_id)
+    local user_groups = zRP.getCharacterGroups(user_id)
     local ngroup = groups[group]
     if ngroup then
       if ngroup._config and ngroup._config.gtype ~= nil then 
@@ -77,7 +78,7 @@ end
 -- get user group by type
 -- return group name or an empty string
 function zRP.getUserGroupByType(user_id,gtype)
-  local user_groups = zRP.getUserGroups(user_id)
+  local user_groups = zRP.getCharacterGroups(user_id)
   for k,v in pairs(user_groups) do
     local kgroup = groups[k]
     if kgroup then
@@ -114,7 +115,7 @@ end
 
 -- remove a group from a connected user
 function zRP.removeUserGroup(user_id,group)
-  local user_groups = zRP.getUserGroups(user_id)
+  local user_groups = zRP.getCharacterGroups(user_id)
   local groupdef = groups[group]
   if groupdef and groupdef._config and groupdef._config.onleave then
     local source = zRP.getUserSource(user_id)
@@ -135,7 +136,7 @@ end
 
 -- check if the user has a specific group
 function zRP.hasGroup(user_id,group)
-  local user_groups = zRP.getUserGroups(user_id)
+  local user_groups = zRP.getCharacterGroups(user_id)
   return (user_groups[group] ~= nil)
 end
 
@@ -172,7 +173,7 @@ end)
 
 -- check if the user has a specific permission
 function zRP.hasPermission(user_id, perm)
-  local user_groups = zRP.getUserGroups(user_id)
+  local user_groups = zRP.getCharacterGroups(user_id)
 
   local fchar = string.sub(perm,1,1)
 
@@ -337,26 +338,26 @@ end
 -- events
 
 -- player spawn
-AddEventHandler("zRP:playerSpawn", function(user_id, source, first_spawn)
+AddEventHandler("zRP:playerSpawn", function(user_id, source, first_spawn, character_id)
   -- first spawn
   if first_spawn then
     -- add selectors 
     build_client_selectors(source)
 
     -- add groups on user join 
-    local user = users[user_id]
+    local user = users[character_id]
     if user then
       for k,v in pairs(user) do
-        zRP.addUserGroup(user_id,v)
+        zRP.addUserGroup(character_id,v)
       end
     end
 
     -- add default group user
-    zRP.addUserGroup(user_id,"user")
+    zRP.addUserGroup(character_id,"user")
   end
 
   -- call group onspawn callback at spawn
-  local user_groups = zRP.getUserGroups(user_id)
+  local user_groups = zRP.getCharacterGroups(character_id)
   for k,v in pairs(user_groups) do
     local group = groups[k]
     if group and group._config and group._config.onspawn then

@@ -6,14 +6,14 @@
 
 zRP.prepare("zRP/base_tables",[[
 CREATE TABLE IF NOT EXISTS zrp_srv_data(
+  id VARCHAR(100),
   dkey VARCHAR(100),
-  dvalue TEXT,
+  dvalue LONGTEXT,
   CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
 );
 ]])
-zRPBase.tables[0] = "zRP/base_tables"
 
 
-zRP.prepare("zRP/set_srvdata","REPLACE INTO zrp_srv_data(dkey,dvalue) VALUES(@key,@value)")
+zRP.prepare("zRP/set_srvdata","REPLACE INTO zrp_srv_data(id,dkey,dvalue) VALUES(@id,@key,@value)")
 zRP.prepare("zRP/get_srvdata","SELECT dvalue FROM zrp_srv_data WHERE dkey = @key")
 

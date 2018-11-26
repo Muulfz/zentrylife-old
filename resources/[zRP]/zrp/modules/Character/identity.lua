@@ -1,5 +1,6 @@
 local htmlEntities = module("lib/htmlEntities")
 
+--TODO trocar para Character
 local cfg = module("cfg/Modules/identity")
 local lang = zRP.lang
 

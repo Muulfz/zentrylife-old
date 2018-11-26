@@ -9,3 +9,11 @@ zRP.rusers = {} -- store the opposite of users
 zRP.user_tables = {} -- user data tables (logger storage, saved to database)
 zRP.user_tmp_tables = {} -- user tmp data tables (logger storage, not saved)
 zRP.user_sources = {} -- user sources
+
+----EXTRAS
+
+zRP.users_character = {} -- User active character  -> Ex: User_id = Character_id
+
+zRP.users_characters_list = {} -- List of User Character ->
+
+zRP.users_loader = {}

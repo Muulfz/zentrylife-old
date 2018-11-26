@@ -32,107 +32,58 @@ function zRP.getCharacterIdByIdentifiers(ids)
                     zRP.execute("zRP/add_identifier", { character_id = character_id, identifier = w })
                 end
             end
-
             return character_id
         end
     end
 end
 
--- return identification string for the source (used for non zRP identifications, for rejected players)
-function zRP.getSourceIdKey(source)
-    local ids = GetPlayerIdentifiers(source)
-    local idk = "idk_"
-    for k, v in pairs(ids) do
-        idk = idk .. v
-    end
+function zRP.getCharactersIdsByUser(user_id)
+    if user_id then
+        local rows = zRP.query("zRP/getcharacters_byuser", { user_id = user_id })
+        if #rows > 0 then
+            return rows
+        end
 
-    return idk
-end
+        local rows, affected = zRP.query("zRP/create_new_character", { user_id = user_id })
+        zRP.users_characters_list[user_id] = { [rows[1].id] = { ["active"] = true } }
+        zRP.setUData(user_id, "zRP:character_list", json.encode(zRP.users_characters_list[user_id]))
 
---- sql
-function zRP.isBanned(character_id, cbr)
-    local rows = zRP.query("zRP/get_banned", { character_id = character_id })
-    if #rows > 0 then
-        return rows[1].banned
-    else
-        return false
+        if #rows > 0 then
+            return rows
+        end
     end
 end
 
---- sql
-function zRP.setBanned(character_id, banned)
-    zRP.execute("zRP/set_banned", { character_id = character_id, banned = banned })
-end
-
---- sql
-function zRP.isWhitelisted(character_id, cbr)
-    local rows = zRP.query("zRP/get_whitelisted", { character_id = character_id })
-    if #rows > 0 then
-        return rows[1].whitelisted
-    else
-        return false
+function zRP.getCharacterActiveId(user_id, characters_table)
+    for i = 1, #characters_table do
+        local checkuser = zRP.checkCharacterIsActived(user_id, characters_table[i].id)
+        if checkuser  then
+            return checkuser
+        end
     end
 end
 
---- sql
-function zRP.setWhitelisted(character_id, whitelisted)
-    zRP.execute("zRP/set_whitelisted", { character_id = character_id, whitelisted = whitelisted })
-end
-
---- sql
-function zRP.getLastLogin(character_id, cbr)
-    local rows = zRP.query("zRP/get_last_login", { character_id = character_id })
-    if #rows > 0 then
-        return rows[1].last_login
-    else
-        return ""
+function zRP.checkCharacterIsActived(user_id, character_id)
+    local character_lis = zRP.users_characters_list[user_id]
+    if character_lis then
+        for k, v in pairs(character_lis) do
+            if v.active then
+                return k
+            end
+        end
     end
+    return false
 end
 
-function zRP.setUData(character_id, key, value)
-    zRP.execute("zRP/set_characterdata", { character_id = character_id, key = key, value = value })
-end
+function zRP.setCData(character_id, key, value)
+    zRP.exedcute("zRP/set_characterdata",{character_id = character_id, key =  key, value = value})
 
-function zRP.getUData(character_id, key, cbr)
-    local rows = zRP.query("zRP/get_characterdata", { character_id = character_id, key = key })
-    if #rows > 0 then
-        return rows[1].dvalue
-    else
-        return ""
-    end
-end
-
--- return character data table for zRP internal persistant connected character storage
-function zRP.getCharacterDataTable(character_id)
-    return zRP.character_tables[character_id]
 end
 
 function zRP.getCharacterTmpTable(character_id)
     return zRP.character_tmp_tables[character_id]
 end
 
--- return the player spawn count (0 = not spawned, 1 = first spawn, ...)
-function zRP.getSpawns(character_id)
-    local tmp = zRP.getCharacterTmpTable(character_id)
-    if tmp then
-        return tmp.spawns or 0
-    end
-
-    return 0
-end
-
-function zRP.getCharacterId(source)
-    if source ~= nil then
-        local ids = GetPlayerIdentifiers(source)
-        if ids ~= nil and #ids > 0 then
-            return zRP.characters[ids[1]]
-        end
-    end
-
-    return nil
-end
-
--- return source or nil
-function zRP.getCharacterSource(character_id)
-    return zRP.character_sources[character_id]
+function zRP.getCHaracterDataTable(character_id)
+    return zRP.character_tables[character_id]
 end

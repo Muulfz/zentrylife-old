@@ -1,4 +1,5 @@
 
+--TODO trocar para Character
 -- this module describe the home system (experimental, a lot can happen and not being handled)
 
 local lang = zRP.lang

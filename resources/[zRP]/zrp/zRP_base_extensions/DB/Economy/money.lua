@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS zrp_user_moneys(
   CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );
 ]])
-zRPBase.tables[6] = "zRP/money_tables"
 
 zRP.prepare("zRP/money_init_user","INSERT IGNORE INTO zrp_user_moneys(user_id,wallet,bank) VALUES(@user_id,@wallet,@bank)")
 zRP.prepare("zRP/get_money","SELECT wallet,bank FROM zrp_user_moneys WHERE user_id = @user_id")

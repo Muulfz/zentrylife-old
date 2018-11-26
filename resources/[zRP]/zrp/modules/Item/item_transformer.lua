@@ -1,4 +1,5 @@
 
+--TODO trocar para Character
 -- this module define a generic system to transform (generate, process, convert) items and money to other items or money in a specific area
 -- each transformer can take things to generate other things, using a unit of work
 -- units are generated periodically at a specific rate

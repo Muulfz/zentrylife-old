@@ -298,6 +298,8 @@ function tzRP.signalVoicePeer(player, data)
   zRPclient._signalVoicePeer(player, source, data)
 end
 
+
+-- todo eventhandler extrat
 AddEventHandler("zRP:playerSpawn",function(user_id, source, first_spawn)
   if first_spawn then
     -- send peer config

@@ -1,3 +1,5 @@
+
+--TODO trocar para Character
 -- a basic gunshop implementation
 
 local cfg = module("cfg/Modules/gunshops")

@@ -5,8 +5,11 @@
 ---
 
 
-function zRP.setSData(key,value)
-    zRP.execute("zRP/set_srvdata", {key = key, value = value})
+function zRP.setSData(key,value,id)
+    if not id then
+        id = "main"
+    end
+    zRP.execute("zRP/set_srvdata", {id = id, key = key, value = value})
 end
 
 function zRP.getSData(key, cbr)
@@ -37,8 +40,31 @@ function zRP.ban(source,reason)
     end
 end
 
+function zRP.banUser(user_id, reason)
+    local source = zRP.getUserSource(user_id)
+    zRP.setBanned(user_id,true)
+    if source then
+        zRP.kick(source,"[Banned] " ..reason)
+    end
+end
+
 function zRP.kick(source,reason)
     DropPlayer(source,reason)
+end
+
+--[[ --TODO Systema de Character
+function zRP.kickCharacter(character_id, reason)
+    local source = zRP.getCharacterSource(character_id)
+    DropPlayer(source,reason)
+end
+--]]
+
+function zRP.kickUser(user_id, reason)
+    local source = zRP.getUserSource(user_id)
+    if source then
+        DropPlayer(source, reason)
+    end
+    return false
 end
 
 -- drop zRP player/user (internal usage)

@@ -11,7 +11,7 @@ local server = module("zRP_base_extensions/Server/Server")
 
 local connection = module("zRP_base_extensions/Server/Conection")
 
-local playerConnectingHandler = module("zRP_base_extensions/Server/Handlers/playerConnecting")
+--local playerConnectingHandler = module("zRP_base_extensions/Server/Handlers/playerConnecting")
 
 local manager = module("zRP_base_extensions/Server/Handlers/_Manager")
 

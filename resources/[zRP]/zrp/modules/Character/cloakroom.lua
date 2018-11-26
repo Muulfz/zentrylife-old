@@ -1,4 +1,5 @@
 
+--TODO trocar para Character
 -- cloakroom system
 local lang = zRP.lang
 local cfg = module("cfg/Modules/cloakrooms")
@@ -105,11 +106,11 @@ local function build_client_points(source)
       local gcfg = cloakroom._config or {}
 
       local function cloakroom_enter(source,area)
-        local user_id = zRP.getUserId(source)
-        if user_id and zRP.hasPermissions(user_id,gcfg.permissions or {}) then
+        local character_id = zRP.getCharacterId(source)
+        if character_id and zRP.hasPermissions(character_id,gcfg.permissions or {}) then
           if gcfg.not_uniform then -- not a uniform cloakroom
             -- notify player if wearing a uniform
-            local data = zRP.getUserDataTable(user_id)
+            local data = zRP.getUserDataTable(character_id)
             if data.cloakroom_idle ~= nil then
               zRPclient._notify(source,lang.common.wearing_uniform())
             end

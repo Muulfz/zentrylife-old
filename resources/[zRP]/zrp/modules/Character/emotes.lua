@@ -1,4 +1,5 @@
 
+--TODO trocar para Character
 -- this module define the emotes menu
 
 local cfg = module("cfg/Modules/emotes")

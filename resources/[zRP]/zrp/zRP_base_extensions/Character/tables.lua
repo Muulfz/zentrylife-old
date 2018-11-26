@@ -8,4 +8,9 @@ zRP.character = {} -- will store logged character (id) by first identifier
 zRP.rcharacter = {} -- store the opposite of character
 zRP.character_tables = {} -- character data tables (logger storage, saved to database)
 zRP.character_tmp_tables = {} -- character tmp data tables (logger storage, not saved)
-zRP.character_sources = {} -- user sources
+zRP.character_sources = {} -- character sources
+
+----- EXTRAS
+zRP.characters_user = {} -- Character User  --EX: Character_ID = USERs
+
+zRP.character_time_table ={}

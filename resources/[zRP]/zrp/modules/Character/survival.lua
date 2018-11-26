@@ -1,3 +1,5 @@
+
+--TODO trocar para Character
 local cfg = module("cfg/Modules/survival")
 local lang = zRP.lang
 
@@ -150,8 +152,8 @@ end)
 -- handlers
 
 -- init values
-AddEventHandler("zRP:playerJoin",function(user_id,source,name,last_login)
-  local data = zRP.getUserDataTable(user_id)
+AddEventHandler("zRP:characterJoin",function(user_id,source,character_id)
+  local data = zRP.getCharacterDataTable(character_id)
   if data.hunger == nil then
     data.hunger = 0
     data.thirst = 0

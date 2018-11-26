@@ -1,6 +1,6 @@
 
 -- define aptitude system (aka. education, skill system)
-
+--TODO trocar para Character
 local cfg = module("cfg/Modules/aptitudes")
 local lang = zRP.lang
 
