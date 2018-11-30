@@ -4,10 +4,3 @@
 --- DateTime: 11/17/2018 2:19 PM
 ---
 
-AddEventHandler("playerDropped",function(reason)
-    local source = source
-    Debug.log("playerDropped "..source)
-
-    zRP.dropPlayer(source)
-end)
-

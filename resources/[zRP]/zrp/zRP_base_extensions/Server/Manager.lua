@@ -7,6 +7,8 @@
 
 local server = module("zRP_base_extensions/Server/Server")
 
+--local AutenticationSystem = module("zRP_base_extensions/Server/AutenticationSystem")
+
 local connection = module("zRP_base_extensions/Server/Conection")
 
 local playerConnectingHandler = module("zRP_base_extensions/Server/Handlers/playerConnecting")

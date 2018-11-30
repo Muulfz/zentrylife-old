@@ -4,25 +4,6 @@ local lang = zRP.lang
 -- The money is managed with direct SQL requests to prevent most potential value corruptions
 -- the wallet empty itself when respawning (after death)
 
-zRP.prepare("zRP/money_tables", [[
-CREATE TABLE IF NOT EXISTS zrp_user_moneys(
-  user_id INTEGER,
-  wallet INTEGER,
-  bank INTEGER,
-  CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
-  CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
-);
-]])
-
-zRP.prepare("zRP/money_init_user","INSERT IGNORE INTO zrp_user_moneys(user_id,wallet,bank) VALUES(@user_id,@wallet,@bank)")
-zRP.prepare("zRP/get_money","SELECT wallet,bank FROM zrp_user_moneys WHERE user_id = @user_id")
-zRP.prepare("zRP/set_money","UPDATE zrp_user_moneys SET wallet = @wallet, bank = @bank WHERE user_id = @user_id")
-
--- init tables
-async(function()
-  zRP.execute("zRP/money_tables")
-end)
-
 -- load config
 local cfg = module("cfg/Modules/money")
 
