@@ -2,6 +2,8 @@
 
 local cfg = {}
 
+cfg.lang = "en"
+
 cfg.iplload = true
 
 cfg.voice_proximity = 30.0 -- default voice proximity (outside)
