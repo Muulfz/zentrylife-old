@@ -40,6 +40,7 @@ cfg.groups = {
   },
   -- the group user is auto added to all logged players
   ["user"] = {
+    "mission.repair.satellite_dishes",
     "player.phone",
     "player.calladmin",
     "police.askid",

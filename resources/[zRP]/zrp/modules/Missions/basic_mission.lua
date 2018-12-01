@@ -16,12 +16,11 @@ function task_mission()
             local user_id = w
             local player = zRP.getUserSource(user_id)
             if not zRP.hasMission(player) --[[and zRP.hasGroup(user_id,"onservice")]] then
-                if math.random(1,v.chance) == 1 then -- chance check
+                if math.random(1,1) == 1 then -- chance check
                     -- build mission
                     local mdata = {}
                     mdata.name = lang.repair({v.title})
                     mdata.steps = {}
-
                     -- build steps
                     for i=1,v.steps do
                         local step = {
@@ -366,7 +365,7 @@ function task_mission()
             end
         end
     end
-    SetTimeout(60000,task_mission)
+    SetTimeout(600,task_mission)
 end
 Citizen.CreateThread(function()
     task_mission()

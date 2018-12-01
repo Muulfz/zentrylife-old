@@ -51,7 +51,7 @@ function zRP.nextMissionStep(player)
         zRPclient._setDivContent(player,"mission",lang.mission.display({tmpdata.mission_data.name,tmpdata.mission_step-1,#tmpdata.mission_data.steps,step.text}))
 
         -- blip/route
-        local id = zRPclient.setNamedBlip(player, "zRP:mission", x,y,z, blipid, blipcolor, lang.mission.blip({tmpdata.mission_data.name,tmpdata.mission_step,#tmpdata.mission_data.steps}))
+        local id = zRPclient._setNamedBlip(player, "zRP:mission", x,y,z, blipid, blipcolor, lang.mission.blip({tmpdata.mission_data.name,tmpdata.mission_step,#tmpdata.mission_data.steps}))
         zRPclient._setBlipRoute(player,id)
 
         -- map trigger
