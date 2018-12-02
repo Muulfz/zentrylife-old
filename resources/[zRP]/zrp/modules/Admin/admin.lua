@@ -298,6 +298,60 @@ local function ch_audiosource(player, choice)
   end
 end
 
+----------------------------------------------------------------------------------------
+
+local function ch_tptowaypoint(player, choice)
+  zRPclient._tpToWaypoint(player)
+end
+
+local function ch_blips(player, choice)
+  zRPclient._showBlips(player)
+end
+
+local function ch_deleteveh(player, choice)
+  zRPclient._deleteVehicleInFrontOrInside(player,5.0)
+end
+
+local function ch_crun(player,choice)
+  local stringToRun = zRP.prompt(player, "Run a client string","") --lang.basic_menu.crun.prompt()
+  stringToRun = stringToRun or ""
+  zRPclient._runStringLocally(player, stringToRun)
+end
+
+local function ch_srun(player, choice)
+  local stringToRun = zRP.prompt(player, "Run server string","")
+  zRP.runStringRemotelly(stringToRun)
+end
+
+local player_gods = {}
+
+local function ch_godmode(player, choice)
+  local user_id = zRP.getUserId(player)
+  if user_id ~= nil then
+    if player_gods[player] then
+      player_gods[player] = nil
+      zRPclient._notify(player, "God Mode is off") --lang.godmode.off()
+    else
+      player_gods[player] = user_id
+      zRPclient._notify(player, "God Mode is ON") -- lang.godmode.on()
+    end
+  end
+end
+
+local function ch_spawnveh(player, choice)
+  local model = zRP.prompt(player, "Spawn veichle ","") -- lang.spawnveh.promt()
+  if model ~= nil and model ~= "" then
+    zRPclient._spawnVehicle(player,model)
+  else
+    zRPclient._notify(player, "Invalid value") --lang.common.invalid_value()
+  end
+end
+
+local function ch_sprites(player, choice)
+  zRPclient._showSprites(player)
+end
+----------------------------------------------------------------------------------------
+
 zRP.registerMenuBuilder("main", function(add, data)
   local user_id = zRP.getUserId(data.player)
   if user_id then
@@ -370,6 +424,30 @@ zRP.registerMenuBuilder("main", function(add, data)
       if zRP.hasPermission(user_id,"player.calladmin") then
         menu["@Call admin"] = {ch_calladmin}
       end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.deleteveh.perm()
+        menu["@Delete Vehicle"] = {ch_deleteveh, "Delete vehicle"} -- lang.deleteveh.button() -- lang.deleteveh.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.spawnveh.perm()
+        menu["@Spawn Vehicle"] = {ch_spawnveh, "Spawn Vehicle"} -- lang.spawnveh.button() -- lang.spawnveh.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.godmode.perm()
+        menu["@God mode"] = {ch_godmode, "God mode"} -- lang.godmode.button() -- lang.godmode.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.blips.perm()
+        menu["@Blips"] = {ch_blips, "Blips"} -- lang.blips.button() -- lang.blips.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.sprites.perm()
+        menu["@Sprites"] = {ch_sprites, "Sprites"} -- lang.sprites.button() -- lang.sprites.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.crun.perm()
+        menu["@Crun"] = {ch_crun, "Run client string"} -- lang.crun.button() -- lang.crun.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.srun.perm()
+        menu["@Srun"] = {ch_srun, "Run Server string"} -- lang.srun.button() -- lang.srun.desc()
+      end
+      if zRP.hasPermission(user_id,"player.kick") then -- lang.tptowaypoint.perm()
+        menu["@Tp to WayPoint"] = {ch_tptowaypoint, "Tp to waypoint"} -- lang.tptowaypoint.button() -- lang.tptowaypoint.desc()
+      end
 
       zRP.openMenu(player,menu)
     end}
@@ -393,4 +471,19 @@ function task_god()
   end
 end
 
+function task_god_adv()
+  SetTimeout(10000, task_god_adv)
+
+  for k,v in pairs(player_gods) do
+    zRP.setHunger(v, 0)
+    zRP.setThirst(v, 0)
+
+    local player = zRP.getUserSource(v)
+    if player ~= nil then
+      zRPclient._setHealth(player, 200)
+    end
+  end
+end
+
+task_god_adv()
 task_god()

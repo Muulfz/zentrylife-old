@@ -263,3 +263,81 @@ Citizen.CreateThread(function()
   end
 end)
 --]]
+
+local state_ready = false
+
+AddEventHandler("playerSpawned",function() -- delay state recording
+  state_ready = false
+
+  Citizen.CreateThread(function()
+    Citizen.Wait(30000)
+    state_ready = true
+  end)
+end)
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(30000)
+
+    if IsPlayerPlaying(PlayerId()) and state_ready then
+      if tzRP.getArmour() == 0 then
+        if(GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_m_freemode_01")) or (GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_f_freemode_01")) then
+          SetPedComponentVariation(GetPlayerPed(-1), 9, 0, 1, 2)
+        end
+      end
+    end
+  end
+end)
+
+-- Freeze
+local frozen = false
+local unfrozen = false
+local other = nil
+local drag = false
+local playerStillDragged = false
+local invisible = false
+local invincible =  false
+
+
+function tzRP.loadFreeze(notify,god,ghost)
+  if not frozen then
+    if notify then
+      tzRP.notify("Frezzado") -- lang.freeze.frozen()
+    end
+    frozen = true
+    invincible = god
+    invisible = ghost
+    unfrozen = false
+  else
+    if notify then
+      tzRP.notify("DesFreezadio") -- lang.freeze.unfrozen()
+    end
+    unfrozen = true
+    invincible = false
+    invisible = false
+  end
+end
+
+Citizen.CreateThread(function()
+  while true do
+    if frozen then
+      if unfrozen then
+        SetEntityInvincible(GetPlayerPed(-1),false)
+        SetEntityVisible(GetPlayerPed(-1),true)
+        FreezeEntityPosition(GetPlayerPed(-1),false)
+        frozen = false
+        invisible = false
+        invincible = false
+      else
+        if invincible then
+          SetEntityInvincible(GetPlayerPed(-1),true)
+        end
+        if invisible then
+          SetEntityVisible(GetPlayerPed(-1),false)
+        end
+        FreezeEntityPosition(GetPlayerPed(-1),true)
+      end
+    end
+    Citizen.Wait(0)
+  end
+end)

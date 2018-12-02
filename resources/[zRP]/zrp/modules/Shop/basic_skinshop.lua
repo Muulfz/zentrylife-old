@@ -71,7 +71,7 @@ function zRP.openSkinshop(source,parts)
         -- apply change
         local custom = {}
         custom[parts[choice]] = {drawable[1],textures[choice][1]}
-        zRPclient.setCustomization(source,custom)
+        zRPclient._setCustomization(source,custom)
 
         -- update max textures number
         local n = zRPclient.getDrawableTextures(source,parts[choice],drawable[1])

@@ -28,18 +28,22 @@ function tzRP.getVehicleInDirection( coordFrom, coordTo )
 end
 
 
-function tzRP.deleteVehicleByOffset(offset)
+function tzRP.deleteVehicleByOffset(offset, notify)
     local ped = GetPlayerPed(-1)
-    veh = vRPmt.getVehicleInDirection(GetEntityCoords(ped, 1), GetOffsetFromEntityInWorldCoords(ped, 0.0, offset, 0.0))
+    local veh = tzRP.getVehicleInDirection(GetEntityCoords(ped, 1), GetOffsetFromEntityInWorldCoords(ped, 0.0, offset, 0.0))
 
     if IsEntityAVehicle(veh) then
         SetVehicleHasBeenOwnedByPlayer(veh,false)
         Citizen.InvokeNative(0xAD738C3085FE7E11, veh, false, true) -- set not as mission entity
         SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(veh))
         Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-        vRP.notify("~g~Vehicle deleted.")
+        if notify then
+            tzRP.notify("~g~Vehicle deleted.")
+        end
     else
-        vRP.notify("~r~Too far away from vehicle.")
+        if notify then
+            tzRP.notify("~r~Too far away from vehicle.")
+        end
     end
 end
 
@@ -57,16 +61,16 @@ end
 
 function tzRP.deleteVehicleModelByOffset(model,offset)
     local ped = GetPlayerPed(-1)
-    veh = vRPmt.getVehicleInDirection(GetEntityCoords(ped, 1), GetOffsetFromEntityInWorldCoords(ped, 0.0, offset, 0.0))
+    local veh = tzRP.getVehicleInDirection(GetEntityCoords(ped, 1), GetOffsetFromEntityInWorldCoords(ped, 0.0, offset, 0.0))
 
     if IsEntityAVehicle(veh) and IsVehicleModel(veh, GetHashKey(model)) then
         SetVehicleHasBeenOwnedByPlayer(veh,false)
         Citizen.InvokeNative(0xAD738C3085FE7E11, veh, false, true) -- set not as mission entity
         SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(veh))
         Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-        vRP.notify("~g~Vehicle deleted.")
+        tzRP.notify("~g~Vehicle deleted.")
     else
-        vRP.notify("~r~Too far away from vehicle.")
+        tzRP.notify("~r~Too far away from vehicle.")
     end
 end
 
@@ -106,13 +110,22 @@ function tzRP.deleteVehiclePedIsIn()
 end
 
 
-function tzRP.deleteNearestVehicle(radius)
+function tzRP.deleteNearestVehicle(radius, notify)
     local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
-    local v = GetClosestVehicle( x+0.0001, y+0.0001, z+0.0001,radius+0.0001,0,70)
-    SetVehicleHasBeenOwnedByPlayer(v,false)
-    Citizen.InvokeNative(0xAD738C3085FE7E11, v, false, true) -- set not as mission entity
-    SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(v))
-    Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(v))
+    local veh = GetClosestVehicle( x+0.0001, y+0.0001, z+0.0001,radius+0.0001,0,70)
+    if IsEntityAVehicle(veh) then
+        SetVehicleHasBeenOwnedByPlayer(veh,false)
+        Citizen.InvokeNative(0xAD738C3085FE7E11, veh, false, true) -- set not as mission entity
+        SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(veh))
+        Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+        if notify then
+            tzRP.notify("Deletado com sucesso") -- lang.deleteveh.success()
+        end
+    else
+        if notify then
+            tzRP.notify("Nao foi possivel deletar") -- lang.deleteveh.toofar()
+        end
+    end
 end
 
 
@@ -169,7 +182,7 @@ function tzRP.deleteTowedVehicle(offset)
     end
 end
 
-function tzRPs.getVehiclePedIsInPlateText()
+function tzRP.getVehiclePedIsInPlateText()
     local p = ""
     local v = GetVehiclePedIsIn(GetPlayerPed(-1),false)
     p = GetVehicleNumberPlateText(v)
@@ -195,17 +208,103 @@ function tzRP.getNearestVehiclePlateText(radius)
     return p
 end
 
+function tzRP.lockpickVehicle(wait,any,notify)
+    local pos = GetEntityCoords(GetPlayerPed(-1))
+    local entityWorld = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 20.0, 0.0)
 
+    local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, GetPlayerPed(-1), 0)
+    local _, _, _, _, vehicleHandle = GetRaycastResult(rayHandle)
+    if DoesEntityExist(vehicleHandle) then
+        if GetVehicleDoorsLockedForPlayer(vehicleHandle,PlayerId()) or any then
+            local prevObj = GetClosestObjectOfType(pos.x, pos.y, pos.z, 10.0, GetHashKey("prop_weld_torch"), false, true, true)
+            if(IsEntityAnObject(prevObj)) then
+                SetEntityAsMissionEntity(prevObj)
+                DeleteObject(prevObj)
+            end
+            StartVehicleAlarm(vehicleHandle)
+            TaskStartScenarioInPlace(GetPlayerPed(-1), "WORLD_HUMAN_WELDING", 0, true)
+            Citizen.Wait(wait*1000)
+            SetVehicleDoorsLocked(vehicleHandle, 1)
+            for i = 1,64 do
+                SetVehicleDoorsLockedForPlayer(vehicleHandle, GetPlayerFromServerId(i), false)
+            end
+            ClearPedTasksImmediately(GetPlayerPed(-1))
 
+            tzRP.notify("sucesso") -- lang.lockpick.success()
 
+            -- ties to the hotkey lock system
+            local plate = GetVehicleNumberPlateText(vehicleHandle)
+            zRPserver.lockSystemUpdate(1, plate)
+            zRPserver.playSoundWithinDistanceOfEntityForEveryone(vehicleHandle, 10, "unlock", 1.0)
+        else
+            if notify then
+                tzRP.notify("fechado") -- lang.lockpick.unlocked()
+            end
+        end
+    else
+        if notify then
+            tzRP.notify("muito longe") -- lang.lockpick.toofar()
+        end
+    end
+end
 
+function tzRP.getArmour()
+    return GetPedArmour(GetPlayerPed(-1))
+end
 
+function tzRP.setArmour(armour,vest)
+    local player = GetPlayerPed(-1)
+    if vest then
+        if(GetEntityModel(player) == GetHashKey("mp_m_freemode_01")) then
+            SetPedComponentVariation(player, 9, 4, 1, 2)  --Bulletproof Vest
+        else
+            if(GetEntityModel(player) == GetHashKey("mp_f_freemode_01")) then
+                SetPedComponentVariation(player, 9, 6, 1, 2)
+            end
+        end
+    end
+    local n = math.floor(armour)
+    SetPedArmour(player,n)
+end
 
+function tzRP.setSpikesOnGround()
+    local ped = GetPlayerPed(-1)
+    local x, y, z = table.unpack(GetEntityCoords(ped, true))
+    local h = GetEntityHeading(ped)
+    local ox, oy, oz = table.unpack(GetOffsetFromEntityInWorldCoords(ped, 0.0, 1.0, -2.0))
+    local spike = GetHashKey("P_ld_stinger_s")
 
+    RequestModel(spike)
+    while not HasModelLoaded(spike) do
+        Citizen.Wait(1)
+    end
 
+    local object = CreateObject(spike, ox, oy, oz, true, true, false)
+    PlaceObjectOnGroundProperly(object)
+    SetEntityHeading(object, h+90)
+end
 
+function tzRP.isCloseToSpikes()
+    local ped = GetPlayerPed(-1)
+    local x, y, z = table.unpack(GetEntityCoords(ped, true))
+    local ox, oy, oz = table.unpack(GetOffsetFromEntityInWorldCoords(ped, 0.0, 1.0, -2.0))
+    if DoesObjectOfTypeExistAtCoords(ox, oy, oz, 0.9, GetHashKey("P_ld_stinger_s"), true) then
+        return true
+    else
+        return false
+    end
+end
 
-
+function tzRP.removeSpikes()
+    local ped = GetPlayerPed(-1)
+    local x, y, z = table.unpack(GetEntityCoords(ped, true))
+    local ox, oy, oz = table.unpack(GetOffsetFromEntityInWorldCoords(ped, 0.0, 1.0, -2.0))
+    if DoesObjectOfTypeExistAtCoords(ox, oy, oz, 0.9, GetHashKey("P_ld_stinger_s"), true) then
+        local spike = GetClosestObjectOfType(ox, oy, oz, 0.9, GetHashKey("P_ld_stinger_s"), false, false, false)
+        SetEntityAsMissionEntity(spike, true, true)
+        DeleteObject(spike)
+    end
+end
 
 
 

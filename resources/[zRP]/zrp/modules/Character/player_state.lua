@@ -21,30 +21,30 @@ AddEventHandler("zRP:playerSpawn", function(user_id, source, first_spawn)
     end
 
     if data.position then -- teleport to saved pos
-      zRPclient.teleport(source,data.position.x,data.position.y,data.position.z)
+      zRPclient._teleport(source,data.position.x,data.position.y,data.position.z)
     end
 
     if data.customization then
-      zRPclient.setCustomization(source,data.customization)
+      zRPclient._setCustomization(source,data.customization)
       if data.weapons then -- load saved weapons
-        zRPclient.giveWeapons(source,data.weapons,true)
+        zRPclient._giveWeapons(source,data.weapons,true)
 
         if data.health then -- set health
-          zRPclient.setHealth(source,data.health)
+          zRPclient._setHealth(source,data.health)
           SetTimeout(5000, function() -- check coma, kill if in coma
-            if zRPclient.isInComa(player) then
-              zRPclient.killComa(player)
+            if zRPclient._isInComa(player) then
+              zRPclient._killComa(player)
             end
           end)
         end
       end
     else
       if data.weapons then -- load saved weapons
-        zRPclient.giveWeapons(source,data.weapons,true)
+        zRPclient._giveWeapons(source,data.weapons,true)
       end
 
       if data.health then
-        zRPclient.setHealth(source,data.health)
+        zRPclient._setHealth(source,data.health)
       end
     end
 

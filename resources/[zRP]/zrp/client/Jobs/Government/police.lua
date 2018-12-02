@@ -259,3 +259,55 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+-- Police Drag
+local other = nil
+local drag = nil
+local playerStillDragged = false
+
+
+function tzRP.policeDrag(p1)
+    other = p1
+    drag = not drag
+end
+
+
+Citizen.CreateThread(function()
+    while true do
+        if drag and other then
+            local ped = GetPlayerPed(GetPlayerFromServerId(other))
+            local myped = GetPlayerPed(-1)
+            Citizen.InvokeNative(0x6B9BBD38AB0796DF, myped, ped, 4103, 11816, 0.50, 0.0, 0.1, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+            playerStillDragged = true
+        else
+            if playerStillDragged then
+                DetachEntity(GetPlayerPed(-1), true, false)
+                playerStillDragged = false
+            end
+        end
+        Citizen.Wait(0)
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        local ped = GetPlayerPed(-1)
+        local veh = GetVehiclePedIsIn(ped, false)
+        local vehCoord = GetEntityCoords(veh)
+        if IsPedInAnyVehicle(ped, false) then
+            if DoesObjectOfTypeExistAtCoords(vehCoord["x"], vehCoord["y"], vehCoord["z"], 0.9, GetHashKey("P_ld_stinger_s"), true) then
+                SetVehicleTyreBurst(veh, 0, true, 1000.0)
+                SetVehicleTyreBurst(veh, 1, true, 1000.0)
+                SetVehicleTyreBurst(veh, 2, true, 1000.0)
+                SetVehicleTyreBurst(veh, 3, true, 1000.0)
+                SetVehicleTyreBurst(veh, 4, true, 1000.0)
+                SetVehicleTyreBurst(veh, 5, true, 1000.0)
+                SetVehicleTyreBurst(veh, 6, true, 1000.0)
+                SetVehicleTyreBurst(veh, 7, true, 1000.0)
+                tzRP.removeSpikes()
+            end
+        end
+    end
+end)
+

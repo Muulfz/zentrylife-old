@@ -152,5 +152,3 @@ Citizen.CreateThread(function() -- disable health regen, conflicts with coma sys
     SetPlayerHealthRechargeMultiplier(PlayerId(), 0)
   end
 end)
-
-
