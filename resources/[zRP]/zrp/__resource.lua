@@ -25,6 +25,8 @@ server_scripts{
   "modules/Properties/home_components.lua",
   "modules/Jobs/mission.lua",
   "modules/Character/aptitude.lua",
+  "modules/Menu/main.lua",
+  "modules/Menu/admin.lua",
 
   -- basic implementations
   "modules/Character/basic_phone.lua",

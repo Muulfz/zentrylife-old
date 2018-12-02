@@ -2,7 +2,6 @@
 
 local lang = {
     adv_garages = {
-
         garage = {
             buy = {
                 item = "{2} {1}<br /><br />{3}",
@@ -100,6 +99,14 @@ local lang = {
         own_veh = "You can't carjack your own vehicle.",
         in_veh = "Please exit the vehicle.",
         no_veh = "You are not in a vehicle."
+    },
+    menu = {
+        admin = {
+            add_whitelist = {
+                prompt = "User id to whitelist: ",
+                notify = "whitelisted user {1} "
+            }
+        }
     },
     common = {
         welcome = "Welcome. Use the phone keys to use the menu.~n~last login: {1}",

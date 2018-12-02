@@ -3,10 +3,18 @@
 --- Created by Muulfz.
 --- DateTime: 11/17/2018 1:03 PM
 ---
-local Luang = module("lib/Luang")
+local Luang = module("lib/lang/Luang")
+local Permluang = module("lib/lang/Permluang")
 local config = zRPBase.config
 
 -- load language
 local Lang = Luang()
-Lang:loadLocale(config.lang, module("cfg/lang/" .. config.lang) or {})
+Lang:loadLocale(config.lang, module("cfg/lang/server/" .. config.lang) or {})
 zRP.lang = Lang.lang[config.lang]
+
+-- load Permission lang
+local Permlang = Permluang()
+Permlang:loadLocale(config.permlang, module("cfg/lang/permission/"..config.lang) or {})
+zRP.permlang = Permlang.permlang[config.lang]
+
+print(zRP.permlang.teste())

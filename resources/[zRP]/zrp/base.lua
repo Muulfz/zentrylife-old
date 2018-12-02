@@ -12,6 +12,8 @@ Proxy.addInterface("zRP",zRP)
 tzRP = {}
 Tunnel.bindInterface("zRP",tzRP) -- listening for client tunnel
 
+zRPMenu = {}
+
 
 --LANG System
 if pcall(function()
@@ -24,6 +26,7 @@ end
 
 -- init
 zRPclient = Tunnel.getInterface("zRP") -- server -> client tunnel
+
 
 local user = module("zRP_base_extensions/User/Manager") --TODO PCALL
 
