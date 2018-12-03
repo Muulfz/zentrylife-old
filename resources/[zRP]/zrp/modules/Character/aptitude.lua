@@ -170,7 +170,7 @@ end
 
 local player_apts = {}
 
-local function ch_aptitude(player,choice)
+function zRPMenu.apitude_aptitude(player,choice)
   -- display aptitudes
   local user_id = zRP.getUserId(player)
   if user_id then
@@ -219,16 +219,5 @@ local function ch_aptitude(player,choice)
     end
   end
 end
-
--- add choices to the menu
-zRP.registerMenuBuilder("main", function(add, data)
-  local user_id = zRP.getUserId(data.player)
-  if user_id then
-    local choices = {}
-    choices[lang.aptitude.title()] = {ch_aptitude,lang.aptitude.description()}
-
-    add(choices)
-  end
-end)
 
 

@@ -182,7 +182,7 @@ local revive_seq = {
   {"amb@medic@standing@kneel@exit","exit",1}
 }
 
-local choice_revive = {function(player,choice)
+function zRPMenu.choice_revive(player,choice)
   local user_id = zRP.getUserId(player)
   if user_id then
     local nplayer = zRPclient.getNearestPlayer(player,10)
@@ -202,17 +202,5 @@ local choice_revive = {function(player,choice)
         zRPclient._notify(player,lang.common.no_player_near())
       end
   end
-end,lang.emergency.menu.revive.description()}
+end
 
--- add choices to the main menu (emergency)
-zRP.registerMenuBuilder("main", function(add, data)
-  local user_id = zRP.getUserId(data.player)
-  if user_id then
-    local choices = {}
-    if zRP.hasPermission(user_id,"emergency.revive") then
-      choices[lang.emergency.menu.revive.title()] = choice_revive
-    end
-
-    add(choices)
-  end
-end)

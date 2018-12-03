@@ -159,7 +159,7 @@ AddEventHandler("zRP:playerSpawn",function(user_id, source, first_spawn)
   end
 end)
 
-local function ch_give(player,choice)
+function zRPMenu.ch_give(player,choice)
   -- get nearest player
   local user_id = zRP.getUserId(player)
   if user_id then
@@ -185,14 +185,3 @@ local function ch_give(player,choice)
     end
   end
 end
-
--- add player give money to main menu
-zRP.registerMenuBuilder("main", function(add, data)
-  local user_id = zRP.getUserId(data.player)
-  if user_id then
-    local choices = {}
-    choices[lang.money.give.title()] = {ch_give, lang.money.give.description()}
-
-    add(choices)
-  end
-end)

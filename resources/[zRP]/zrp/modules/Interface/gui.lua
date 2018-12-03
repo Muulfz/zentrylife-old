@@ -162,6 +162,7 @@ function zRP.openMainMenu(source)
   menudata.name = "Main menu"
   menudata.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
   zRP.openMenu(source,menudata) -- open the generated menu
+  print("MENU ABERTO EIN")
 end
 
 -- SERVER TUNNEL API

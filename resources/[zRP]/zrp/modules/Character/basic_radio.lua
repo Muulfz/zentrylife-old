@@ -65,35 +65,11 @@ function zRP.disconnectRadio(user_id)
   end
 end
 
+
 -- menu
-zRP.registerMenuBuilder("main", function(add, data)
-  local choices = {}
-  local player = data.player
-  local user_id = zRP.getUserId(player)
-  if user_id then
-    -- check if in a radio group
-    local groups = zRP.getUserGroups(user_id)
-    local ok = false
-    for group,_ in pairs(groups) do
-      if cgroups[group] then
-        ok = true
-        break
-      end
-    end
-
-    if ok then
-      choices[lang.radio.title()] = {function() 
-        if rusers[user_id] then
-          zRP.disconnectRadio(user_id)
-        else
-          zRP.connectRadio(user_id)
-        end
-      end}
-    end
-  end
-
-  add(choices)
-end)
+function zRPMenu.basic_radio_cgroup()
+  return cgroups
+end
 
 -- events
 

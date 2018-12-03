@@ -361,7 +361,7 @@ veh_actions[lang.vehicle.engine.title()] = {function(user_id,player,name)
   zRPclient._vc_toggleEngine(player, name)
 end, lang.vehicle.engine.description()}
 
-local function ch_vehicle(player,choice)
+function zRPMenu.basicGarage_vehicle(player,choice)
   local user_id = zRP.getUserId(player)
   if user_id then
     -- check vehicle
@@ -384,7 +384,7 @@ local function ch_vehicle(player,choice)
 end
 
 -- ask trunk (open other user car chest)
-local function ch_asktrunk(player,choice)
+function zRPMenu.basicGarage_asktrunk(player,choice)
   local nplayer = zRPclient.getNearestPlayer(player,10)
   local nuser_id = zRP.getUserId(nplayer)
   if nuser_id then
@@ -421,7 +421,7 @@ local function ch_asktrunk(player,choice)
 end
 
 -- repair nearest vehicle
-local function ch_repair(player,choice)
+function zRPMenu.basicGarage_repair(player,choice)
   local user_id = zRP.getUserId(player)
   if user_id then
     -- anim and repair
@@ -436,29 +436,7 @@ local function ch_repair(player,choice)
 end
 
 -- replace nearest vehicle
-local function ch_replace(player,choice)
+function zRPMenu.basicGarage_replace(player,choice)
   zRPclient._replaceNearestVehicle(player,7)
 end
 
-zRP.registerMenuBuilder("main", function(add, data)
-  local user_id = zRP.getUserId(data.player)
-  if user_id then
-    -- add vehicle entry
-    local choices = {}
-    choices[lang.vehicle.title()] = {ch_vehicle}
-
-    -- add ask trunk
-    choices[lang.vehicle.asktrunk.title()] = {ch_asktrunk}
-
-    -- add repair functions
-    if zRP.hasPermission(user_id, "vehicle.repair") then
-      choices[lang.vehicle.repair.title()] = {ch_repair, lang.vehicle.repair.description()}
-    end
-
-    if zRP.hasPermission(user_id, "vehicle.replace") then
-      choices[lang.vehicle.replace.title()] = {ch_replace, lang.vehicle.replace.description()}
-    end
-
-    add(choices)
-  end
-end)

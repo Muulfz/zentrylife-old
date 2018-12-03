@@ -397,15 +397,9 @@ SetTimeout(10000, function()
   end
 end)
 
+function zRPMenu.basic_phone()
+return phone_menu
+end
+
 -- add phone menu to main menu
 
-zRP.registerMenuBuilder("main", function(add, data)
-  local player = data.player
-  local choices = {}
-  choices[lang.phone.title()] = {function() zRP.openMenu(player,phone_menu) end}
-
-  local user_id = zRP.getUserId(player)
-  if user_id and zRP.hasPermission(user_id, "player.phone") then
-    add(choices)
-  end
-end)

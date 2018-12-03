@@ -90,18 +90,3 @@ function zRP.hasMission(player)
   return false
 end
 
--- MAIN MENU
-zRP.registerMenuBuilder("main", function(add, data)
-  local player = data.player
-  local user_id = zRP.getUserId(player)
-  if user_id then
-    local choices = {}
-
-    -- build admin menu
-    choices[lang.mission.cancel.title()] = {function(player,choice)
-      zRP.stopMission(player)
-    end}
-
-    add(choices)
-  end
-end)

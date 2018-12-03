@@ -8,6 +8,7 @@ local cfg = module("cfg/Modules/homes")
 
 local components = {}
 
+--todo remover requisicao
 -- return user address (home and number) or nil
 function zRP.getUserAddress(user_id, cbr)
   local rows = zRP.query("zRP/get_address", {user_id = user_id})

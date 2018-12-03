@@ -15,7 +15,7 @@ local toggles = {}
 local colors = {}
 local wheel = 0
 
-function zRP.advGarageRepairVehicle(mod)
+function tzRP.advGarageRepairVehicle(mod)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     SetVehicleFixed(veh)
@@ -23,7 +23,7 @@ function zRP.advGarageRepairVehicle(mod)
     SetVehicleUndriveable(veh, false)
 end
 
-function zRP.advGarageNotifyTimed(msg, timed)
+function tzRP.advGarageNotifyTimed(msg, timed)
     SetNotificationTextEntry("STRING")
     AddTextComponentString(msg)
     local n = DrawNotification(true, false)
@@ -31,7 +31,7 @@ function zRP.advGarageNotifyTimed(msg, timed)
     RemoveNotification(n)
 end
 
-function zRP.advGarageProtectVehicle(protect)
+function tzRP.advGarageProtectVehicle(protect)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if veh then
@@ -44,7 +44,7 @@ function zRP.advGarageProtectVehicle(protect)
     end
 end
 
-function zRP.advGarageToggleNeon(neon)
+function tzRP.advGarageToggleNeon(neon)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if not toggles[neon] then toggles[neon] = false end
@@ -52,19 +52,19 @@ function zRP.advGarageToggleNeon(neon)
     SetVehicleNeonLightEnabled(veh,neon, toggles[neon])
 end
 
-function zRP.advGarageSetNeonColour(r, g, b)
+function tzRP.advGarageSetNeonColour(r, g, b)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     SetVehicleNeonLightsColour(veh,r,g,b)
 end
 
-function zRP.advGarageSetSmokeColour(r, g, b)
+function tzRP.advGarageSetSmokeColour(r, g, b)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     SetVehicleTyreSmokeColor(veh,r,g,b)
 end
 
-function zRP.advGarageScrollVehiclePrimaryColour(pmod)
+function tzRP.advGarageScrollVehiclePrimaryColour(pmod)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if not colors[1] then colors[1] = 0 end
@@ -76,7 +76,7 @@ function zRP.advGarageScrollVehiclePrimaryColour(pmod)
     SetVehicleColours(veh, colors[1], colors[2])
 end
 
-function zRP.advGarageScrollVehicleSecondaryColour(smod)
+function tzRP.advGarageScrollVehicleSecondaryColour(smod)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if not colors[2] then colors[2] = 0 end
@@ -88,19 +88,19 @@ function zRP.advGarageScrollVehicleSecondaryColour(smod)
     SetVehicleColours(veh, colors[1], colors[2])
 end
 
-function zRP.advGarageSetCustomPrimaryColour(r, g, b)
+function tzRP.advGarageSetCustomPrimaryColour(r, g, b)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     SetVehicleCustomPrimaryColour(veh,r,g,b)
 end
 
-function zRP.advGarageSetCustomSecondaryColour(r, g, b)
+function tzRP.advGarageSetCustomSecondaryColour(r, g, b)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     SetVehicleCustomSecondaryColour(veh,r,g,b)
 end
 
-function zRP.advGarageScrollVehiclePearlescentColour(emod)
+function tzRP.advGarageScrollVehiclePearlescentColour(emod)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if not colors[3] then colors[3] = 0 end
@@ -111,7 +111,7 @@ function zRP.advGarageScrollVehiclePearlescentColour(emod)
     SetVehicleExtraColours(veh, colors[3], colors[4])
 end
 
-function zRP.advGarageScrollVehicleWheelColour(wmod)
+function tzRP.advGarageScrollVehicleWheelColour(wmod)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if not colors[4] then colors[4] = 0 end
@@ -122,7 +122,7 @@ function zRP.advGarageScrollVehicleWheelColour(wmod)
     SetVehicleExtraColours(veh, colors[3], colors[4])
 end
 
-function zRP.advGarageScrollVehicleMods(mod, add)
+function tzRP.advGarageScrollVehicleMods(mod, add)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     local num = GetNumVehicleMods(veh,mod)
@@ -145,7 +145,7 @@ function zRP.advGarageScrollVehicleMods(mod, add)
         if toggles[mod] == nil then toggles[mod] = false end
         toggles[mod] = not toggles[mod]
         ToggleVehicleMod(veh, mod, toggles[mod])
-        if toggles[mod] then zRP.advGarageNotifyTimed(lang.garage.shop.client.toggle.applied,1500) else zRP.advGarageNotifyTimed(lang.garage.shop.client.toggle.removed,1500) end
+        if toggles[mod] then tzRP.advGarageNotifyTimed(lang.garage.shop.client.toggle.applied,1500) else zRP.advGarageNotifyTimed(lang.garage.shop.client.toggle.removed,1500) end
 
         -- wheel type change
     elseif (mod == 23 or mod == 24) and add == 0 then
@@ -156,15 +156,15 @@ function zRP.advGarageScrollVehicleMods(mod, add)
         SetVehicleMod(veh,mod,mods[mod],false)
 
         -- no modifications case
-    elseif num == 0 then zRP.advGarageNotifyTimed(lang.garage.shop.client.nomods,1500)
+    elseif num == 0 then tzRP.advGarageNotifyTimed(lang.garage.shop.client.nomods,1500)
 
         -- normalization checks for mods[mod]
     elseif mods[mod] > num then
         mods[mod] = num
-        zRP.advGarageNotifyTimed(lang.garage.shop.client.maximum,1500)
+        tzRP.advGarageNotifyTimed(lang.garage.shop.client.maximum,1500)
     elseif mods[mod] < 0 then
         mods[mod] = 0
-        zRP.advGarageNotifyTimed(lang.garage.shop.client.minimum,1500)
+        tzRP.advGarageNotifyTimed(lang.garage.shop.client.minimum,1500)
 
         -- changing plate index
     elseif mod == 35 or mod == 26 then
@@ -187,7 +187,7 @@ function zRP.advGarageScrollVehicleMods(mod, add)
     end
 end
 
-function zRP.advGarageGetVehicleMods(vtype)
+function tzRP.advGarageGetVehicleMods(vtype)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     local vehicle = vehicles[vtype]
@@ -253,7 +253,7 @@ function zRP.advGarageGetVehicleMods(vtype)
     return false, false
 end
 
-function zRP.advGarageSetVehicleMods(custom)
+function tzRP.advGarageSetVehicleMods(custom)
     local ped = GetPlayerPed(-1)
     local veh = GetVehiclePedIsUsing(ped)
     if custom and veh then
@@ -305,7 +305,7 @@ function zRP.advGarageSetVehicleMods(custom)
     end
 end
 
-function zRP.advGarageSpawnGarageVehicle(vtype, name, pos) -- vtype is the vehicle type (one vehicle per type allowed at the same time)
+function tzRP.advGarageSpawnGarageVehicle(vtype, name, pos) -- vtype is the vehicle type (one vehicle per type allowed at the same time)
     local vehicle = vehicles[vtype]
     if vehicle and not IsVehicleDriveable(vehicle[3]) then -- precheck if vehicle is undriveable
         -- despawn vehicle
@@ -330,17 +330,17 @@ function zRP.advGarageSpawnGarageVehicle(vtype, name, pos) -- vtype is the vehic
 
         -- spawn car
         if HasModelLoaded(mhash) then
-            local x,y,z = zRP.getPosition()
+            local x,y,z = tzRP.getPosition()
             if pos then
                 x,y,z = table.unpack(pos)
             end
 
-            if zRP.advGarageClearAreaOfVehicles(3) then
+            if tzRP.advGarageClearAreaOfVehicles(3) then
                 local nveh = CreateVehicle(mhash, x,y,z+0.5, GetEntityHeading(GetPlayerPed(-1)), true, false)
                 SetVehicleOnGroundProperly(nveh)
                 SetEntityInvincible(nveh,false)
                 SetPedIntoVehicle(GetPlayerPed(-1),nveh,-1) -- put player inside
-                SetVehicleNumberPlateText(nveh, zRP.getRegistrationNumber())
+                SetVehicleNumberPlateText(nveh, tzRP.getRegistrationNumber())
                 Citizen.InvokeNative(0xAD738C3085FE7E11, nveh, true, true) -- set as mission entity
                 SetVehicleHasBeenOwnedByPlayer(nveh,true)
 
@@ -357,20 +357,20 @@ function zRP.advGarageSpawnGarageVehicle(vtype, name, pos) -- vtype is the vehic
     return false
 end
 
-function zRP.advGarageClearAreaOfVehicles(radius)
-    local closeby = zRP.getNearestVehicle(radius)
+function tzRP.advGarageClearAreaOfVehicles(radius)
+    local closeby = tzRP.getNearestVehicle(radius)
     if IsEntityAVehicle(closeby) then -- precheck if vehicle is undriveable
         -- despawn vehicle
         SetVehicleHasBeenOwnedByPlayer(closeby,false)
         Citizen.InvokeNative(0xAD738C3085FE7E11, closeby, false, true) -- set not as mission entity
         SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(closeby))
         Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(closeby))
-        return zRP.advGarageClearAreaOfVehicles(radius)
+        return tzRP.advGarageClearAreaOfVehicles(radius)
     end
     return true
 end
 
-function zRP.advGarageSpawnShowroomVehicle(name, pos)
+function tzRP.advGarageSpawnShowroomVehicle(name, pos)
     if showroom then -- precheck if vehicle is undriveable
         -- despawn vehicle
         SetVehicleHasBeenOwnedByPlayer(showroom,false)
@@ -392,17 +392,17 @@ function zRP.advGarageSpawnShowroomVehicle(name, pos)
         end
         -- spawn car
         if HasModelLoaded(mhash) then
-            local x,y,z = zRP.getPosition()
+            local x,y,z = tzRP.getPosition()
             if pos then
                 x,y,z = table.unpack(pos)
             end
 
-            if zRP.advGarageClearAreaOfVehicles(3) then
+            if tzRP.advGarageClearAreaOfVehicles(3) then
                 local nveh = CreateVehicle(mhash, x,y,z+0.5, GetEntityHeading(GetPlayerPed(-1)), true, false)
                 SetVehicleOnGroundProperly(nveh)
                 SetEntityInvincible(nveh,false)
                 SetPedIntoVehicle(GetPlayerPed(-1),nveh,-1) -- put player inside
-                SetVehicleNumberPlateText(nveh, zRP.getRegistrationNumber())
+                SetVehicleNumberPlateText(nveh, tzRP.getRegistrationNumber())
                 Citizen.InvokeNative(0xAD738C3085FE7E11, nveh, true, true) -- set as mission entity
                 SetVehicleHasBeenOwnedByPlayer(nveh,true)
 
@@ -419,11 +419,11 @@ function zRP.advGarageSpawnShowroomVehicle(name, pos)
     return false
 end
 
-function zRP.advGarageDespawnGarageVehicle(vtype, max_range)
+function tzRP.advGarageDespawnGarageVehicle(vtype, max_range)
     local vehicle = vehicles[vtype]
     if vehicle then
         local x,y,z = table.unpack(GetEntityCoords(vehicle[3],true))
-        local px,py,pz = zRP.getPosition()
+        local px,py,pz = tzRP.getPosition()
 
         if GetDistanceBetweenCoords(x,y,z,px,py,pz,true) < max_range then -- check distance with the vehicule
             -- remove vehicle
@@ -439,7 +439,7 @@ function zRP.advGarageDespawnGarageVehicle(vtype, max_range)
     end
 end
 
-function zRP.advGarageDespawnShowroomVehicle()
+function tzRP.advGarageDespawnShowroomVehicle()
     if showroom then
         -- remove vehicle
         SetVehicleHasBeenOwnedByPlayer(showroom,false)
@@ -451,8 +451,8 @@ function zRP.advGarageDespawnShowroomVehicle()
 end
 
 -- return ok,vtype,name
-function zRP.advGarageGetNearestOwnedVehicle(radius)
-    local px,py,pz = zRP.getPosition()
+function tzRP.advGarageGetNearestOwnedVehicle(radius)
+    local px,py,pz = tzRP.getPosition()
     for k,v in pairs(vehicles) do
         local x,y,z = table.unpack(GetEntityCoords(v[3],true))
         local dist = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
@@ -462,7 +462,7 @@ function zRP.advGarageGetNearestOwnedVehicle(radius)
     return false,"",""
 end
 
-function zRP.advGarageIsOwnedVehicleOut(vname)
+function tzRP.advGarageIsOwnedVehicleOut(vname)
     for vtype,vehicle in pairs(vehicles) do
         if vehicle[2] == vname then
             return vtype, vehicle
@@ -472,28 +472,28 @@ function zRP.advGarageIsOwnedVehicleOut(vname)
 end
 
 -- vehicle commands
-function zRP.advGarageVc_openDoor(vtype, door_index)
+function tzRP.advGarageVc_openDoor(vtype, door_index)
     local vehicle = vehicles[vtype]
     if vehicle then
         SetVehicleDoorOpen(vehicle[3],door_index,0,false)
     end
 end
 
-function zRP.advGarageVc_closeDoor(vtype, door_index)
+function tzRP.advGarageVc_closeDoor(vtype, door_index)
     local vehicle = vehicles[vtype]
     if vehicle then
         SetVehicleDoorShut(vehicle[3],door_index)
     end
 end
 
-function zRP.advGarageVc_detachTrailer(vtype)
+function tzRP.advGarageVc_detachTrailer(vtype)
     local vehicle = vehicles[vtype]
     if vehicle then
         DetachVehicleFromTrailer(vehicle[3])
     end
 end
 
-function zRP.advGarageVc_detachTowTruck(vtype)
+function tzRP.advGarageVc_detachTowTruck(vtype)
     local vehicle = vehicles[vtype]
     if vehicle then
         local ent = GetEntityAttachedToTowTruck(vehicle[3])
@@ -503,7 +503,7 @@ function zRP.advGarageVc_detachTowTruck(vtype)
     end
 end
 
-function zRP.advGarageVc_detachCargobob(vtype)
+function tzRP.advGarageVc_detachCargobob(vtype)
     local vehicle = vehicles[vtype]
     if vehicle then
         local ent = GetVehicleAttachedToCargobob(vehicle[3])
@@ -513,7 +513,7 @@ function zRP.advGarageVc_detachCargobob(vtype)
     end
 end
 
-function zRP.advGarageVc_toggleEngine(vtype)
+function tzRP.advGarageVc_toggleEngine(vtype)
     local vehicle = vehicles[vtype]
     if vehicle then
         local running = Citizen.InvokeNative(0xAE31E7DF9B5B132E,vehicle[3]) -- GetIsVehicleEngineRunning
@@ -526,7 +526,7 @@ function zRP.advGarageVc_toggleEngine(vtype)
     end
 end
 
-function zRP.advGarageVc_toggleLock(vtype)
+function tzRP.advGarageVc_toggleLock(vtype)
     local vehicle = vehicles[vtype]
     if vehicle then
         local veh = vehicle[3]
@@ -535,11 +535,11 @@ function zRP.advGarageVc_toggleLock(vtype)
             SetVehicleDoorsLockedForAllPlayers(veh, false)
             SetVehicleDoorsLocked(veh,1)
             SetVehicleDoorsLockedForPlayer(veh, PlayerId(), false)
-            zRP.notify(lang.garage.personal.client.unlocked)
+            tzRP.notify(lang.garage.personal.client.unlocked)
         else -- lock
             SetVehicleDoorsLocked(veh,2)
             SetVehicleDoorsLockedForAllPlayers(veh, true)
-            zRP.notify(lang.garage.personal.client.locked)
+            tzRP.notify(lang.garage.personal.client.locked)
         end
     end
 end

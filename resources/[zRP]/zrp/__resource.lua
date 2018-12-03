@@ -27,6 +27,8 @@ server_scripts{
   "modules/Character/aptitude.lua",
   "modules/Menu/main.lua",
   "modules/Menu/admin.lua",
+  "modules/Menu/basic_phone.lua",
+  "modules/Menu/basic_radio.lua",
 
   -- basic implementations
   "modules/Character/basic_phone.lua",
@@ -57,7 +59,7 @@ client_scripts{
   "client/Admin/admin.lua",
   "client/Character/basic_phone.lua",
   "client/Character/basic_radio.lua",
-  "client/Shop/adv_garages.lua",
+  "client/Shop/adv_garage.lua",
   "client/Utils/NativesUtils.lua"
 }
 

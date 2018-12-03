@@ -13,7 +13,7 @@ tzRP = {}
 Tunnel.bindInterface("zRP",tzRP) -- listening for client tunnel
 
 zRPMenu = {}
-
+zRPStaticMenu  = {}
 
 --LANG System
 if pcall(function()
