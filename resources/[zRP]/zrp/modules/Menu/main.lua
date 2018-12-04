@@ -119,3 +119,37 @@ zRP.registerMenuBuilder("main", function(add, data)
         add(choices)
     end
 end)
+
+
+zRP.registerMenuBuilder("main", function(add, data)
+    local user_id = zRP.getUserId(data.player)
+    if user_id ~= nil then
+        local choices = {}
+
+        if zRP.hasPermission(user_id,lang.basic_menu.player.perm()) then
+            choices[lang.basic_menu.player.button()] = {zRPMenu.player_menu,lang.basic_menu.player.desc()} -- opens player submenu
+        end
+
+        if zRP.hasPermission(user_id,lang.basic_menu.service.perm()) then
+            choices[lang.basic_menu.service.button()] = {zRPMenu.mission_services,lang.basic_menu.service()} -- toggle the receiving of missions
+        end
+
+        if zRP.hasPermission(user_id,lang.basic_menu.loot.perm()) then
+            choices[lang.basic_menu.loot.button()] = {zRPMenu.thief_loot, lang.basic_menu.loot.desc()} -- take the items of nearest player in coma
+        end
+
+        if zRP.hasPermission(user_id,lang.basic_menu.mugger.perm()) then
+            choices[lang.basic_menu.mugger.button()] = {zRPMenu.thief_mug, lang.basic_menu.mugger.desc()} -- steal nearest player wallet
+        end
+
+        if zRP.hasPermission(user_id,lang.basic_menu.hacker.perm()) then
+            choices[lang.basic_menu.hacker.button()] = {zRPMenu.hacker_hack, lang.hacker.desc()} --  1 in 100 chance of stealing 1% of nearest player bank
+        end
+
+        if zRP.hasPermission(user_id,lang.basic_menu.lockpick.perm()) then
+                choices[lang.basic_menu.lockpick.button()] = {zRPMenu.thief_lockpickveh, lang.basic_menu.lockpick.desc()} -- opens a locked vehicle
+        end
+
+        add(choices)
+    end
+end)

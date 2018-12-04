@@ -90,3 +90,19 @@ function zRP.hasMission(player)
   return false
 end
 
+function zRPMenu.mission_services(player, choice)
+  local user_id = vRP.getUserId(player)
+  local service = lang.service.group()
+  if user_id ~= nil then
+    if vRP.hasGroup(user_id,service) then
+      vRP.removeUserGroup(user_id,service)
+      if vRP.hasMission(player) then
+        vRP.stopMission(player)
+      end
+      vRPclient.notify(player,lang.basic_menu.service.off())
+    else
+      vRP.addUserGroup(user_id,service)
+      vRPclient.notify(player,lang.basic_menu.service.on())
+    end
+  end
+end
