@@ -32,6 +32,7 @@ server_scripts{
   "modules/Menu/admin.lua",
   "modules/Menu/basic_phone.lua",
   "modules/Menu/basic_radio.lua",
+  "modules/Menu/police.lua",
 
   -- basic implementations
   "modules/Character/basic_phone.lua",

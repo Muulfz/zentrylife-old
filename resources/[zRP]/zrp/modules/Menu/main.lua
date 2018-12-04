@@ -131,7 +131,7 @@ zRP.registerMenuBuilder("main", function(add, data)
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.service.perm()) then
-            choices[lang.basic_menu.service.button()] = {zRPMenu.mission_services,lang.basic_menu.service()} -- toggle the receiving of missions
+            choices[lang.basic_menu.service.button()] = {zRPMenu.mission_services,lang.basic_menu.service.desc()} -- toggle the receiving of missions
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.loot.perm()) then
@@ -143,13 +143,12 @@ zRP.registerMenuBuilder("main", function(add, data)
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.hacker.perm()) then
-            choices[lang.basic_menu.hacker.button()] = {zRPMenu.hacker_hack, lang.hacker.desc()} --  1 in 100 chance of stealing 1% of nearest player bank
+            choices[lang.basic_menu.hacker.button()] = {zRPMenu.hacker_hack, lang.basic_menu.hacker.desc()} --  1 in 100 chance of stealing 1% of nearest player bank
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.lockpick.perm()) then
                 choices[lang.basic_menu.lockpick.button()] = {zRPMenu.thief_lockpickveh, lang.basic_menu.lockpick.desc()} -- opens a locked vehicle
         end
-
         add(choices)
     end
 end)

@@ -78,30 +78,31 @@ zRP.registerMenuBuilder("main", function(add, data)
             if zRP.hasPermission(user_id,"player.calladmin") then
                 menu["@Call admin"] = {zRPMenu.admin_calladmin}
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.deleteveh.perm()
-                menu["@Delete Vehicle"] = {zRPMenu.admin_deleteveh, "Delete vehicle"} -- lang.deleteveh.button() -- lang.deleteveh.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.deleteveh.perm()
+                menu["@Delete Vehicle"] = {zRPMenu.admin_deleteveh, "Delete vehicle"} -- lang.basic_menu.deleteveh.button() -- lang.basic_menu.deleteveh.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.spawnveh.perm()
-                menu["@Spawn Vehicle"] = {zRPMenu.admin_spawnveh, "Spawn Vehicle"} -- lang.spawnveh.button() -- lang.spawnveh.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.spawnveh.perm()
+                menu["@Spawn Vehicle"] = {zRPMenu.admin_spawnveh, "Spawn Vehicle"} -- lang.basic_menu.spawnveh.button() -- lang.basic_menu.spawnveh.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.godmode.perm()
-                menu["@God mode"] = {zRPMenu.admin_godmode, "God mode"} -- lang.godmode.button() -- lang.godmode.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.godmode.perm()
+                menu["@God mode"] = {zRPMenu.admin_godmode, "God mode"} -- lang.basic_menu.godmode.button() -- lang.basic_menu.godmode.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.blips.perm()
-                menu["@Blips"] = {zRPMenu.admin_blips, "Blips"} -- lang.blips.button() -- lang.blips.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.blips.perm()
+                menu["@Blips"] = {zRPMenu.admin_blips, "Blips"} -- lang.basic_menu.blips.button() -- lang.basic_menu.blips.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.sprites.perm()
-                menu["@Sprites"] = {zRPMenu.admin_sprites, "Sprites"} -- lang.sprites.button() -- lang.sprites.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.sprites.perm()
+                menu["@Sprites"] = {zRPMenu.admin_sprites, "Sprites"} -- lang.basic_menu.sprites.button() -- lang.basic_menu.sprites.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.crun.perm()
-                menu["@Crun"] = {zRPMenu.admin_crun, "Run client string"} -- lang.crun.button() -- lang.crun.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.crun.perm()
+                menu["@Crun"] = {zRPMenu.admin_crun, "Run client string"} -- lang.basic_menu.crun.button() -- lang.basic_menu.crun.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.srun.perm()
-                menu["@Srun"] = {zRPMenu.admin_srun, "Run Server string"} -- lang.srun.button() -- lang.srun.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.srun.perm()
+                menu["@Srun"] = {zRPMenu.admin_srun, "Run Server string"} -- lang.basic_menu.srun.button() -- lang.basic_menu.srun.desc()
             end
-            if zRP.hasPermission(user_id,"player.kick") then -- lang.tptowaypoint.perm()
-                menu["@Tp to WayPoint"] = {zRPMenu.admin_tptowaypoint, "Tp to waypoint"} -- lang.tptowaypoint.button() -- lang.tptowaypoint.desc()
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.tptowaypoint.perm()
+                menu["@Tp to WayPoint"] = {zRPMenu.admin_tptowaypoint, "Tp to waypoint"} -- lang.basic_menu.tptowaypoint.button() -- lang.basic_menu..tptowaypoint.desc()
             end
+
 
             zRP.openMenu(player,menu)
         end}

@@ -16,3 +16,12 @@ zRP.registerMenuBuilder("main", function(add, data)
         add(choices)
     end
 end)
+
+zRP.registerMenuBuilder("phone", function(add) -- phone menu is created on server start, so it has no permissions.
+    Citizen.CreateThread(function()
+        local choices = {} -- Comment the choices you want to disable by adding -- in front of them.
+        choices[lang.basic_menu.mpay.button()] = {zRPMenu.player_mobilepay, lang.basic_menu.mpay.desc()} -- transfer money through phone
+        choices[lang.basic_menu.mcharge.button()] = {zRPMenu.player_mobilecharge, lang.basic_menu.mcharge.desc()} -- charge money through phone
+        add(choices)
+    end)
+end)

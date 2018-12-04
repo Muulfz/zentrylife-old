@@ -150,11 +150,11 @@ function tzRP.deleteVehicleInFrontOrInside(offset, notify)
         SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(veh))
         Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
         if notify then
-            tvRP.notify(lang.deleteveh.success) -- lang.deleteveh.success()
+            tzRP.notify(lang.deleteveh.success) -- lang.deleteveh.success()
         end
     else
         if notify then
-            tvRP.notify(lang.deleteveh.toofar) -- lang.deleteveh.toofar()
+            tzRP.notify(lang.deleteveh.toofar) -- lang.deleteveh.toofar()
         end
     end
 end

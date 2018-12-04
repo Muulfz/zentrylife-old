@@ -88,7 +88,7 @@ function zRPMenu.thief_lockpickveh()
             zRPclient.notify(player,lang.service.off())
         else
             zRP.addUserGroup(user_id,service)
-            vRPclient.notify(player,lang.service.on())
+            zRPclient.notify(player,lang.service.on())
         end
     end
 end

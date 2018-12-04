@@ -158,6 +158,62 @@ function zRPMenu.player_userlist(player, choice)
     end
 end
 
+function zRPMenu.player_mobilepay(player, choice)
+    local user_id = zRP.getUserId(player)
+    local menu = {}
+    menu.name = lang.phone.directory.title()
+    menu.css = {top = "75px", header_color = "rgba(0,0,255,0.75)"}
+    menu.onclose = function(player) zRP.openMainMenu(player) end -- nest menu
+    menu[lang.mpay.type.button()] = {
+        -- payment function
+        function(player,choice)
+            local phone = zRP.prompt(player,lang.mpay.type.prompt,"")
+            if phone ~= nil and phone ~= "" then
+                zRP.payPhoneNumber(user_id,phone)
+            else
+                zRPclient.notify(player,lang.common.invalid_value())
+            end
+        end,lang.mpay.type.desc()}
+    local directory = zRP.getPhoneDirectory(user_id)
+    for k,v in pairs(directory) do
+        menu[k] = {
+            -- payment function
+            function(player,choice)
+                zRP.payPhoneNumber(user_id,v)
+            end
+        ,v} -- number as description
+    end
+    zRP.openMenu(player, menu)
+end
+
+function zRPMenu.player_mobilecharge(player, choice)
+    local user_id = zRP.getUserId(player)
+    local menu = {}
+    menu.name = lang.phone.directory.title()
+    menu.css = {top = "75px", header_color = "rgba(0,0,255,0.75)"}
+    menu.onclose = function(player) zRP.openMainMenu(player) end -- nest menu
+    menu[lang.mcharge.type.button()] = {
+        -- payment function
+        function(player,choice)
+            local phone = zRP.prompt(player,lang.mcharge.type.prompt(),"")
+            if phone ~= nil and phone ~= "" then
+                zRP.chargePhoneNumber(user_id,phone)
+            else
+                zRPclient.notify(player,lang.common.invalid_value())
+            end
+        end,lang.mcharge.type.desc()}
+    local directory = zRP.getPhoneDirectory(user_id)
+    for k,v in pairs(directory) do
+        menu[k] = {
+            -- payment function
+            function(player,choice)
+                zRP.chargePhoneNumber(user_id,v)
+            end
+        ,v} -- number as description
+    end
+    zRP.openMenu(player, menu)
+end
+
 
 --- menu
 

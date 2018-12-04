@@ -3,34 +3,34 @@
 --- Created by Muulfz.
 --- DateTime: 12/4/2018 1:24 PM
 ---
-local lang = zRP.lang.basic_menu
+local lang = zRP.lang
 -- hack player
 
 function zRPMenu.hacker_hack(player, choice)
     -- get nearest player
-    local user_id = vRP.getUserId(player)
+    local user_id = zRP.getUserId(player)
     if user_id ~= nil then
-        local nplayer = vRPclient.getNearestPlayer(player,25)
+        local nplayer = zRPclient.getNearestPlayer(player,25)
         if nplayer ~= nil then
-            local nuser_id = vRP.getUserId(nplayer)
+            local nuser_id = zRP.getUserId(nplayer)
             if nuser_id ~= nil then
                 -- prompt number
-                local nbank = vRP.getBankMoney(nuser_id)
+                local nbank = zRP.getBankMoney(nuser_id)
                 local amount = math.floor(nbank*0.01)
                 local nvalue = nbank - amount
                 if math.random(1,100) == 1 then
-                    vRP.setBankMoney(nuser_id,nvalue)
-                    vRPclient.notify(nplayer,lang.hacker.hacked({amount}))
-                    vRP.giveInventoryItem(user_id,"dirty_money",amount,true)
+                    zRP.setBankMoney(nuser_id,nvalue)
+                    zRPclient.notify(nplayer,lang.basic_menu.hacker.hacked({amount}))
+                    zRP.giveInventoryItem(user_id,"dirty_money",amount,true)
                 else
-                    vRPclient.notify(nplayer,lang.hacker.failed.good())
-                    vRPclient.notify(player,lang.hacker.failed.bad())
+                    zRPclient.notify(nplayer,lang.basic_menu.hacker.failed.good())
+                    zRPclient.notify(player,lang.basic_menu.hacker.failed.bad())
                 end
             else
-                vRPclient.notify(player,lang.common.no_player_near())
+                zRPclient.notify(player,lang.common.no_player_near())
             end
         else
-            vRPclient.notify(player,lang.common.no_player_near())
+            zRPclient.notify(player,lang.common.no_player_near())
         end
     end
 end
