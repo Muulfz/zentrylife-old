@@ -4,7 +4,7 @@
 --- DateTime: 12/2/2018 3:15 PM
 ---
 
-
+local lang = zRP.lang
 ----------------------------------------------------------------------------------------
 zRP.registerMenuBuilder("main", function(add, data)
     local user_id = zRP.getUserId(data.player)
@@ -102,8 +102,15 @@ zRP.registerMenuBuilder("main", function(add, data)
             if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.tptowaypoint.perm()
                 menu["@Tp to WayPoint"] = {zRPMenu.admin_tptowaypoint, "Tp to waypoint"} -- lang.basic_menu.tptowaypoint.button() -- lang.basic_menu..tptowaypoint.desc()
             end
-
-
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.unjail.perm()
+                menu["@Admin unjail"] = {zRPMenu.police_unjail, lang.basic_menu.unjail.desc()} -- lang.unjail.button()
+            end
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.spikes.perm()
+                menu["@Admin spike"] = {zRPMenu.police_spikes, lang.basic_menu.spikes.perm()} -- lang.spikes.button()
+            end
+            if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.freeze.perm()
+                menu["@Admin freeze"] = {zRPMenu.police_freeze, lang.basic_menu.freeze.perm()} -- lang.freeze.button()
+            end
             zRP.openMenu(player,menu)
         end}
 

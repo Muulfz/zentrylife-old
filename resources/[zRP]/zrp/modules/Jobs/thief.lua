@@ -3,7 +3,7 @@
 --- Created by Muulfz.
 --- DateTime: 12/4/2018 4:42 PM
 ---
-local lang = zRP.lang.basic_menu
+local lang = zRP.lang
 
 function zRPMenu.thief_mug(player, choice)
     -- get nearest player
@@ -18,7 +18,7 @@ function zRPMenu.thief_mug(player, choice)
                 local amount = nmoney
                 if math.random(1, 3) == 1 then
                     if zRP.tryPayment(nuser_id, amount) then
-                        zRPclient.notify(nplayer, lang.mugger.mugged({ amount }))
+                        zRPclient.notify(nplayer, lang.basic_menu.mugger.mugged({ amount }))
                         zRP.giveInventoryItem(user_id, "dirty_money", amount, true)
                     else
                         zRPclient.notify(player, lang.money.not_enough())
@@ -68,7 +68,7 @@ function zRPMenu.thief_loot()
                 end)
                 zRPclient.stopAnim(player, false)
             else
-                zRPclient.notify(player, lang.emergency.menu.revive.not_in_coma())
+                zRPclient.notify(player, lang.basic_menu.emergency.menu.revive.not_in_coma())
             end
         else
             zRPclient.notify(player, lang.common.no_player_near())
@@ -85,10 +85,31 @@ function zRPMenu.thief_lockpickveh()
             if zRP.hasMission(player) then
                 zRP.stopMission(player)
             end
-            zRPclient.notify(player,lang.service.off())
+            zRPclient.notify(player,lang.basic_menu.service.off())
         else
             zRP.addUserGroup(user_id,service)
-            zRPclient.notify(player,lang.service.on())
+            zRPclient.notify(player,lang.basic_menu.service.on())
         end
     end
 end
+
+
+
+zRP.defInventoryItem(lang.basic_menu.lockpick.id(),lang.basic_menu.lockpick.name(),lang.basic_menu.lockpick.desc(), -- add it for sale to zrp/cfg/markets.lua if you want to use it
+        function(args)
+            local choices = {}
+
+            choices[lang.basic_menu.lockpick.button()] = {function(player,choice)
+                local user_id = zRP.getUserId(player)
+                if user_id ~= nil then
+                    if zRP.tryGetInventoryItem(user_id, lang.basic_menu.lockpick.id(), 1, true) then
+                        zRPclient.lockpickVehicle(player,20,true) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
+                        zRP.closeMenu(player)
+                    end
+                end
+            end,lang.basic_menu.lockpick.desc()}
+
+            return choices
+        end,
+        0.75)
+

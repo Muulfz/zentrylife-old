@@ -947,3 +947,23 @@ function zRPMenu.police_freeze(player, choice)
     end
 end
 
+
+zRP.defInventoryItem(lang.bodyarmor.id(),lang.bodyarmor.name(),lang.bodyarmor.desc(),
+        function(args)
+            local choices = {}
+
+            choices[lang.bodyarmor.equip()] = {function(player,choice)
+                local user_id = zRP.getUserId(player)
+                if user_id ~= nil then
+                    if zRP.tryGetInventoryItem(user_id, lang.bodyarmor.id(), 1, true) then
+                       zRPclient.setArmour(player,100,true)
+                        zRP.closeMenu(player)
+                    end
+                end
+            end}
+
+            return choices
+        end,
+        5.0)
+
+

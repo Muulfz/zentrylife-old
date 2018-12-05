@@ -6,6 +6,99 @@
 local lang = zRP.lang
 
 
+
+
+function zRP.chargePhoneNumber(user_id,phone)
+    local player = zRP.getUserSource(user_id)
+    local directory_name = zRP.getPhoneDirectoryName(user_id, phone)
+    if directory_name == "unknown" then
+        directory_name = phone
+    end
+    local charged = zRP.prompt(player,lang.basic_menu.mcharge.prompt({directory_name}),"")
+    if charge ~= nil and charge ~= "" and tonumber(charge)>0 then
+        local target_id = zRP.getUserByPhone(phone)
+        if target_id~=nil then
+            if charge ~= nil and charge ~= "" then
+                local target = zRP.getUserSource(target_id)
+                if target ~= nil then
+                    local identity = zRP.getUserIdentity(user_id)
+                    local my_directory_name = zRP.getPhoneDirectoryName(target_id, identity.phone)
+                    if my_directory_name == "unknown" then
+                        my_directory_name = identity.phone
+                    end
+                    local ok = zRP.request(target,lang.basic_menu.mcharge.request({my_directory_name,charge}),600)
+                    if ok then
+                        local target_bank = zRP.getBankMoney(target_id) - tonumber(charge)
+                        local my_bank = zRP.getBankMoney(user_id) + tonumber(charge)
+                        if target_bank>0 then
+                            zRP.setBankMoney(user_id,my_bank)
+                            zRP.setBankMoney(target_id,target_bank)
+                            zRPclient.notify(player,lang.basic_menu.mcharge.charger({directory_name,charge}))
+                            zRPclient.notify(target,lang.basic_menu.mcharge.charged({my_directory_name,charge}))
+                            --zRP.logInfoToFile(lang.basic_menu.mcharge.file(),lang.basic_menu.mcharge.log({user_id,target_id,charge,my_bank,target_bank})
+                            zRP.closeMenu(player)
+                        else
+                            zRPclient.notify(target,lang.basic_menu.money.not_enough())
+                            zRPclient.notify(player,lang.basic_menu.mcharge.not_enough({directory_name}))
+                        end
+                    else
+                        zRPclient.notify(player,lang.basic_menu.mcharge.refused({directory_name}))
+                    end
+                else
+                    zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                end
+            else
+                zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+            end
+        else
+            zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+        end
+    else
+        zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+    end
+end
+
+function zRP.payPhoneNumber(user_id,phone)
+    local player = zRP.getUserSource(user_id)
+    local directory_name = zRP.getPhoneDirectoryName(user_id, phone)
+    if directory_name == "unknown" then
+        directory_name = phone
+    end
+    local transfer = zRP.prompt(player,lang.basic_menu.mpay.prompt({directory_name}),"")
+    if transfer ~= nil and transfer ~= "" and tonumber(transfer)>0 then
+        local target_id = zRP.getUserByPhone(phone)
+        local my_bank = zRP.getBankMoney(user_id) - tonumber(transfer)
+        if target_id~=nil then
+            if my_bank >= 0 then
+                local target = zRP.getUserSource(target_id)
+                if target ~= nil then
+                    zRP.setBankMoney(user_id,my_bank)
+                    zRPclient.notify(player,lang.basic_menu.mpay.transferred({transfer,directory_name}))
+                    local target_bank = zRP.getBankMoney(target_id) + tonumber(transfer)
+                    zRP.setBankMoney(target_id,target_bank)
+                    --zRP.logInfoToFile(lang.basic_menu.mpay.file(),lang.basic_menu.mpay.log({user_id,target_id,transfer,my_bank,target_bank})
+                    local identity = zRP.getUserIdentity(user_id)
+                    local my_directory_name = zRP.getPhoneDirectoryName(target_id, identity.phone)
+                    if my_directory_name == "unknown" then
+                        my_directory_name = identity.phone
+                    end
+                    zRPclient.notify(target,lang.basic_menu.mpay.received({transfer,my_directory_name}))
+                    zRP.closeMenu(player)
+                else
+                    zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                end
+            else
+                zRPclient.notify(player,lang.basic_menu.money.not_enough())
+            end
+        else
+            zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+        end
+    else
+        zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+    end
+end
+
+
 zRP.registerMenuBuilder("main", function(add, data)
     local player = data.player
     local choices = {}
