@@ -4,6 +4,9 @@
 --- DateTime: 12/1/2018 5:43 AM
 ---
 
+function tzRP.getArmour()
+    return GetPedArmour(GetPlayerPed(-1))
+end
 
 function tzRP.isPlayerInVehicleModel(model)
     if (IsVehicleModel(GetVehiclePedIsUsing(GetPlayerPed(-1)), GetHashKey(model))) then -- just a function you can use to see if your player is in a taxi or any other car model (use the tunnel)

@@ -111,6 +111,9 @@ zRP.registerMenuBuilder("main", function(add, data)
             if zRP.hasPermission(user_id,"player.kick") then -- lang.basic_menu.freeze.perm()
                 menu["@Admin freeze"] = {zRPMenu.police_freeze, lang.basic_menu.freeze.perm()} -- lang.freeze.button()
             end
+            if zRP.hasPermission(user_id,lang.barbershop.perm()) then
+                menu[lang.barbershop.button()] = {zRPMenu.admin_display_custom, lang.barbershop.desc()}
+            end
             zRP.openMenu(player,menu)
         end}
 

@@ -80,34 +80,32 @@ function zRPMenu.thief_lockpickveh()
     local user_id = zRP.getUserId(player)
     local service = lang.service.group()
     if user_id ~= nil then
-        if zRP.hasGroup(user_id,service) then
-            zRP.removeUserGroup(user_id,service)
+        if zRP.hasGroup(user_id, service) then
+            zRP.removeUserGroup(user_id, service)
             if zRP.hasMission(player) then
                 zRP.stopMission(player)
             end
-            zRPclient.notify(player,lang.basic_menu.service.off())
+            zRPclient.notify(player, lang.basic_menu.service.off())
         else
-            zRP.addUserGroup(user_id,service)
-            zRPclient.notify(player,lang.basic_menu.service.on())
+            zRP.addUserGroup(user_id, service)
+            zRPclient.notify(player, lang.basic_menu.service.on())
         end
     end
 end
 
-
-
-zRP.defInventoryItem(lang.basic_menu.lockpick.id(),lang.basic_menu.lockpick.name(),lang.basic_menu.lockpick.desc(), -- add it for sale to zrp/cfg/markets.lua if you want to use it
+zRP.defInventoryItem(lang.basic_menu.lockpick.id(), lang.basic_menu.lockpick.name(), lang.basic_menu.lockpick.desc(), -- add it for sale to zrp/cfg/markets.lua if you want to use it
         function(args)
             local choices = {}
 
-            choices[lang.basic_menu.lockpick.button()] = {function(player,choice)
+            choices[lang.basic_menu.lockpick.button()] = { function(player, choice)
                 local user_id = zRP.getUserId(player)
                 if user_id ~= nil then
                     if zRP.tryGetInventoryItem(user_id, lang.basic_menu.lockpick.id(), 1, true) then
-                        zRPclient.lockpickVehicle(player,20,true) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
+                        zRPclient.lockpickVehicle(player, 20, true) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
                         zRP.closeMenu(player)
                     end
                 end
-            end,lang.basic_menu.lockpick.desc()}
+            end, lang.basic_menu.lockpick.desc() }
 
             return choices
         end,

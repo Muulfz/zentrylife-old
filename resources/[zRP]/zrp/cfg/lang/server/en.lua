@@ -867,7 +867,13 @@ local lang = {
     },
     radio = {
         title = "Radio ON/OFF"
-    }
+    },
+    barbershop = {
+        title = "Barbershop",
+        button = "@Show Overlay",
+        perm = "admin.overlay",
+        desc = "Show ped overlay."
+    },
 }
 
 return lang

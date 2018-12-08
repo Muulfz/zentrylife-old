@@ -37,7 +37,6 @@ for gtype,weapons in pairs(gunshop_types) do
         if weapons[string.upper(weapon)] == nil then -- add body price if not already owned
           total = total+price
         end
-
         -- payment
         if user_id and zRP.tryPayment(user_id,total) then
           zRPclient._giveWeapons(player,{

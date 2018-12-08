@@ -45,7 +45,10 @@ server_scripts{
   "modules/Character/cloakroom.lua",
   "modules/Character/basic_radio.lua",
   "modules/Shop/adv_garages.lua",
-  "modules/Missions/basic_mission.lua"
+  "modules/Shop/basic_armorshop.lua",
+  "modules/Shop/basic_barbershop.lua",
+  "modules/Shop/carwash.lua",
+  "modules/Missions/basic_mission.lua",
 }
 
 -- client scripts
@@ -64,7 +67,10 @@ client_scripts{
   "client/Character/basic_phone.lua",
   "client/Character/basic_radio.lua",
   "client/Shop/adv_garage.lua",
-  "client/Utils/NativesUtils.lua"
+  "client/Utils/NativesUtils.lua",
+  "client/Character/armor.lua",
+  "client/Character/custom.lua",
+  "client/Shop/carwash.lua"
 }
 
 -- client files
