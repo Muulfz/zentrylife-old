@@ -12,3 +12,4 @@ function zRP.getPlayerName(player)
     return GetPlayerName(player) or "unknown"
 end
 
+w

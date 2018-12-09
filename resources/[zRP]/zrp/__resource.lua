@@ -48,6 +48,7 @@ server_scripts{
   "modules/Shop/basic_armorshop.lua",
   "modules/Shop/basic_barbershop.lua",
   "modules/Shop/carwash.lua",
+  "modules/Shop/tattos.lua",
   "modules/Missions/basic_mission.lua",
 }
 
@@ -70,7 +71,8 @@ client_scripts{
   "client/Utils/NativesUtils.lua",
   "client/Character/armor.lua",
   "client/Character/custom.lua",
-  "client/Shop/carwash.lua"
+  "client/Shop/carwash.lua",
+  "client/Shop/tattos.lua"
 }
 
 -- client files

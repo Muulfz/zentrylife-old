@@ -6,6 +6,7 @@
 
 local lang = zRP.lang
 
+
 zRP.registerMenuBuilder("police", function(add, data)
     local user_id = zRP.getUserId(data.player)
     if user_id ~= nil then
@@ -41,3 +42,4 @@ zRP.registerMenuBuilder("police", function(add, data)
         add(choices)
     end
 end)
+

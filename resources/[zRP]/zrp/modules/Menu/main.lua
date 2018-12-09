@@ -143,7 +143,7 @@ zRP.registerMenuBuilder("main", function(add, data)
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.hacker.perm()) then
-            choices[lang.basic_menu.hacker.button()] = {zRPMenu.hacker_hack, lang.basic_menu.hacker.desc()} --  1 in 100 chance of stealing 1% of nearest player bank
+            choices[lang.basic_menu.hacker.button()] = {zRPMenu.hackewr_hack, lang.basic_menu.hacker.desc()} --  1 in 100 chance of stealing 1% of nearest player bank
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.lockpick.perm()) then

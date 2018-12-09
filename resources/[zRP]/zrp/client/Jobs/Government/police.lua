@@ -5,7 +5,6 @@
 ---
 
 
-
 -- this module define some police tools and functions
 
 local handcuffed = false
