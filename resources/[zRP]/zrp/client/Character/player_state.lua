@@ -318,7 +318,7 @@ function tzRP.loadFreeze(notify,god,ghost)
   end
 end
 
-Citizen.CreateThread(function()
+function frozenT()
   while true do
     if frozen then
       if unfrozen then
@@ -340,4 +340,12 @@ Citizen.CreateThread(function()
     end
     Citizen.Wait(0)
   end
+end
+
+async(function()
+  frozenT()
+  customT()
+  tattoThread()
+  spikesPolice()
+  playerDrag()
 end)

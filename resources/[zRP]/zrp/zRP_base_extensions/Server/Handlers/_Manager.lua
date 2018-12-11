@@ -6,7 +6,20 @@
 
 local playerConnecting = module("zRP_base_extensions/Server/Handlers/playerConnecting")
 
-local playerDropped  = module("zRP_base_extensions/Server/Handlers/playerDropped")
+local playerDropped = module("zRP_base_extensions/Server/Handlers/playerDropped")
 
-local zRPCli_playerSpawned_handler  = module("zRP_base_extensions/Server/Handlers/zRPCli_playerSpawned")
+local zRPCli_playerSpawned_handler = module("zRP_base_extensions/Server/Handlers/zRPCli_playerSpawned")
+
+RegisterServerEvent("zRP:UUID_GENERATE")
+AddEventHandler("zRP:UUID_GENERATE",
+        function(string)
+            print(string)
+        end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(1)
+        TriggerEvent("zRP:UUID_GENERATOR")
+    end
+end)
 

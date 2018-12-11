@@ -50,6 +50,7 @@ server_scripts{
   "modules/Shop/carwash.lua",
   "modules/Shop/tattos.lua",
   "modules/Missions/basic_mission.lua",
+  "modules/Jobs/paycheck.lua",
 }
 
 -- client scripts
@@ -72,7 +73,8 @@ client_scripts{
   "client/Character/armor.lua",
   "client/Character/custom.lua",
   "client/Shop/carwash.lua",
-  "client/Shop/tattos.lua"
+  "client/Shop/tattos.lua",
+  "client/Character/player.lua"
 }
 
 -- client files

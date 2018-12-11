@@ -3,10 +3,7 @@
 --- Created by Muulfz.
 --- DateTime: 12/8/2018 6:35 PM
 ---
-
-
 local custom = {}
-
 
 function tzRP.setTattoos(data)
     ClearPedDecorations(GetPlayerPed(-1))
@@ -40,7 +37,8 @@ function tzRP.cleanPlayer()
     custom = {}
 end
 
-Citizen.CreateThread(function()
+
+function tattoThread()
     while true do
         Citizen.Wait(1)
         while not IsPedModel(GetPlayerPed(-1),"mp_m_freemode_01") and not IsPedModel(GetPlayerPed(-1),"mp_f_freemode_01") do
@@ -54,4 +52,5 @@ Citizen.CreateThread(function()
             end
         end
     end
-end)
+end
+

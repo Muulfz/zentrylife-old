@@ -53,7 +53,7 @@ function tzRP.getTextures(part)
     end
 end
 
-Citizen.CreateThread(function()
+function customT()
     while true do
         Citizen.Wait(1)
         while not IsPedModel(GetPlayerPed(-1),"mp_m_freemode_01") and not IsPedModel(GetPlayerPed(-1),"mp_f_freemode_01") do
@@ -87,4 +87,5 @@ Citizen.CreateThread(function()
             end
         end
     end
-end)
+end
+

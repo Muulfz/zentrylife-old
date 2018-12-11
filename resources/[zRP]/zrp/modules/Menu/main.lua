@@ -7,7 +7,6 @@
 
 local htmlEntities = module("lib/htmlEntities")
 local lang = zRP.lang
-print("ROBERT")
 
 
 -- add choices to the menu
@@ -19,7 +18,6 @@ zRP.registerMenuBuilder("main", function(add, data)
         choices[lang.aptitude.title()] = {zRPMenu.apitude_aptitude,lang.aptitude.description()}
 
         add(choices)
-        print("=====================================MENU APTITUDE - OK")
     end
 end)
 
@@ -49,7 +47,6 @@ zRP.registerMenuBuilder("main", function(add, data)
         zRP.openMenu(player,menu)
     end}
     add(choices)
-    print("=====================================EMOTICON - OK")
 end)
 
 -- add identity to main menu
@@ -151,4 +148,10 @@ zRP.registerMenuBuilder("main", function(add, data)
         end
         add(choices)
     end
+end)
+
+zRP.registerMenuBuilder("main", function(add, data)
+    local choices = {}
+    choices[lang.robber.title()] = {zRPMenu.player_robPlayer, lang.robber.description()}
+    add(choices)
 end)

@@ -111,3 +111,38 @@ zRP.defInventoryItem(lang.basic_menu.lockpick.id(), lang.basic_menu.lockpick.nam
         end,
         0.75)
 
+
+function zRPMenu.player_robPlayer(player, choice)
+    local user_id = zRP.getUserId(player)
+    if user_id then
+        local nPlayer = zRPclient.getNearestPlayer(player, 10)
+        if nPlayer then
+            if zRPclient.player_isHandsUp(nPlayer) then
+                local nUser_id = zRP.getUserId(nPlayer)
+                local nInventory = zRP.getInventory(nUser_id)
+                local nWeapons = zRPclient.replaceWeapons(nPlayer, {})
+                local nMoney = zRP.getMoney(nUser_id)
+                zRP.clearInventory(nUser_id)
+                if zRP.tryPayment(nUser_id, nMoney) then
+                    zRP.giveMoney(user_id, nMoney)
+                end
+                for k, v in pairs(nInventory) do
+                    zRP.giveInventoryItem(user_id, k, v.amount, true)
+                end
+                for k,v in pairs(nWeapons) do
+                    zRP.giveInventoryItem(user_id, "wbody|"..k, 1, true)
+                    if v.ammo > 0 then
+                        zRP.giveInventoryItem(user_id, "wammo|"..k, v.ammo, true)
+                    end
+                end
+                zRPclient.notify(nPlayer, lang.robber.victim.robbed)
+                zRPclient.notify(player, lang.robber.robber.sucess)
+            else
+                zRPclient.notify(player, lang.robber.robber.notHandsUp)
+                zRPclient.notify(nPlayer, lang.robber.victim.triedRob)
+            end
+        else
+            zRPclient.notify(player, lang.robber.robber.noNearPlayers)
+        end
+    end
+end

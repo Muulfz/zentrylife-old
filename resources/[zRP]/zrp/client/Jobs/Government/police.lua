@@ -271,7 +271,7 @@ function tzRP.policeDrag(p1)
 end
 
 
-Citizen.CreateThread(function()
+function playerDrag()
     while true do
         if drag and other then
             local ped = GetPlayerPed(GetPlayerFromServerId(other))
@@ -286,9 +286,11 @@ Citizen.CreateThread(function()
         end
         Citizen.Wait(0)
     end
-end)
+end
 
-Citizen.CreateThread(function()
+
+
+function spikesPolice()
     while true do
         Citizen.Wait(0)
         local ped = GetPlayerPed(-1)
@@ -308,5 +310,4 @@ Citizen.CreateThread(function()
             end
         end
     end
-end)
-
+end
