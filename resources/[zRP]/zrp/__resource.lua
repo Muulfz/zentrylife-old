@@ -49,8 +49,10 @@ server_scripts{
   "modules/Shop/basic_barbershop.lua",
   "modules/Shop/carwash.lua",
   "modules/Shop/tattos.lua",
+  "modules/Shop/store.lua",
   "modules/Missions/basic_mission.lua",
   "modules/Jobs/paycheck.lua",
+
 }
 
 -- client scripts

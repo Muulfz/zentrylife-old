@@ -12,3 +12,4 @@ local character_identity = module("zRP_base_extensions/DB/Character/identity") -
 local character_home = module("zRP_base_extensions/DB/Character/home") --5
 local character_money = module("zRP_base_extensions/DB/Economy/money") -- 6
 local economy_business = module("zRP_base_extensions/DB/Economy/business") -- 7
+local store = module("zRP_base_extensions/DB/Shop/store") -- 8

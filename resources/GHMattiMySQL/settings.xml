@@ -6,5 +6,5 @@
   <setting key="MySQL:Database">newZentryLife</setting>
   <setting key="MySQL:Username">root</setting>
   <setting key="MySQL:Password"></setting>
-  <setting key="MySQL:Debug">true</setting>
+  <setting key="MySQL:Debug">false</setting>
 </configuration>
