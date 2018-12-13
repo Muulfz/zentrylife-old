@@ -76,7 +76,8 @@ client_scripts{
   "client/Character/custom.lua",
   "client/Shop/carwash.lua",
   "client/Shop/tattos.lua",
-  "client/Character/player.lua"
+  "client/Character/player.lua",
+  "client/Character/weapons.lua"
 }
 
 -- client files
