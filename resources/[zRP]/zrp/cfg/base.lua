@@ -27,7 +27,7 @@ cfg.ignore_ip_identifier = true
 cfg.lang = "en"
 cfg.permlang = "en"
 
-cfg.debug = false
+cfg.debug = true
 
 -- time to wait before displaying async return warning (seconds)
 cfg.debug_async_time = 2

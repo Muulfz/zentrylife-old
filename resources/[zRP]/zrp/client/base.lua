@@ -14,131 +14,131 @@ Tunnel.bindInterface("zRP", tzRP)
 zRPserver = Tunnel.getInterface("zRP")
 
 -- add client proxy interface (same as tunnel interface)
-Proxy.addInterface("zRP",tzRP)
+Proxy.addInterface("zRP", tzRP)
 
 -- functions
 
 local user_id
 function tzRP.setUserId(_user_id)
-  user_id = _user_id
+    user_id = _user_id
 end
 
 -- get user id (client-side)
 function tzRP.getUserId()
-  return user_id
+    return user_id
 end
 
-function tzRP.teleport(x,y,z)
-  tzRP.unjail() -- force unjail before a teleportation
-  SetEntityCoords(GetPlayerPed(-1), x+0.0001, y+0.0001, z+0.0001, 1,0,0,1)
-  zRPserver._updatePos(x,y,z)
+function tzRP.teleport(x, y, z)
+    tzRP.unjail() -- force unjail before a teleportation
+    SetEntityCoords(GetPlayerPed(-1), x + 0.0001, y + 0.0001, z + 0.0001, 1, 0, 0, 1)
+    zRPserver._updatePos(x, y, z)
 end
 
 -- return x,y,z
 function tzRP.getPosition()
-  local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
-  return x,y,z
+    local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+    return x, y, z
 end
 
 -- return false if in exterior, true if inside a building
 function tzRP.isInside()
-  local x,y,z = tzRP.getPosition()
-  return not (GetInteriorAtCoords(x,y,z) == 0)
+    local x, y, z = tzRP.getPosition()
+    return not (GetInteriorAtCoords(x, y, z) == 0)
 end
 
 -- return vx,vy,vz
 function tzRP.getSpeed()
-  local vx,vy,vz = table.unpack(GetEntityVelocity(GetPlayerPed(-1)))
-  return math.sqrt(vx*vx+vy*vy+vz*vz)
+    local vx, vy, vz = table.unpack(GetEntityVelocity(GetPlayerPed(-1)))
+    return math.sqrt(vx * vx + vy * vy + vz * vz)
 end
 
 function tzRP.getCamDirection()
-  local heading = GetGameplayCamRelativeHeading()+GetEntityHeading(GetPlayerPed(-1))
-  local pitch = GetGameplayCamRelativePitch()
+    local heading = GetGameplayCamRelativeHeading() + GetEntityHeading(GetPlayerPed(-1))
+    local pitch = GetGameplayCamRelativePitch()
 
-  local x = -math.sin(heading*math.pi/180.0)
-  local y = math.cos(heading*math.pi/180.0)
-  local z = math.sin(pitch*math.pi/180.0)
+    local x = -math.sin(heading * math.pi / 180.0)
+    local y = math.cos(heading * math.pi / 180.0)
+    local z = math.sin(pitch * math.pi / 180.0)
 
-  -- normalize
-  local len = math.sqrt(x*x+y*y+z*z)
-  if len ~= 0 then
-    x = x/len
-    y = y/len
-    z = z/len
-  end
+    -- normalize
+    local len = math.sqrt(x * x + y * y + z * z)
+    if len ~= 0 then
+        x = x / len
+        y = y / len
+        z = z / len
+    end
 
-  return x,y,z
+    return x, y, z
 end
 
 function tzRP.addPlayer(player)
-  players[player] = true
+    players[player] = true
 end
 
 function tzRP.removePlayer(player)
-  players[player] = nil
+    players[player] = nil
 end
 
 function tzRP.getPlayers()
-  return players
+    return players
 end
 
 function tzRP.getNearestPlayers(radius)
-  local r = {}
+    local r = {}
 
-  local ped = GetPlayerPed(i)
-  local pid = PlayerId()
-  local px,py,pz = tzRP.getPosition()
+    local ped = GetPlayerPed(i)
+    local pid = PlayerId()
+    local px, py, pz = tzRP.getPosition()
 
-  --[[
-  for i=0,GetNumberOfPlayers()-1 do
-    if i ~= pid then
-      local oped = GetPlayerPed(i)
+    --[[
+    for i=0,GetNumberOfPlayers()-1 do
+      if i ~= pid then
+        local oped = GetPlayerPed(i)
 
-      local x,y,z = table.unpack(GetEntityCoords(oped,true))
-      local distance = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
-      if distance <= radius then
-        r[GetPlayerServerId(i)] = distance
+        local x,y,z = table.unpack(GetEntityCoords(oped,true))
+        local distance = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
+        if distance <= radius then
+          r[GetPlayerServerId(i)] = distance
+        end
       end
     end
-  end
-  --]]
+    --]]
 
-  for k,v in pairs(players) do
-    local player = GetPlayerFromServerId(k)
+    for k, v in pairs(players) do
+        local player = GetPlayerFromServerId(k)
 
-    if v and player ~= pid and NetworkIsPlayerConnected(player) then
-      local oped = GetPlayerPed(player)
-      local x,y,z = table.unpack(GetEntityCoords(oped,true))
-      local distance = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
-      if distance <= radius then
-        r[GetPlayerServerId(player)] = distance
-      end
+        if v and player ~= pid and NetworkIsPlayerConnected(player) then
+            local oped = GetPlayerPed(player)
+            local x, y, z = table.unpack(GetEntityCoords(oped, true))
+            local distance = GetDistanceBetweenCoords(x, y, z, px, py, pz, true)
+            if distance <= radius then
+                r[GetPlayerServerId(player)] = distance
+            end
+        end
     end
-  end
 
-  return r
+    return r
 end
 
 function tzRP.getNearestPlayer(radius)
-  local p = nil
+    local p = nil
 
-  local players = tzRP.getNearestPlayers(radius)
-  local min = radius+10.0
-  for k,v in pairs(players) do
-    if v < min then
-      min = v
-      p = k
+    local players = tzRP.getNearestPlayers(radius)
+    local min = radius + 10.0
+    for k, v in pairs(players) do
+        if v < min then
+            min = v
+            p = k
+        end
     end
-  end
 
-  return p
+    return p
 end
 
 function tzRP.notify(msg)
-  SetNotificationTextEntry("STRING")
-  AddTextComponentString(msg)
-  DrawNotification(true, false)
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString(msg)
+    DrawNotification(true, false)
 end
 
 function tzRP.notifyPicture(icon, type, sender, title, text)
@@ -154,22 +154,24 @@ end
 -- name, see https://wiki.fivem.net/wiki/Screen_Effects
 -- duration: in seconds, if -1, will play until stopScreenEffect is called
 function tzRP.playScreenEffect(name, duration)
-  if duration < 0 then -- loop
-    StartScreenEffect(name, 0, true)
-  else
-    StartScreenEffect(name, 0, true)
+    if duration < 0 then
+        -- loop
+        StartScreenEffect(name, 0, true)
+    else
+        StartScreenEffect(name, 0, true)
 
-    Citizen.CreateThread(function() -- force stop the screen effect after duration+1 seconds
-      Citizen.Wait(math.floor((duration+1)*1000))
-      StopScreenEffect(name)
-    end)
-  end
+        Citizen.CreateThread(function()
+            -- force stop the screen effect after duration+1 seconds
+            Citizen.Wait(math.floor((duration + 1) * 1000))
+            StopScreenEffect(name)
+        end)
+    end
 end
 
 -- stop a screen effect
 -- name, see https://wiki.fivem.net/wiki/Screen_Effects
 function tzRP.stopScreenEffect(name)
-  StopScreenEffect(name)
+    StopScreenEffect(name)
 end
 
 -- ANIM
@@ -184,81 +186,94 @@ local anim_ids = Tools.newIDGenerator()
 -- seq: list of animations as {dict,anim_name,loops} (loops is the number of loops, default 1) or a task def (properties: task, play_exit)
 -- looping: if true, will infinitely loop the first element of the sequence until stopAnim is called
 function tzRP.playAnim(upper, seq, looping)
-  if seq.task then -- is a task (cf https://github.com/ImagicTheCat/zRP/pull/118)
-    tzRP.stopAnim(true)
+    if seq.task then
+        -- is a task (cf https://github.com/ImagicTheCat/zRP/pull/118)
+        tzRP.stopAnim(true)
 
-    local ped = GetPlayerPed(-1)
-    if seq.task == "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" then -- special case, sit in a chair
-      local x,y,z = tzRP.getPosition()
-      TaskStartScenarioAtPosition(ped, seq.task, x, y, z-1, GetEntityHeading(ped), 0, 0, false)
-    else
-      TaskStartScenarioInPlace(ped, seq.task, 0, not seq.play_exit)
-    end
-  else -- a regular animation sequence
-    tzRP.stopAnim(upper)
-
-    local flags = 0
-    if upper then flags = flags+48 end
-    if looping then flags = flags+1 end
-
-    Citizen.CreateThread(function()
-      -- prepare unique id to stop sequence when needed
-      local id = anim_ids:gen()
-      anims[id] = true
-
-      for k,v in pairs(seq) do
-        local dict = v[1]
-        local name = v[2]
-        local loops = v[3] or 1
-
-        for i=1,loops do
-          if anims[id] then -- check animation working
-            local first = (k == 1 and i == 1)
-            local last = (k == #seq and i == loops)
-
-            -- request anim dict
-            RequestAnimDict(dict)
-            local i = 0
-            while not HasAnimDictLoaded(dict) and i < 1000 do -- max time, 10 seconds
-              Citizen.Wait(10)
-              RequestAnimDict(dict)
-              i = i+1
-            end
-
-            -- play anim
-            if HasAnimDictLoaded(dict) and anims[id] then
-              local inspeed = 8.0001
-              local outspeed = -8.0001
-              if not first then inspeed = 2.0001 end
-              if not last then outspeed = 2.0001 end
-
-              TaskPlayAnim(GetPlayerPed(-1),dict,name,inspeed,outspeed,-1,flags,0,0,0,0)
-            end
-
-            Citizen.Wait(0)
-            while GetEntityAnimCurrentTime(GetPlayerPed(-1),dict,name) <= 0.95 and IsEntityPlayingAnim(GetPlayerPed(-1),dict,name,3) and anims[id] do
-              Citizen.Wait(0)
-            end
-          end
+        local ped = GetPlayerPed(-1)
+        if seq.task == "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" then
+            -- special case, sit in a chair
+            local x, y, z = tzRP.getPosition()
+            TaskStartScenarioAtPosition(ped, seq.task, x, y, z - 1, GetEntityHeading(ped), 0, 0, false)
+        else
+            TaskStartScenarioInPlace(ped, seq.task, 0, not seq.play_exit)
         end
-      end
+    else
+        -- a regular animation sequence
+        tzRP.stopAnim(upper)
 
-      -- free id
-      anim_ids:free(id)
-      anims[id] = nil
-    end)
-  end
+        local flags = 0
+        if upper then
+            flags = flags + 48
+        end
+        if looping then
+            flags = flags + 1
+        end
+
+        Citizen.CreateThread(function()
+            -- prepare unique id to stop sequence when needed
+            local id = anim_ids:gen()
+            anims[id] = true
+
+            for k, v in pairs(seq) do
+                local dict = v[1]
+                local name = v[2]
+                local loops = v[3] or 1
+
+                for i = 1, loops do
+                    if anims[id] then
+                        -- check animation working
+                        local first = (k == 1 and i == 1)
+                        local last = (k == #seq and i == loops)
+
+                        -- request anim dict
+                        RequestAnimDict(dict)
+                        local i = 0
+                        while not HasAnimDictLoaded(dict) and i < 1000 do
+                            -- max time, 10 seconds
+                            Citizen.Wait(10)
+                            RequestAnimDict(dict)
+                            i = i + 1
+                        end
+
+                        -- play anim
+                        if HasAnimDictLoaded(dict) and anims[id] then
+                            local inspeed = 8.0001
+                            local outspeed = -8.0001
+                            if not first then
+                                inspeed = 2.0001
+                            end
+                            if not last then
+                                outspeed = 2.0001
+                            end
+
+                            TaskPlayAnim(GetPlayerPed(-1), dict, name, inspeed, outspeed, -1, flags, 0, 0, 0, 0)
+                        end
+
+                        Citizen.Wait(0)
+                        while GetEntityAnimCurrentTime(GetPlayerPed(-1), dict, name) <= 0.95 and IsEntityPlayingAnim(GetPlayerPed(-1), dict, name, 3) and anims[id] do
+                            Citizen.Wait(0)
+                        end
+                    end
+                end
+            end
+
+            -- free id
+            anim_ids:free(id)
+            anims[id] = nil
+        end)
+    end
 end
 
 -- stop animation (new version)
 -- upper: true, stop the upper animation, false, stop full animations
 function tzRP.stopAnim(upper)
-  anims = {} -- stop all sequences
-  if upper then
-    ClearPedSecondaryTask(GetPlayerPed(-1))
-  else
-    ClearPedTasks(GetPlayerPed(-1))
-  end
+    anims = {} -- stop all sequences
+    if upper then
+        ClearPedSecondaryTask(GetPlayerPed(-1))
+    else
+        ClearPedTasks(GetPlayerPed(-1))
+    end
 end
 
 -- RAGDOLL
@@ -266,32 +281,32 @@ local ragdoll = false
 
 -- set player ragdoll flag (true or false)
 function tzRP.setRagdoll(flag)
-  ragdoll = flag
+    ragdoll = flag
 end
 
 -- ragdoll thread
 Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(10)
-    if ragdoll then
-      SetPedToRagdoll(GetPlayerPed(-1), 1000, 1000, 0, 0, 0, 0)
+    while true do
+        Citizen.Wait(10)
+        if ragdoll then
+            SetPedToRagdoll(GetPlayerPed(-1), 1000, 1000, 0, 0, 0, 0)
+        end
     end
-  end
 end)
 
 -- SOUND
--- some lists: 
+-- some lists:
 -- pastebin.com/A8Ny8AHZ
 -- https://wiki.gtanet.work/index.php?title=FrontEndSoundlist
 
 -- play sound at a specific position
-function tzRP.playSpatializedSound(dict,name,x,y,z,range)
-  PlaySoundFromCoord(-1,name,x+0.0001,y+0.0001,z+0.0001,dict,0,range+0.0001,0)
+function tzRP.playSpatializedSound(dict, name, x, y, z, range)
+    PlaySoundFromCoord(-1, name, x + 0.0001, y + 0.0001, z + 0.0001, dict, 0, range + 0.0001, 0)
 end
 
 -- play sound
-function tzRP.playSound(dict,name)
-  PlaySound(-1,name,dict,0,0,1)
+function tzRP.playSound(dict, name)
+    PlaySound(-1, name, dict, 0, 0, 1)
 end
 
 --[[
@@ -307,40 +322,42 @@ end
 
 -- events
 
-AddEventHandler("playerSpawned",function()
-  TriggerServerEvent("zRPcli:playerSpawned")
+AddEventHandler("playerSpawned", function()
+    TriggerServerEvent("zRPcli:playerSpawned")
 end)
 
-AddEventHandler("onPlayerDied",function(player,reason)
-  TriggerServerEvent("zRPcli:playerDied")
+AddEventHandler("onPlayerDied", function(player, reason)
+    TriggerServerEvent("zRPcli:playerDied")
 end)
 
-AddEventHandler("onPlayerKilled",function(player,killer,reason)
-  TriggerServerEvent("zRPcli:playerDied")
+AddEventHandler("onPlayerKilled", function(player, killer, reason)
+    TriggerServerEvent("zRPcli:playerDied")
 end)
 
 -- voice proximity computation
 Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(500)
-    if cfg.zrp_voip then -- zRP voip
-      NetworkSetTalkerProximity(0) -- disable voice chat
-    else -- regular voice chat
-      local ped = GetPlayerPed(-1)
-      local proximity = cfg.voice_proximity
+    while true do
+        Citizen.Wait(500)
+        if cfg.zrp_voip then
+            -- zRP voip
+            NetworkSetTalkerProximity(0) -- disable voice chat
+        else
+            -- regular voice chat
+            local ped = GetPlayerPed(-1)
+            local proximity = cfg.voice_proximity
 
-      if IsPedSittingInAnyVehicle(ped) then
-        local veh = GetVehiclePedIsIn(ped,false)
-        local hash = GetEntityModel(veh)
-        -- make open vehicles (bike,etc) use the default proximity
-        if IsThisModelACar(hash) or IsThisModelAHeli(hash) or IsThisModelAPlane(hash) then
-          proximity = cfg.voice_proximity_vehicle
+            if IsPedSittingInAnyVehicle(ped) then
+                local veh = GetVehiclePedIsIn(ped, false)
+                local hash = GetEntityModel(veh)
+                -- make open vehicles (bike,etc) use the default proximity
+                if IsThisModelACar(hash) or IsThisModelAHeli(hash) or IsThisModelAPlane(hash) then
+                    proximity = cfg.voice_proximity_vehicle
+                end
+            elseif tzRP.isInside() then
+                proximity = cfg.voice_proximity_inside
+            end
+
+            NetworkSetTalkerProximity(proximity + 0.0001)
         end
-      elseif tzRP.isInside() then
-        proximity = cfg.voice_proximity_inside
-      end
-
-      NetworkSetTalkerProximity(proximity+0.0001)
     end
-  end
 end)

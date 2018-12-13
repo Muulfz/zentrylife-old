@@ -5,8 +5,9 @@
 local cfg = module("cfg/Modules/Shop/adv_garages")
 local cfg_inventory = module("cfg/Modules/inventory")
 local lang = zRP.lang.adv_garages
-zRP.prepare("zRP/move_vehicle", "UPDATE zrp_user_vehicles SET user_id = @tuser_id WHERE user_id = @user_id AND vehicle = @vehicle")
 
+
+zRP.prepare("zRP/move_vehicle", "UPDATE zrp_user_vehicles SET user_id = @tuser_id WHERE user_id = @user_id AND vehicle = @vehicle")
 
 local adv_garages =  cfg.adv_garages
 local items = cfg.items
@@ -443,6 +444,7 @@ function zRP.advGaragesOpen(source, gid, pos)
             end, lang.garage.store.description()}
         elseif gtype == "shop" then
             menu[lang.garage.shop.title()] = {function(player,choice)
+                print("AAAA")
                 local user_id = zRP.getUserId(source)
                 local tosub = false
                 if user_id then

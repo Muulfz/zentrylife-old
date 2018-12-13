@@ -336,7 +336,9 @@ function tzRP.advGarageSpawnGarageVehicle(vtype, name, pos) -- vtype is the vehi
             end
 
             if tzRP.advGarageClearAreaOfVehicles(3) then
+                print("SPAWN VEICULO")
                 local nveh = CreateVehicle(mhash, x,y,z+0.5, GetEntityHeading(GetPlayerPed(-1)), true, false)
+                TriggerServerEvent("setUpgrades", name)
                 SetVehicleOnGroundProperly(nveh)
                 SetEntityInvincible(nveh,false)
                 SetPedIntoVehicle(GetPlayerPed(-1),nveh,-1) -- put player inside
