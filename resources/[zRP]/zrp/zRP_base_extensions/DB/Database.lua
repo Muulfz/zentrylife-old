@@ -23,7 +23,7 @@ end)
 
 -- init tables
 print("[zRP] init base tables")
-async(function()
+Citizen.CreateThread(function()
     for k,v in pairs(zRPBase.tables) do
         zRP.execute(v)
     end

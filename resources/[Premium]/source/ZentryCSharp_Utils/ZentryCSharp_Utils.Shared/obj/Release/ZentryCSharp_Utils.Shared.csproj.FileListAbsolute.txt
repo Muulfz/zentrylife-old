@@ -1,0 +1,13 @@
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\bin\Release\ZentryCSharp_Utils.Shared.net.dll
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\bin\Release\ZentryCSharp_Utils.Shared.net.pdb
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\bin\Release\ZentryCSharp_Utils.Client.net.dll
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\bin\Release\ZentryCSharp_Utils.Server.net.dll
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\bin\Release\ZentryCSharp_Utils.Client.net.pdb
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\bin\Release\ZentryCSharp_Utils.Server.net.pdb
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\obj\Release\ZentryCSharp_Utils.Shared.csprojAssemblyReference.cache
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\obj\Release\ZentryCSharp_Utils.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\obj\Release\ZentryCSharp_Utils.Shared.csproj.CopyComplete
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\obj\Release\ZentryCSharp_Utils.Shared.net.dll
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Shared\obj\Release\ZentryCSharp_Utils.Shared.net.pdb
+D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\ZentryCsharp_Utils\ZentryCSharp_Utils.Shared.net.dll
+D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\ZentryCsharp_Utils\ZentryCSharp_Utils.Shared.net.pdb

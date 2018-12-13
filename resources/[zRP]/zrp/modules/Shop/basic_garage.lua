@@ -20,9 +20,10 @@ zRP.prepare("zRP/alter_vehicles_table","alter table zrp_user_vehicles add if not
 zRP.prepare("zRP/update_vehicle_upgrades","update zrp_user_vehicles SET upgrades = @upgrades WHERE user_id = @user_id and vehicle = @model")
 
 -- init
-async(function()
+Citizen.CreateThread(function()
     zRP.execute("zRP/vehicles_table")
 end)
+
 
 -- load config
 

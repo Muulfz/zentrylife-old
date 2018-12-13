@@ -84,4 +84,25 @@ cfg.radio_voice_config = {
   }
 }
 
+cfg.peds_control = {
+  density = {
+    peds = 1.0,
+    vehicles = 1.0
+  },
+  peds = { -- these peds wont show up anywhere, they will be removed and their vehicles deleted
+    "s_m_y_cop_01",
+    "s_f_y_sheriff_01",
+    "s_m_y_sheriff_01",
+    "s_m_y_hwaycop_01",
+    "s_m_y_swat_01",
+    "s_m_m_snowcop_01",
+    "s_m_m_paramedic_01"
+  },
+  noguns = { -- these peds wont have any weapons
+  },
+  nodrops = { -- these peds wont drop their weapons when killed
+  }
+}
+
+
 return cfg

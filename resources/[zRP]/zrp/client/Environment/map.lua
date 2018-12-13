@@ -122,6 +122,10 @@ end
 
 -- markers draw loop
 Citizen.CreateThread(function()
+  --DISPATCH
+  for i = 1, 12 do
+    Citizen.InvokeNative(0xDC0F817884CDD856, i, false)
+  end
   while true do
     Citizen.Wait(0)
 
@@ -203,3 +207,49 @@ end
 function tzRP.closeClosestDoor(doordef)
   tzRP.setStateOfClosestDoor(doordef, true, 0)
 end
+-------------------------------------
+--[[
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(1)
+
+    for ped in EnumeratePeds() do
+      if DoesEntityExist(ped) then
+        for i,model in pairs(cfg.peds_control.peds) do
+          if (GetEntityModel(ped) == GetHashKey(model)) then
+            veh = GetVehiclePedIsIn(ped, false)
+            SetEntityAsNoLongerNeeded(ped)
+            SetEntityCoords(ped,10000,10000,10000,1,0,0,1)
+            if veh ~= nil then
+              SetEntityAsNoLongerNeeded(veh)
+              SetEntityCoords(veh,10000,10000,10000,1,0,0,1)
+            end
+          end
+        end
+        for i,model in pairs(cfg.peds_control.noguns) do
+          if (GetEntityModel(ped) == GetHashKey(model)) then
+            RemoveAllPedWeapons(ped, true)
+          end
+        end
+        for i,model in pairs(cfg.peds_control.nodrops) do
+          if (GetEntityModel(ped) == GetHashKey(model)) then
+            SetPedDropsWeaponsWhenDead(ped,false)
+          end
+        end
+      end
+    end
+  end
+end)
+
+Citizen.CreateThread(function()
+  while true
+  do
+    -- These natives has to be called every frame.
+    SetPedDensityMultiplierThisFrame(cfg.peds_control.density.peds)
+    SetScenarioPedDensityMultiplierThisFrame(cfg.peds_control.density.peds, cfg.peds_control.density.peds)
+    SetVehicleDensityMultiplierThisFrame(cfg.peds_control.density.vehicles)
+    SetRandomVehicleDensityMultiplierThisFrame(cfg.peds_control.density.vehicles)
+    SetParkedVehicleDensityMultiplierThisFrame(cfg.peds_control.density.vehicles)
+    Citizen.Wait(0)
+  end
+end)

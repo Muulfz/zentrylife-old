@@ -31,6 +31,7 @@ function zRP.getUserByAddress(home,number,cbr)
   if #rows > 0 then
     return rows[1].user_id
   end
+  --return false
 end
 
 -- find a free address number to buy

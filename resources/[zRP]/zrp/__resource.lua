@@ -58,6 +58,7 @@ server_scripts{
 -- client scripts
 client_scripts{
   "lib/utils.lua",
+  "lib/enum.lua",
   "client/base.lua",
   "client/Environment/iplloader.lua",
   "client/Interface/gui.lua",

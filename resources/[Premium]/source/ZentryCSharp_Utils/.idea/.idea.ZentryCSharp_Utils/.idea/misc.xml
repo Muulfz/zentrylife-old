@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.jetbrains.rider.android.RiderAndroidMiscFileCreationComponent">
+    <option name="ENSURE_MISC_FILE_EXISTS" value="true" />
+  </component>
+  <component name="com.jetbrains.rider.android.RiderAndroidMiscFileCreationFakeComponent">
+    <option name="FAKE_SETTING_KEY" value="42" />
+  </component>
+  <component name="jetbrains.communicator.idea.IdProvider" IDEtalkID="AFF08C16AEF47F0FB3867C8E180046E1" />
+</project>

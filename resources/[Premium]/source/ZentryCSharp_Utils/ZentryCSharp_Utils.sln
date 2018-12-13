@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZentryCSharp_Utils.Client", "ZentryCSharp_Utils.Client\ZentryCSharp_Utils.Client.csproj", "{63468EA1-AA2A-4955-BDAA-5AE6CDFC01BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZentryCSharp_Utils.Server", "ZentryCSharp_Utils.Server\ZentryCSharp_Utils.Server.csproj", "{6CCFB7F8-425C-4AD9-B397-C0118D377ADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZentryCSharp_Utils.Shared", "ZentryCSharp_Utils.Shared\ZentryCSharp_Utils.Shared.csproj", "{D71509B2-6003-4531-BAE6-3CEFBD2905EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E59E451-E16A-4825-B5D6-4ED6377B6F5E}"
+	ProjectSection(SolutionItems) = preProject
+		..\__resource.lua = ..\__resource.lua
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63468EA1-AA2A-4955-BDAA-5AE6CDFC01BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63468EA1-AA2A-4955-BDAA-5AE6CDFC01BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63468EA1-AA2A-4955-BDAA-5AE6CDFC01BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63468EA1-AA2A-4955-BDAA-5AE6CDFC01BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CCFB7F8-425C-4AD9-B397-C0118D377ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCFB7F8-425C-4AD9-B397-C0118D377ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCFB7F8-425C-4AD9-B397-C0118D377ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCFB7F8-425C-4AD9-B397-C0118D377ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D71509B2-6003-4531-BAE6-3CEFBD2905EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71509B2-6003-4531-BAE6-3CEFBD2905EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71509B2-6003-4531-BAE6-3CEFBD2905EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71509B2-6003-4531-BAE6-3CEFBD2905EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4D3486F-E6F1-4088-BF99-B16DD25F89CF}
+	EndGlobalSection
+EndGlobal

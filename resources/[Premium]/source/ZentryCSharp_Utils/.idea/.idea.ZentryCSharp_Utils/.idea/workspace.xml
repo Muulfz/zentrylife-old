@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BuildServerSettings">
+    <option name="LOGIN" value="" />
+    <option name="SERVER_URL" value="http://buildserver" />
+    <option name="REMEMBER_ME" value="true" />
+    <option name="USE_IDEA_PROXY_SETTINGS" value="true" />
+    <option name="INSPECTIONS_BUILD_TYPE_IDS" />
+    <option name="DUPLICATES_BUILD_TYPE_IDS" />
+    <option name="COVERAGE_SETTINGS" />
+    <option name="TEST_STATUS_ENABLED" value="true" />
+    <option name="TEST_STATUS_SHOW_SUCCESSFUL" value="false" />
+    <option name="POSTPONE_SUITABLE_CONFIGURATIONS_SEARCH" value="false" />
+    <option name="ARTIFACTS_BUILD_TYPE_IDS" />
+    <option name="PERFORM_COMMIT_IF_SUCCESSFUL" value="true" />
+    <option name="PERFORM_COMMIT_IF_NO_NEW_FAILED_TESTS" value="false" />
+    <option name="REQUEST_CONFIRMATON" value="false" />
+    <option name="PRE_TESTED_COMMIT" value="true" />
+    <option name="FILTER_BY_STATUS" value="false" />
+    <option name="FILTER_MARKED_AS_FIXED" value="false" />
+    <option name="SHOW_CLOSE_PROMPT" value="true" />
+    <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
+    <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="78d8a27a-6631-4d4f-bd86-f815ab4365f6" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/ClientScript.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <marker date="1543318646733" expanded="false" signature="6:146" ph="..." />
+                <marker date="1543318646733" expanded="true" signature="183:389" ph="{...}" />
+                <marker date="1543318646733" expanded="true" signature="225:387" ph="{...}" />
+                <marker date="1543318646733" expanded="true" signature="256:323" ph="{...}" />
+                <marker date="1543318646733" expanded="true" signature="355:383" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/ServerScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Roaming/NuGet/NuGet.Config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA19E97C-D465-4841-A3C7-4EDCAB1B6889/d7/9f44e422/Player.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/Discord/DiscordManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/Discord/DiscordManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5773F87E-D5AF-4625-B73B-87B87404EF65/8d/97590041/Player.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/Manager/Session.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files (x86)/NuGet/Config/Microsoft.VisualStudio.Offline.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA19E97C-D465-4841-A3C7-4EDCAB1B6889/0b/d0a1d58a/BaseScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/ClientScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6258E3D-7F59-4E3B-8D0C-F4DC34EE16EC/eb/36b6d488/Action`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/EventHandleManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/Events/GuidGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/Handles/SessionAutentication.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6258E3D-7F59-4E3B-8D0C-F4DC34EE16EC/05/420947c8/Guid.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/EventHandleManager.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/Events/GuidGenerator.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/ZentryCSharp_Utils.Server.csproj" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/Handles/SessionAutentication.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Client/Manager/Session.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/ServerScript.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Client/ClientScript.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/Discord/discordManager.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Server/Discord/DiscordManager.cs" />
+        <option value="$PROJECT_DIR$/ZentryCSharp_Utils.Client/Discord/DiscordManager.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="574" />
+    <option name="y" value="170" />
+    <option name="width" value="1535" />
+    <option name="height" value="885" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <autoscrollFromSource SolutionExplorer="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AssemblyExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project" type="5427d58d:AssemblyExplorerRootNode" />
+              <item name="CitizenFX.Core (x64, .Net Framework v4.5)" type="5e97225f:AssemblyExplorerNode" />
+            </path>
+            <path>
+              <item name="Project" type="5427d58d:AssemblyExplorerRootNode" />
+              <item name="CitizenFX.Core (x64, .Net Framework v4.5)" type="5e97225f:AssemblyExplorerNode" />
+              <item name="CitizenFX.Core.Native" type="5e97225f:AssemblyExplorerNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="ZentryCSharp_Utils" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="ZentryCSharp_Utils" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="ZentryCSharp_Utils.Client" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="FileSystemExplorer" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/Program Files/Fivem/FiveM.app/citizen/clr2/lib/mono/4.5/CitizenFX.Core.dll" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78d8a27a-6631-4d4f-bd86-f815ab4365f6" name="Default Changelist" comment="" />
+      <created>1542245671768</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1542245671768</updated>
+      <workItem from="1542245676602" duration="640000" />
+      <workItem from="1542246363531" duration="7380000" />
+      <workItem from="1542280910985" duration="8306000" />
+      <workItem from="1542305093197" duration="614000" />
+      <workItem from="1542401279673" duration="2387000" />
+      <workItem from="1542473529174" duration="8548000" />
+      <workItem from="1542548842539" duration="1067000" />
+      <workItem from="1543316982972" duration="2781000" />
+      <workItem from="1543729750295" duration="603000" />
+      <workItem from="1544324941867" duration="1081000" />
+      <workItem from="1544546795320" duration="1114000" />
+      <workItem from="1544549387508" duration="126000" />
+      <workItem from="1544705226364" duration="399000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="35046000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="574" y="170" width="1535" height="885" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17084746" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Captures" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32954547" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="7" />
+      <window_info anchor="bottom" id="NuGet" order="8" weight="0.32954547" />
+      <window_info anchor="bottom" id="Performance Profiler" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Floobits" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Unit Tests" order="14" />
+      <window_info anchor="bottom" id="TeamCity" order="15" />
+      <window_info anchor="bottom" id="Terminal" order="16" />
+      <window_info anchor="bottom" id="Event Log" order="17" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Build" order="18" visible="true" weight="0.32102272" />
+      <window_info anchor="bottom" id="Android Profiler" order="19" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Logcat" order="20" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="IDEtalk" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" weight="0.23159434" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="6" weight="0.26101694" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Device File Explorer" order="8" side_tool="true" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17552413" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="7" />
+      <window_info anchor="bottom" id="NuGet" order="8" />
+      <window_info anchor="bottom" id="Performance Profiler" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Floobits" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Unit Tests" order="14" />
+      <window_info anchor="bottom" id="TeamCity" order="15" />
+      <window_info anchor="bottom" id="Terminal" order="16" />
+      <window_info anchor="bottom" id="Event Log" order="17" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="18" visible="true" weight="0.3293556" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="IDEtalk" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" visible="true" weight="0.23159434" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="6" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA19E97C-D465-4841-A3C7-4EDCAB1B6889/0b/d0a1d58a/BaseScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/ZentryCSharp_Utils.Server.csproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="15" column="37" lean-forward="true" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/EventHandleManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+          <folding>
+            <marker date="1542252683097" expanded="false" signature="6:35" ph="..." />
+            <marker date="1542252683097" expanded="true" signature="73:177" ph="{...}" />
+            <marker date="1542252683097" expanded="true" signature="111:175" ph="{...}" />
+            <marker date="1542252683097" expanded="true" signature="149:160" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6258E3D-7F59-4E3B-8D0C-F4DC34EE16EC/eb/36b6d488/Action`2.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5773F87E-D5AF-4625-B73B-87B87404EF65/8d/97590041/Player.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="596" column="15" selection-start-line="596" selection-start-column="15" selection-end-line="596" selection-end-column="15" />
+          <folding>
+            <marker date="1542482241341" expanded="true" signature="0:261" ph="/* Decompiled with JetBrains decompiler ... */" />
+            <marker date="1542482241341" expanded="false" signature="269:380" ph="..." />
+            <marker date="1542482241341" expanded="true" signature="406:15076" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="472:15074" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="554:595" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="618:685" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="634:679" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="724:861" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="740:793" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="803:855" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="887:1193" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="903:1187" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1002:1051" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1217:1395" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1233:1389" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1330:1379" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1424:2674" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1463:2085" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="1542:1924" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="2095:2668" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="2174:2554" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="2702:3148" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="2718:2879" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="2820:2869" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="2889:3142" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3189:3579" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3205:3380" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3321:3370" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3390:3573" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3604:3914" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3620:3779" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3720:3769" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3789:3908" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="3968:4352" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4007:4198" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4208:4346" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4406:4806" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4445:4644" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4654:4800" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4851:5013" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="4867:5007" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5063:5621" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5102:5417" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5427:5615" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5646:5713" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5662:5707" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5737:5912" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5753:5906" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5847:5896" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5938:6120" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="5954:6114" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6055:6104" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6148:6327" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6164:6321" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6262:6311" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6358:6541" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6374:6535" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6476:6525" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6573:6757" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6589:6751" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6692:6741" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6784:6962" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6800:6956" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6897:6946" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="6992:7303" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7008:7168" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7109:7158" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7178:7297" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7336:7480" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7352:7474" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7515:7661" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7531:7655" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7692:7840" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7708:7834" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7869:8013" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="7885:8007" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8046:8231" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8062:8225" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8166:8215" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8266:8413" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8282:8407" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8450:8776" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8466:8625" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8566:8615" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8635:8770" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="8830:9134" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9172:9366" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9188:9360" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9301:9350" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9407:9604" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9423:9598" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9539:9588" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9646:9844" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9662:9838" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9779:9828" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9884:10070" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="9900:10064" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10005:10054" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10111:10428" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10127:10292" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10233:10282" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10302:10422" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10486:10640" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10701:10858" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="10898:11012" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11053:11170" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11202:11466" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11218:11460" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11511:11655" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11693:11883" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11709:11877" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11818:11867" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="11956:12193" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="12220:12361" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="12236:12355" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="12403:12512" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="12566:12760" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="12815:13003" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13043:13181" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13128:13173" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13226:13369" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13316:13361" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13415:13559" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13506:13551" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13600:13739" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13686:13731" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13792:13942" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="13889:13934" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14012:14151" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14190:14302" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14347:14488" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14527:14579" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14642:14759" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14822:14865" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14890:15070" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="14906:15064" ph="{...}" />
+            <marker date="1542482241341" expanded="true" signature="15005:15054" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA19E97C-D465-4841-A3C7-4EDCAB1B6889/d7/9f44e422/Player.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-238">
+          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B6258E3D-7F59-4E3B-8D0C-F4DC34EE16EC/05/420947c8/Guid.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/Handles/SessionAutentication.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="20" selection-end-column="9" />
+          <folding>
+            <marker date="1542483646085" expanded="true" signature="6:54" ph="..." />
+            <marker date="1542483646085" expanded="true" signature="100:721" ph="{...}" />
+            <marker date="1542483646085" expanded="true" signature="140:719" ph="{...}" />
+            <marker date="1542483646085" expanded="true" signature="319:713" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/BF4D57EE-D7FA-44AC-8285-9B2D6670E02C/7c/d0e28535/API.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="126257" column="5" lean-forward="true" selection-start-line="126257" selection-start-column="5" selection-end-line="126257" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/NuGet/NuGet.Config">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://C:/Program Files (x86)/NuGet/Config/Microsoft.VisualStudio.Offline.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/Manager/Session.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="21" selection-start-line="3" selection-start-column="20" selection-end-line="4" selection-end-column="21" />
+          <folding>
+            <marker date="1542483844962" expanded="false" signature="6:35" ph="..." />
+            <marker date="1542483844962" expanded="true" signature="81:465" ph="{...}" />
+            <marker date="1542483844962" expanded="true" signature="111:460" ph="{...}" />
+            <marker date="1542483844962" expanded="true" signature="231:451" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/Discord/DiscordManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding>
+            <marker date="1544549505164" expanded="true" signature="70:113" ph="{...}" />
+            <marker date="1544549505164" expanded="true" signature="104:111" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/Discord/DiscordManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+          <folding>
+            <marker date="1544547298988" expanded="true" signature="78:103" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/ServerScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding>
+            <marker date="1542549314237" expanded="false" signature="6:105" ph="..." />
+            <marker date="1542549314237" expanded="true" signature="143:1090" ph="{...}" />
+            <marker date="1542549314237" expanded="true" signature="188:1088" ph="{...}" />
+            <marker date="1542549314237" expanded="true" signature="274:435" ph="{...}" />
+            <marker date="1542549314237" expanded="true" signature="472:673" ph="{...}" />
+            <marker date="1542549314237" expanded="true" signature="486:634" ph="/* Debug.WriteLine(&quot;[C##] Executando&quot;); ... */" />
+            <marker date="1542549314237" expanded="true" signature="705:823" ph="{...}" />
+            <marker date="1542549314237" expanded="true" signature="882:967" ph="{...}" />
+            <marker date="1542549314237" expanded="true" signature="1009:1082" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Server/Events/GuidGenerator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding>
+            <marker date="1542282957692" expanded="false" signature="6:35" ph="..." />
+            <marker date="1542282957692" expanded="true" signature="80:256" ph="{...}" />
+            <marker date="1542282957692" expanded="true" signature="113:254" ph="{...}" />
+            <marker date="1542282957692" expanded="true" signature="152:248" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ZentryCSharp_Utils.Client/ClientScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <marker date="1543318646733" expanded="false" signature="6:146" ph="..." />
+            <marker date="1543318646733" expanded="true" signature="183:389" ph="{...}" />
+            <marker date="1543318646733" expanded="true" signature="225:387" ph="{...}" />
+            <marker date="1543318646733" expanded="true" signature="256:323" ph="{...}" />
+            <marker date="1543318646733" expanded="true" signature="355:383" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

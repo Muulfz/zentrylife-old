@@ -1,0 +1,8 @@
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Client\bin\Release\ZentryCSharp_Utils.Client.net.dll
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Client\bin\Release\ZentryCSharp_Utils.Client.net.pdb
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Client\obj\Release\ZentryCSharp_Utils.Client.csprojAssemblyReference.cache
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Client\obj\Release\ZentryCSharp_Utils.Client.csproj.CoreCompileInputs.cache
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Client\obj\Release\ZentryCSharp_Utils.Client.net.dll
+C:\Users\Muulfz\source\repos\ZentryCSharp_Utils\ZentryCSharp_Utils.Client\obj\Release\ZentryCSharp_Utils.Client.net.pdb
+D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\ZentryCsharp_Utils\ZentryCSharp_Utils.Client.net.dll
+D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\ZentryCsharp_Utils\ZentryCSharp_Utils.Client.net.pdb

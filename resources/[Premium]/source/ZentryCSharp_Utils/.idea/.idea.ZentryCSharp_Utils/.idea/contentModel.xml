@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Muulfz\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Muulfz\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_ZentryCSharp_Utils.211854826.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Muulfz\source\repos\__resource.lua" t="Include" />
+    <e p="C:\Users\Muulfz\source\repos\ZentryCSharp_Utils" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Solution Items" t="Include" />
+      <e p="ZentryCSharp_Utils.Client" t="IncludeRecursive">
+        <e p="ClientScript.cs" t="Include" />
+        <e p="Discord" t="Include">
+          <e p="discordManager.cs" t="Include" />
+        </e>
+        <e p="Manager" t="Include">
+          <e p="Session.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="ZentryCSharp_Utils.Client.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="ZentryCSharp_Utils.Server" t="IncludeRecursive">
+        <e p="Discord" t="Include">
+          <e p="discordManager.cs" t="Include" />
+        </e>
+        <e p="EventHandleManager.cs" t="Include" />
+        <e p="Events" t="Include">
+          <e p="GuidGenerator.cs" t="Include" />
+        </e>
+        <e p="Handles" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="ServerScript.cs" t="Include" />
+        <e p="ZentryCSharp_Utils.Server.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="ZentryCSharp_Utils.Shared" t="IncludeRecursive">
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="SharedScript.cs" t="Include" />
+        <e p="ZentryCSharp_Utils.Shared.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="ZentryCSharp_Utils.sln" t="IncludeFlat" />
+    </e>
+    <e p="D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\ZentryCSharp_Utils" t="ExcludeRecursive" />
+  </component>
+</project>
