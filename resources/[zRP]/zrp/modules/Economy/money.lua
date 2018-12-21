@@ -14,7 +14,7 @@ local cfg = module("cfg/Modules/money")
 function zRP.getMoney(user_id)
   local tmp = zRP.getUserTmpTable(user_id)
   if tmp then
-    return tmp.wallet or 0
+    return tmp.money.wallet or 0
   else
     return 0
   end
@@ -24,7 +24,7 @@ end
 function zRP.setMoney(user_id,value)
   local tmp = zRP.getUserTmpTable(user_id)
   if tmp then
-    tmp.wallet = value
+    tmp.money.wallet = value
   end
 
   -- update client display
@@ -58,7 +58,7 @@ end
 function zRP.getBankMoney(user_id)
   local tmp = zRP.getUserTmpTable(user_id)
   if tmp then
-    return tmp.bank or 0
+    return tmp.money.bank or 0
   else
     return 0
   end
@@ -68,7 +68,7 @@ end
 function zRP.setBankMoney(user_id,value)
   local tmp = zRP.getUserTmpTable(user_id)
   if tmp then
-    tmp.bank = value
+    tmp.money.bank = value
   end
 end
 
@@ -121,14 +121,18 @@ end
 
 -- events, init user account if doesn't exist at connection
 AddEventHandler("zRP:playerJoin",function(user_id,source,name,last_login)
-  zRP.execute("zRP/money_init_user", {user_id = user_id, wallet = cfg.open_wallet, bank = cfg.open_bank})
+  local money = {
+      wallet = cfg.open_wallet,
+      bank = cfg.open_bank
+  }
+  zRP.execute("zRP/money_init_user_json", {user_id = user_id, money = json.encode(money)})
+  print(json.encode(money))
   -- load money (wallet,bank)
   local tmp = zRP.getUserTmpTable(user_id)
   if tmp then
-    local rows = zRP.query("zRP/get_money", {user_id = user_id})
+    local rows = zRP.query("zRP/get_money_json", {user_id = user_id})
     if #rows > 0 then
-      tmp.bank = rows[1].bank
-      tmp.wallet = rows[1].wallet
+      tmp.money = json.decode(rows[1].money)
     end
   end
 end)
@@ -137,16 +141,16 @@ end)
 AddEventHandler("zRP:playerLeave",function(user_id,source)
   -- (wallet,bank)
   local tmp = zRP.getUserTmpTable(user_id)
-  if tmp and tmp.wallet and tmp.bank then
-    zRP.execute("zRP/set_money", {user_id = user_id, wallet = tmp.wallet, bank = tmp.bank})
+  if tmp and tmp.money then
+    zRP.execute("zRP/set_money_json", {user_id = user_id, money = json.encode(tmp.money)})
   end
 end)
 
 -- save money (at same time that save datatables)
 AddEventHandler("zRP:save", function()
   for k,v in pairs(zRP.user_tmp_tables) do
-    if v.wallet and v.bank then
-      zRP.execute("zRP/set_money", {user_id = k, wallet = v.wallet, bank = v.bank})
+    if v.money then
+      zRP.execute("zRP/set_money_json", {user_id = k, money = json.encode(v.money)})
     end
   end
 end)

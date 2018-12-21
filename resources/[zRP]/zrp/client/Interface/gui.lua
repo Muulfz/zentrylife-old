@@ -417,8 +417,14 @@ function tzRP.isPaused()
   return paused
 end
 
+
+
 -- gui controls (from cellphone)
 Citizen.CreateThread(function()
+    local open_menu = {
+        main = false,
+        quick = false
+    }
   while true do
     Citizen.Wait(0)
     -- menu controls
@@ -430,7 +436,10 @@ Citizen.CreateThread(function()
     if IsControlJustPressed(table.unpack(cfg.controls.phone.cancel)) then SendNUIMessage({act="event",event="CANCEL"}) end
 
     -- open general menu
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.open)) and (not tzRP.isInComa() or not cfg.coma_disable_menu) and (not tzRP.isHandcuffed() or not cfg.handcuff_disable_menu) and not menu_state.opened then zRPserver._openMainMenu() end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.open)) and (not tzRP.isInComa() or not cfg.coma_disable_menu) and (not tzRP.isHandcuffed() or not cfg.handcuff_disable_menu) and not menu_state.opened  then  zRPserver._openMainMenu() end
+
+    -- open quick menu
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.quick_menu)) and (not tzRP.isInComa() or not cfg.coma_disable_quick_menu) and (not tzRP.isHandcuffed() or not cfg.handcuff_disable_quick_menu) then  zRPserver._openQuickMenu() end
 
     -- F5,F6 (default: control michael, control franklin)
     if IsControlJustPressed(table.unpack(cfg.controls.request.yes)) then SendNUIMessage({act="event",event="F5"}) end

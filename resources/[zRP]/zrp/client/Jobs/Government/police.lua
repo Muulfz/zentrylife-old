@@ -272,7 +272,6 @@ end
 
 
 function playerDrag()
-    while true do
         if drag and other then
             local ped = GetPlayerPed(GetPlayerFromServerId(other))
             local myped = GetPlayerPed(-1)
@@ -284,14 +283,11 @@ function playerDrag()
                 playerStillDragged = false
             end
         end
-        Citizen.Wait(0)
-    end
 end
 
 
 
 function spikesPolice()
-    while true do
         Citizen.Wait(0)
         local ped = GetPlayerPed(-1)
         local veh = GetVehiclePedIsIn(ped, false)
@@ -309,5 +305,4 @@ function spikesPolice()
                 tzRP.removeSpikes()
             end
         end
-    end
 end

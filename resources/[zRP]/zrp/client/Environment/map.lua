@@ -253,3 +253,33 @@ Citizen.CreateThread(function()
     Citizen.Wait(0)
   end
 end)
+-]]
+
+
+local frozen_finish = false
+local frozen = false
+
+function tzRP.isFrozen()
+  return frozen
+end
+function tzRP.loadFreeze()
+  while not frozen_finish do
+    SetEntityInvincible(GetPlayerPed(-1),true)
+    SetEntityVisible(GetPlayerPed(-1),false)
+    FreezeEntityPosition(GetPlayerPed(-1),true)
+    frozen = true
+    Citizen.Wait(1)
+  end
+  Citizen.Wait(30000)
+  print("DESFREZANDO FINALIZANDO")
+  SetEntityInvincible(GetPlayerPed(-1),false)
+  SetEntityVisible(GetPlayerPed(-1),true)
+  FreezeEntityPosition(GetPlayerPed(-1),false)
+  frozen = false
+end
+
+RegisterNetEvent("zRP:Unfreeze")
+AddEventHandler("zRP:Unfreeze", function()
+  print("DESFREZANDO")
+  frozen_finish = true
+end)

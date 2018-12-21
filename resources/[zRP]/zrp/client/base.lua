@@ -342,22 +342,27 @@ Citizen.CreateThread(function()
             -- zRP voip
             NetworkSetTalkerProximity(0) -- disable voice chat
         else
-            -- regular voice chat
-            local ped = GetPlayerPed(-1)
-            local proximity = cfg.voice_proximity
+            if not tzRP.isInComa() then
+                NetworkSetVoiceActive(true)
+                -- regular voice chat
+                local ped = GetPlayerPed(-1)
+                local proximity = cfg.voice_proximity
 
-            if IsPedSittingInAnyVehicle(ped) then
-                local veh = GetVehiclePedIsIn(ped, false)
-                local hash = GetEntityModel(veh)
-                -- make open vehicles (bike,etc) use the default proximity
-                if IsThisModelACar(hash) or IsThisModelAHeli(hash) or IsThisModelAPlane(hash) then
-                    proximity = cfg.voice_proximity_vehicle
+                if IsPedSittingInAnyVehicle(ped) then
+                    local veh = GetVehiclePedIsIn(ped, false)
+                    local hash = GetEntityModel(veh)
+                    -- make open vehicles (bike,etc) use the default proximity
+                    if IsThisModelACar(hash) or IsThisModelAHeli(hash) or IsThisModelAPlane(hash) then
+                        proximity = cfg.voice_proximity_vehicle
+                    end
+                elseif tzRP.isInside() then
+                    proximity = cfg.voice_proximity_inside
                 end
-            elseif tzRP.isInside() then
-                proximity = cfg.voice_proximity_inside
-            end
 
-            NetworkSetTalkerProximity(proximity + 0.0001)
+                NetworkSetTalkerProximity(proximity + 0.0001)
+            else
+                NetworkSetVoiceActive(false)
+            end
         end
     end
 end)

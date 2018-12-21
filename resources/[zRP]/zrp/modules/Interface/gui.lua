@@ -164,6 +164,16 @@ function zRP.openMainMenu(source)
   zRP.openMenu(source,menudata) -- open the generated menu
 end
 
+-- QUICK MENU
+
+-- open the player main menu
+function zRP.openQuickMenu(source)
+  local menudata = zRP.buildMenu("quick_menu", {player = source})
+  menudata.name = "Quick menu"
+  menudata.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
+  zRP.openMenu(source,menudata) -- open the generated menu
+end
+
 -- SERVER TUNNEL API
 
 function tzRP.closeMenu(id)
@@ -224,6 +234,11 @@ end
 -- open the general player menu
 function tzRP.openMainMenu()
   zRP.openMainMenu(source)
+end
+
+-- open the quick player menu
+function tzRP.openQuickMenu()
+  zRP.openQuickMenu(source)
 end
 
 

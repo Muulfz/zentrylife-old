@@ -33,6 +33,7 @@ server_scripts{
   "modules/Menu/basic_phone.lua",
   "modules/Menu/basic_radio.lua",
   "modules/Menu/police.lua",
+  "modules/Menu/quick_menu.lua",
 
   -- basic implementations
   "modules/Character/basic_phone.lua",
@@ -52,6 +53,8 @@ server_scripts{
   "modules/Shop/store.lua",
   "modules/Missions/basic_mission.lua",
   "modules/Jobs/paycheck.lua",
+  "modules/Economy/currency.lua",
+  "modules/Economy/currency_utils.lua",
 
 }
 
@@ -78,7 +81,6 @@ client_scripts{
   "client/Shop/carwash.lua",
   "client/Shop/tattos.lua",
   "client/Character/player.lua",
-  "client/Character/weapons.lua"
 }
 
 -- client files

@@ -165,6 +165,9 @@ AddEventHandler("zRPcli:playerSpawned", function()
 
     SetTimeout(2000, function() -- trigger spawn event
       TriggerEvent("zRP:playerSpawn",user_id,player,first_spawn)
+      print("DESFREZANDO")
+      TriggerClientEvent("zRP:Unfreeze",player)
+      print("DESFREZADO")
     end)
   end
 end)

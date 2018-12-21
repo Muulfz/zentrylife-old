@@ -7,8 +7,7 @@
 zRP.prepare("zRP/money_tables", [[
 CREATE TABLE IF NOT EXISTS zrp_user_moneys(
   user_id INTEGER,
-  wallet INTEGER,
-  bank INTEGER,
+  money LONGTEXT,
   CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
   CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );
@@ -18,3 +17,23 @@ zRPBase.tables[6] = "zRP/money_tables"
 zRP.prepare("zRP/money_init_user","INSERT IGNORE INTO zrp_user_moneys(user_id,wallet,bank) VALUES(@user_id,@wallet,@bank)")
 zRP.prepare("zRP/get_money","SELECT wallet,bank FROM zrp_user_moneys WHERE user_id = @user_id")
 zRP.prepare("zRP/set_money","UPDATE zrp_user_moneys SET wallet = @wallet, bank = @bank WHERE user_id = @user_id")
+
+zRP.prepare("zRP/money_init_user_json","INSERT IGNORE INTO zrp_user_moneys(user_id,money) VALUES(@user_id,@money)")
+zRP.prepare("zRP/get_money_json","SELECT money FROM zrp_user_moneys WHERE user_id = @user_id")
+zRP.prepare("zRP/set_money_json","UPDATE zrp_user_moneys SET money = @money WHERE user_id = @user_id")
+
+
+zRP.prepare("zRP/currency_tables",[[
+CREATE TABLE IF NOT EXISTS zrp_srv_currency(
+  dkey VARCHAR(100),
+  dvalue TEXT,
+  last_time_update INTEGER,
+  CONSTRAINT pk_zrv_data PRIMARY KEY(dkey)
+);
+]])
+
+zRPBase.tables[9] = "zRP/currency_tables"
+
+zRP.prepare("zRP/set_srvcurrency", "REPLACE INTO zrp_srv_currency(dkey,dvalue,last_time_update) VALUES(@key,@value,@last_time_update)")
+zRP.prepare("zRP/get_srvcurrency", "SELECT dvalue FROM zrp_srv_currency WHERE dkey = @key")
+zRP.prepare("zRP/get_srvcurrency_time", "SELECT last_time_update FROM zrp_srv_currency WHERE dkey = @key")

@@ -93,6 +93,7 @@ cfg.groups = {
     "police.getoutveh",
     "police.check",
     "police.service",
+    "police.bmfine",
     "police.wanted",
     "police.seize.weapons",
     "police.seize.items",

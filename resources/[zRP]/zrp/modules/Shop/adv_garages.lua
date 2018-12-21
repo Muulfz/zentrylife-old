@@ -24,6 +24,7 @@ function zRP.advGaragesResetCooldown()
 end
 
 
+
 -- build garages menus
 function zRP.advGaragesOpen(source, gid, pos)
     local user_id = zRP.getUserId(source)

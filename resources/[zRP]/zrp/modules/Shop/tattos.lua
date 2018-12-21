@@ -26,21 +26,21 @@ function zRP.openTattooshop(source, shop)
         if tattoo then
             local applied = false
             if tattoo == "CLEAR" then
-                zRPclient.notify(source,lang.tattoos.cleaned())
-                zRPclient.cleanPlayer(source)
+                zRPclient._notify(source,lang.tattoos.cleaned())
+                zRPclient._cleanPlayer(source)
             else
-                local custom = zRPclient.getTattoos(source)
+                local custom = zRPclient._getTattoos(source)
                 for k,v in pairs(custom) do
                     if k == tattoo then
                         applied = true
                     end
                 end
                 if not applied then
-                    zRPclient.notify(source,lang.tattoos.added())
-                    zRPclient.addTattoo(source, tattoo, shop, price)
+                    zRPclient._notify(source,lang.tattoos.added())
+                    zRPclient._addTattoo(source, tattoo, shop, price)
                 else
-                    zRPclient.notify(source,lang.tattoos.removed())
-                    zRPclient.delTattoo(source,tattoo)
+                    zRPclient._notify(source,lang.tattoos.removed())
+                    zRPclient._delTattoo(source,tattoo)
                 end
             end
         end
@@ -48,7 +48,7 @@ function zRP.openTattooshop(source, shop)
 
     menudata.onclose = function(player)
         -- compute price
-        local custom = zRPclient.getTattoos(source)
+        local custom = zRPclient._getTattoos(source)
         local price = 0
         for k,v in pairs(custom) do
             local old = old_custom[k]
@@ -58,12 +58,12 @@ function zRP.openTattooshop(source, shop)
         if zRP.tryPayment(user_id,price) then
             zRP.setUData(user_id,"zRP:tattoos",json.encode(custom))
             if price > 0 then
-                zRPclient.notify(source,lang.money.paid({price}))
+                zRPclient._notify(source,lang.money.paid({price}))
             end
         else
-            zRPclient.notify(source,lang.money.not_enough())
+            zRPclient._notify(source,lang.money.not_enough())
             -- revert changes
-            zRPclient.setTattoos(source,old_custom)
+            zRPclient._setTattoos(source,old_custom)
         end
     end
 
@@ -97,8 +97,8 @@ local function build_client_tattooshops(source)
                 local function tattooshop_leave(source)
                     zRP.closeMenu(source)
                 end
-                zRPclient.addBlip(source,x,y,z,gcfg.blipid,gcfg.blipcolor,gcfg.title)
-                zRPclient.addMarker(source,x,y,z-1,0.7,0.7,0.5,0,255,125,125,150)
+                zRPclient._addBlip(source,x,y,z,gcfg.blipid,gcfg.blipcolor,gcfg.title)
+                zRPclient._addMarker(source,x,y,z-1,0.7,0.7,0.5,0,255,125,125,150)
 
                 zRP.setArea(source,"zRP:tattooshop"..k,x,y,z,1,1.5,tattooshop_enter,tattooshop_leave)
             end
@@ -112,7 +112,7 @@ AddEventHandler("zRP:playerSpawn",function(user_id, source, first_spawn)
         local data = zRP.getUData(user_id,"zRP:tattoos")
         if data then
             local tattoos = json.decode(data)
-            zRPclient.setTattoos(source,tattoos)
+            zRPclient._setTattoos(source,tattoos)
         end
     end
 end)

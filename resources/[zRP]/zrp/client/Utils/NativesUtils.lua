@@ -309,16 +309,54 @@ function tzRP.removeSpikes()
     end
 end
 
+function tzRP.playMovement(clipset,blur,drunk,fade,clear)
+    --request anim
+    RequestAnimSet(clipset)
+    while not HasAnimSetLoaded(clipset) do
+        Citizen.Wait(0)
+    end
+    -- fade out
+    if fade then
+        DoScreenFadeOut(1000)
+        Citizen.Wait(1000)
+    end
+    -- clear tasks
+    if clear then
+        ClearPedTasksImmediately(GetPlayerPed(-1))
+    end
+    -- set timecycle
+    SetTimecycleModifier("spectator5")
+    -- set blur
+    if blur then
+        SetPedMotionBlur(GetPlayerPed(-1), true)
+    end
+    -- set movement
+    SetPedMovementClipset(GetPlayerPed(-1), clipset, true)
+    -- set drunk
+    if drunk then
+        SetPedIsDrunk(GetPlayerPed(-1), true)
+    end
+    -- fade in
+    if fade then
+        DoScreenFadeIn(1000)
+    end
 
+end
 
-
-
-
-
-
-
-
-
+function tzRP.resetMovement(fade)
+    -- fade
+    if fade then
+        DoScreenFadeOut(1000)
+        Citizen.Wait(1000)
+        DoScreenFadeIn(1000)
+    end
+    -- reset all
+    ClearTimecycleModifier()
+    ResetScenarioTypesEnabled()
+    ResetPedMovementClipset(GetPlayerPed(-1), 0)
+    SetPedIsDrunk(GetPlayerPed(-1), false)
+    SetPedMotionBlur(GetPlayerPed(-1), false)
+end
 
 
 
