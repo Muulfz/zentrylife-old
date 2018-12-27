@@ -39,6 +39,10 @@ zRP.registerMenuBuilder("police", function(add, data)
             choices[lang.basic_menu.freeze.button()] = {zRPMenu.police_freeze, lang.basic_menu.freeze.desc()} -- Toggle freeze
         end
 
+        if zRP.hasPermission(user_id,lang.basic_menu.jail.perm()) then
+            choices["APREENDER VEICULO"] = {zRPMenu.police_size_vehicle, "apreende"}
+        end
+
         add(choices)
     end
 end)

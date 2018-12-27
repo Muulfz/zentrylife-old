@@ -111,5 +111,17 @@ cfg.peds_control = {
   }
 }
 
+cfg.vehicle_ai_tow = {
+  spawnDistance = 500,
+  enroute = false,
+  onscene = false,
+  cleartask = false,
+  distanceToCheck = 5.0,
+  towOffset = -5.0,
+  deleteLastTruck = true,
+  ped_model = {"mp_m_waremech_01"},
+  vehicles = {"flatbed"},
+  drivingStyle = 2883625, --	**786603  - "Normal" - Default**  -- **1074528293 - "Rushed"** --**2883621 - "Ignore Lights"** --**5 - "Sometimes Overtake Traffic"** --	**Customize Driving Style: https://vespura.com/drivingstyle/
+}
 
 return cfg

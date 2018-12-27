@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LuaSourceRootManager">
+    <option name="rootList">
+      <list>
+        <option value="file://$PROJECT_DIR$/resources/[zRP]/zrp" />
+      </list>
+    </option>
+  </component>
+</project>

@@ -23,7 +23,9 @@ end) then
 else
   print("[zRP] Lang System are not found")
 end
-
+local teste = "P ujhiwqeiwqjiewq"
+local vai = teste:gsub("P ","")
+print(vai)
 -- init
 zRPclient = Tunnel.getInterface("zRP") -- server -> client tunnel
 

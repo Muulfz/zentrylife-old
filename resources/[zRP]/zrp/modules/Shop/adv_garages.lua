@@ -9,11 +9,28 @@ local lang = zRP.lang.adv_garages
 
 zRP.prepare("zRP/move_vehicle", "UPDATE zrp_user_vehicles SET user_id = @tuser_id WHERE user_id = @user_id AND vehicle = @vehicle")
 
+zRP.prepare("zRP/vehicles_seized",[[
+CREATE TABLE IF NOT EXISTS zrp_seized_vehicles(
+    user_id INTEGER,
+    vehicle VARCHAR(255),
+    reason VARCHAR(255),
+    seized_agent INTEGER,
+  CONSTRAINT pk_seized_vehicles PRIMARY KEY(user_id,vehicle),
+  CONSTRAINT fk_seized_vehicles_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_agente_seized_vehicles_users FOREIGN KEY(seized_agent) REFERENCES zrp_users(id) ON DELETE CASCADE
+);
+]])
+
+
+zRP.prepare("zRP/add_seized_vehicle","INSERT IGNORE INTO zrp_seized_vehicles(user_id,vehicle,reason,seized_agent) VALUES(@user_id, @vehicle, @reason, @seized_agent)")
+zRP.prepare("zRP/remove_seized_vehicle","DELETE FROM zrp_seized_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
+
 local adv_garages =  cfg.adv_garages
 local items = cfg.items
 local cooldown = {}
 
 Citizen.CreateThread(function()
+    zRP.execute("zRP/vehicles_seized")
     for k,v in pairs(items) do
         zRP.defInventoryItem(k,v[1],v[2],v[3],v[4])
     end

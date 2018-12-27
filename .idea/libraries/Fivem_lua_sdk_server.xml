@@ -1,0 +1,8 @@
+<component name="libraryTable">
+  <library name="Fivem-lua-sdk-server">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SDK/Fivem-lua-sdk-server.zip!/" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

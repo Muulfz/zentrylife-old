@@ -545,3 +545,151 @@ function tzRP.advGarageVc_toggleLock(vtype)
         end
     end
 end
+
+function tzRP.getVehiclePlate(veh)
+    local i = GetVehicleNumberPlateText(veh)
+    return i
+end
+
+function tzRP.getVehicleName(veh)
+    local model = GetEntityModel(veh)
+    local vehname = GetDisplayNameFromVehicleModel(model)
+    return vehname
+end
+
+function tzRP.sizeNeasterVehicle()
+    print("COMECANDO")
+    local veh = tzRP.getNearestVehicle(3)
+    print("veh")
+    print(veh)
+    if veh then
+        local plate = tzRP.getVehiclePlate(veh)
+        local vehname = tzRP.getVehicleName(veh)
+        print(plate)
+        print(vehname)
+        local table = {
+            [1] = plate,
+            [2] = vehname,
+            [3] = veh
+        }
+        return table
+    else
+        tzRP.notify("Nenhum veiculo proximo")
+    end
+
+end
+
+function tzRP.vehicleAiTowing(veh)
+    print("COMECANDO")
+    print(veh)
+    local spawnDistance = math.random(cfg.vehicle_ai_tow.spawnDistance * -1,cfg.vehicle_ai_tow.spawnDistance)
+    local pmodels = cfg.vehicle_ai_tow.ped_model
+    local vehicles = cfg.vehicle_ai_tow.vehicles
+    local driver = GetHashKey(pmodels[math.random(#pmodels)])
+    print(driver)
+    local vehiclehash = GetHashKey(vehicles[math.random(#vehicles)])
+    RequestModel(vehiclehash)
+    RequestModel(driver)
+    while not HasModelLoaded(vehiclehash) and RequestModel(driver) do
+        RequestModel(vehiclehash)
+        RequestModel(driver)
+        Citizen.Wait(0)
+    end
+    local targetVeh = veh
+
+    print("CPEDINDO CARRO")
+    if DoesEntityExist(vehicle) and cfg.vehicle_ai_tow.deleteLastTruck == true then
+        SetEntityAsMissionEntity(driver)
+        SetEntityAsMissionEntity(vehicle)
+        SetEntityAsMissionEntity(towedVeh)
+
+        DeleteEntity(driver)
+        DeleteEntity(vehicle)
+        DeleteEntity(towedVeh)
+
+        while DoesEntityExist(driver) do
+            --Wait(0)
+            DeleteEntity(driver)
+        end
+    end
+    print("EXISTE?")
+    if DoesEntityExist(targetVeh) then
+        tzRP.notify("Tow is coming")
+        --Wait(math.random(2000, 6000))
+
+        local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), false))
+        local heading, vector = GetNthClosestVehicleNode(x, y, z, spawnDistance, 0, 0, 0)
+        local sX, sY, sZ = table.unpack(vector)
+        local vehicle = CreateVehicle(vehiclehash, sX, sY, sZ, heading, true, true)
+
+        local vehiclehash = GetHashKey(vehicle)
+
+        print(vehicle)
+        print(driver)
+        driver = CreatePedInsideVehicle(vehicle, 26, driver, -1, true, false)
+        print(driver)
+        local vehpos = GetEntityCoords(targetVeh)
+        print(1)
+        TaskVehicleDriveToCoord(driver, vehicle, vehpos.x, vehpos.y, vehpos.z, 17.0, 0, vehiclehash, cfg.vehicle_ai_tow.drivingStyle, 1.0, true)
+        print(2)
+        SetVehicleFixed(vehicle)
+        print(3)
+        SetVehicleOnGroundProperly(vehicle)
+        print("CHAMANDO!")
+        if DoesEntityExist(driver) and DoesEntityExist(vehicle) then
+            print("PEDE EXISTE")
+            SetEntityAsMissionEntity(driver, true, true)
+            print(4)
+            local towblip = AddBlipForEntity(vehicle)
+            print(5)
+            SetBlipColour(towblip, 29)
+            print(5)
+            SetBlipFlashes(towblip, true)
+
+            local distanceToTow = GetDistanceBetweenCoords(GetEntityCoords(vehicle), GetEntityCoords(targetVeh))
+
+            if distanceToTow < 100 then
+                eta = '~g~1 Mike'
+            elseif distanceToTow < 300 then
+                eta = '~g~2 Mikes'
+            elseif distanceToTow < 500 then
+                eta = '~o~3 Mikes'
+            elseif distanceToTow > 500 then
+                eta = '~r~5 Mikes'
+            end
+            print(6)
+            tzRP.notify("A tow truck has been dispatched to your location. Thanks for using ~y~")
+            cfg.vehicle_ai_tow.enroute = true
+            while (cfg.vehicle_ai_tow.enroute) do
+                Citizen.Wait(300)
+                local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(vehicle), GetEntityCoords(targetVeh), 1)
+                SetEntityInvincible(vehicle, true)
+                SetEntityInvincible(driver, true)
+                if distanceToVeh <= 15 then
+                    SetVehicleIndicatorLights(vehicle, 1, true)
+                    SetVehicleIndicatorLights(vehicle, 2, true)
+                    TaskVehicleTempAction(driver, vehicle, 27, 5000)
+                    Wait(5000)
+                    AttachEntityToEntity(targetVeh, vehicle, 20, -0.5, cfg.vehicle_ai_tow.towOffset, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
+                    targetVeh = towedVeh
+                    SetDriveTaskDrivingStyle(vehicle, 786603)
+                    TaskVehicleDriveWander(driver, vehicle, 17.0, cfg.vehicle_ai_tow.drivingStyle)
+                    SetVehicleSiren(vehicle, true)
+                    tzRP.notify("AEEEOO")
+                    SetEntityAsNoLongerNeeded(vehicle)
+                    cfg.vehicle_ai_tow.enroute = false
+                    towblip = RemoveBlip(towblip)
+                    SetVehicleIndicatorLights(vehicle, 1, false)
+                    SetVehicleIndicatorLights(vehicle, 2, false)
+                    SetEntityInvincible(vehicle, false)
+                    SetEntityInvincible(driver, false)
+                    SetEntityAsNoLongerNeeded(vehicle)
+                    SetEntityAsNoLongerNeeded(driver)
+                    SetEntityAsNoLongerNeeded(targetVeh)
+                end
+            end
+        end
+    else
+        tzRP.notify("No vehicle found!")
+    end
+end

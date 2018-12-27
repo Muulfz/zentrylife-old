@@ -830,45 +830,45 @@ function zRPMenu.police_jail(player, choice)
 end
 
 function zRPMenu.police_unjail(player, choice)
-    local target_id = zRP.prompt(player,lang.basic_menu.unjail.prompt(),"")
+    local target_id = zRP.prompt(player, lang.basic_menu.unjail.prompt(), "")
     if target_id ~= nil and target_id ~= "" then
-        local value = zRP.getUData(tonumber(target_id),"zRP:jail:time")
+        local value = zRP.getUData(tonumber(target_id), "zRP:jail:time")
         if value ~= nil then
             local custom = json.decode(value)
             if custom ~= nil then
                 local user_id = zRP.getUserId(player)
-                if tonumber(custom) > 0 or zRP.hasPermission(user_id,lang.basic_menu.unjail.admin()) then
+                if tonumber(custom) > 0 or zRP.hasPermission(user_id, lang.basic_menu.unjail.admin()) then
                     local target = zRP.getUserSource(tonumber(target_id))
                     if target ~= nil then
                         unjailed[target] = tonumber(target_id)
-                        zRPclient.notify(player,lang.basic_menu.unjail.released())
-                        zRPclient.notify(target,lang.basic_menu.unjail.lowered())
-                        zRP.logInfoToFile(lang.basic_menu.unjail.file(),lang.basic_menu.unjail.log({user_id,target_id,custom}))
+                        zRPclient.notify(player, lang.basic_menu.unjail.released())
+                        zRPclient.notify(target, lang.basic_menu.unjail.lowered())
+                        zRP.logInfoToFile(lang.basic_menu.unjail.file(), lang.basic_menu.unjail.log({ user_id, target_id, custom }))
                     else
-                        zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                        zRPclient.notify(player, lang.basic_menu.common.invalid_value())
                     end
                 else
-                    zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                    zRPclient.notify(player, lang.basic_menu.common.invalid_value())
                 end
             end
         end
     else
-        zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+        zRPclient.notify(player, lang.basic_menu.common.invalid_value())
     end
 end
 
 function zRPMenu.police_fine(player, choice)
-    local nplayers = zRPclient.getNearestPlayers(player,15)
+    local nplayers = zRPclient.getNearestPlayers(player, 15)
     local user_list = ""
-    for k,v in pairs(nplayers) do
-        user_list = user_list .. lang.basic_menu.userlist.format({zRP.getUserId(k),GetPlayerName(k)})
+    for k, v in pairs(nplayers) do
+        user_list = user_list .. lang.basic_menu.userlist.format({ zRP.getUserId(k), GetPlayerName(k) })
     end
     if user_list ~= "" then
-        local target_id = zRP.prompt(player,lang.basic_menu.userlist.nearby({user_list}),"")
+        local target_id = zRP.prompt(player, lang.basic_menu.userlist.nearby({ user_list }), "")
         if target_id ~= nil and target_id ~= "" then
-            local fine = zRP.prompt(player,lang.basic_menu.fine.prompt.amount(),"")
+            local fine = zRP.prompt(player, lang.basic_menu.fine.prompt.amount(), "")
             if fine ~= nil and fine ~= "" then
-                local reason = zRP.prompt(player,lang.basic_menu.fine.prompt.reason(),"")
+                local reason = zRP.prompt(player, lang.basic_menu.fine.prompt.reason(), "")
                 if reason ~= nil and reason ~= "" then
                     local target = zRP.getUserSource(tonumber(target_id))
                     if target ~= nil then
@@ -880,87 +880,113 @@ function zRPMenu.police_fine(player, choice)
                         end
 
                         if zRP.tryFullPayment(tonumber(target_id), tonumber(fine)) then
-                            zRP.insertPoliceRecord(tonumber(target_id), lang.basic_menu.police.menu.fine.record({reason,fine}))
-                            zRPclient.notify(player,lang.basic_menu.police.menu.fine.fined({reason,fine}))
-                            zRPclient.notify(target,lang.basic_menu.police.menu.fine.notify_fined({reason,fine}))
+                            zRP.insertPoliceRecord(tonumber(target_id), lang.basic_menu.police.menu.fine.record({ reason, fine }))
+                            zRPclient.notify(player, lang.basic_menu.police.menu.fine.fined({ reason, fine }))
+                            zRPclient.notify(target, lang.basic_menu.police.menu.fine.notify_fined({ reason, fine }))
                             local user_id = zRP.getUserId(player)
                             local custom = ""
-                            zRP.logInfoToFile(lang.basic_menu.fine.file(),lang.basic_menu.fine.log({user_id,target_id,custom,reason}))
+                            zRP.logInfoToFile(lang.basic_menu.fine.file(), lang.basic_menu.fine.log({ user_id, target_id, custom, reason }))
                             zRP.closeMenu(player)
                         else
-                            zRPclient.notify(player,lang.basic_menu.money.not_enough())
+                            zRPclient.notify(player, lang.basic_menu.money.not_enough())
                         end
                     else
-                        zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                        zRPclient.notify(player, lang.basic_menu.common.invalid_value())
                     end
                 else
-                    zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                    zRPclient.notify(player, lang.basic_menu.common.invalid_value())
                 end
             else
-                zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+                zRPclient.notify(player, lang.basic_menu.common.invalid_value())
             end
         else
-            zRPclient.notify(player,lang.basic_menu.common.invalid_value())
+            zRPclient.notify(player, lang.basic_menu.common.invalid_value())
         end
     else
-        zRPclient.notify(player,lang.basic_menu.common.no_player_near())
+        zRPclient.notify(player, lang.basic_menu.common.no_player_near())
     end
 end
 
 function zRPMenu.police_handcuff(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player,10)
+    local nplayer = zRPclient.getNearestPlayer(player, 10)
     local nuser_id = zRP.getUserId(nplayer)
     if nuser_id ~= nil then
         zRPclient.toggleHandcuff(nplayer)
         local user_id = zRP.getUserId(player)
-        zRP.logInfoToFile(lang.cuff.file(),lang.cuff.log({user_id,nuser_id}))
+        zRP.logInfoToFile(lang.cuff.file(), lang.cuff.log({ user_id, nuser_id }))
         zRP.closeMenu(nplayer)
     else
-        zRPclient.notify(player,lang.common.no_player_near())
+        zRPclient.notify(player, lang.common.no_player_near())
     end
 end
 
 function zRPMenu.police_freeze(player, choice)
     local user_id = zRP.getUserId(player)
-    if zRP.hasPermission(user_id,lang.freeze.admin()) then
-        local target_id = zRP.prompt(player,lang.freeze.prompt(),"")
+    if zRP.hasPermission(user_id, lang.freeze.admin()) then
+        local target_id = zRP.prompt(player, lang.freeze.prompt(), "")
         if target_id ~= nil and target_id ~= "" then
             local target = zRP.getUserSource(tonumber(target_id))
             if target ~= nil then
-                zRPclient.notify(player,lang.freeze.notify())
-                zRPclient.loadFreeze(target,true,true,true)
+                zRPclient.notify(player, lang.freeze.notify())
+                zRPclient.loadFreeze(target, true, true, true)
             else
-                zRPclient.notify(player,lang.common.invalid_value())
+                zRPclient.notify(player, lang.common.invalid_value())
             end
         else
-            zRPclient.notify(player,lang.common.invalid_value())
+            zRPclient.notify(player, lang.common.invalid_value())
         end
     else
-        local nplayer = zRPclient.getNearestPlayer(player,10)
+        local nplayer = zRPclient.getNearestPlayer(player, 10)
         local nuser_id = zRP.getUserId(nplayer)
         if nuser_id ~= nil then
-            zRPclient.notify(player,lang.freeze.notify())
-            zRPclient.loadFreeze(nplayer,true,false,false)
+            zRPclient.notify(player, lang.freeze.notify())
+            zRPclient.loadFreeze(nplayer, true, false, false)
         else
-            zRPclient.notify(player,lang.common.no_player_near())
+            zRPclient.notify(player, lang.common.no_player_near())
         end
     end
 end
 
+function zRPMenu.police_size_vehicle(player, choice)
+    local user_id = zRP.getUserId(player)
+    if user_id then
+        local reason = zRP.prompt(player, "Motivo da Apreencao", "")
+        if reason then
+            local table = zRPclient.sizeNeasterVehicle(player)
+            if table then
+                local reg = table[1]
+                local regist = reg:gsub("P ","")
+                local veh = table[2]:lower()
+                local nuser_id = zRP.getUserByRegistration(regist)
+                if nuser_id ~= nil then
+                    zRPclient._vehicleAiTowing(player,table[3])
+                    zRP.execute("zRP/remove_vehicle", { user_id = nuser_id, vehicle = veh })
+                    zRP.execute("zRP/add_seized_vehicle", { user_id = nuser_id, vehicle = veh, reason = reason, seized_agent = user_id })
+                end
+            end
+        end
+    end
+    --todo sistema de entregar no patio (mysql guardar se for entregue)
+    -- guardar a indentidade do usuario
+    -- colocar na ficha criminal
+    -- lugar para retirada
+    print("terminei")
+end
 
-zRP.defInventoryItem(lang.bodyarmor.id(),lang.bodyarmor.name(),lang.bodyarmor.desc(),
+
+zRP.defInventoryItem(lang.bodyarmor.id(), lang.bodyarmor.name(), lang.bodyarmor.desc(),
         function(args)
             local choices = {}
 
-            choices[lang.bodyarmor.equip()] = {function(player,choice)
+            choices[lang.bodyarmor.equip()] = { function(player, choice)
                 local user_id = zRP.getUserId(player)
                 if user_id ~= nil then
                     if zRP.tryGetInventoryItem(user_id, lang.bodyarmor.id(), 1, true) then
-                       zRPclient.setArmour(player,100,true)
+                        zRPclient.setArmour(player, 100, true)
                         zRP.closeMenu(player)
                     end
                 end
-            end}
+            end }
 
             return choices
         end,
