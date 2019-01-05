@@ -23,9 +23,7 @@ end) then
 else
   print("[zRP] Lang System are not found")
 end
-local teste = "P ujhiwqeiwqjiewq"
-local vai = teste:gsub("P ","")
-print(vai)
+
 -- init
 zRPclient = Tunnel.getInterface("zRP") -- server -> client tunnel
 
@@ -83,12 +81,12 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
             tmpdata.spawns = 0
 
             -- set last login
-            local ep = zRP.getPlayerEndpoint(source)
+            local ep = zRP.getPlayerEndpoint(source) --TODO ADICIONAR O IP
             local last_login_stamp = os.date("%H:%M:%S %d/%m/%Y")
             zRP.execute("zRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
 
             -- trigger join
-            print("[zRP] "..name.." ("..zRP.getPlayerEndpoint(source)..") joined (user_id = "..user_id..")")
+            print("[zRP] "..name.." ("..ep..") joined (user_id = "..user_id..")")
             TriggerEvent("zRP:playerJoin", user_id, source, name, tmpdata.last_login)
             deferrals.done()
           else -- already connected

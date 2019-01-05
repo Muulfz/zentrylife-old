@@ -5,6 +5,8 @@ zRP.prepare("zRP/vehicles_table", [[
 CREATE TABLE IF NOT EXISTS zrp_user_vehicles(
   user_id INTEGER,
   vehicle VARCHAR(100),
+  upgrades VARCHAR(100),
+  sized BOOLEAN,
   CONSTRAINT pk_user_vehicles PRIMARY KEY(user_id,vehicle),
   CONSTRAINT fk_user_vehicles_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );
@@ -13,6 +15,7 @@ CREATE TABLE IF NOT EXISTS zrp_user_vehicles(
 zRP.prepare("zRP/add_vehicle", "INSERT IGNORE INTO zrp_user_vehicles(user_id,vehicle) VALUES(@user_id,@vehicle)")
 zRP.prepare("zRP/remove_vehicle", "DELETE FROM zrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 zRP.prepare("zRP/get_vehicles", "SELECT vehicle FROM zrp_user_vehicles WHERE user_id = @user_id")
+zRP.prepare("zRP/get_vehicles_unsized", "SELECT vehicle FROM zrp_user_vehicles WHERE user_id = @user_id AND sized = false")
 zRP.prepare("zRP/get_vehicle", "SELECT vehicle FROM zrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 zRP.prepare("zRP/get_vehicle_upgrades", "SELECT upgrades FROM zrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle AND upgrades IS NOT NULL")
 
@@ -87,7 +90,7 @@ for group, vehicles in pairs(vehicle_groups) do
             end
 
             -- get player owned vehicles
-            local pvehicles = zRP.query("zRP/get_vehicles", { user_id = user_id })
+            local pvehicles = zRP.query("zRP/get_vehicles_unsized", { user_id = user_id })
             -- add rents to whitelist
             for k, v in pairs(tmpdata.rent_vehicles) do
                 if v then

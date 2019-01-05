@@ -6,19 +6,15 @@
 
 
 zRP.users = {
-    ["license:97450620cacad874188c4ad27549456d1570302b"] = "e9414a06-8688-45ef-a3b1-c3b18650e859"
+    ["license:97450620cacad874188c4ad27549456d1570302b"] = "1"
 }
 
 zRP.rusers = {
-    ["e9414a06-8688-45ef-a3b1-c3b18650e859"] = "identifier"
+    ["1"] = "identifier"
 }
 
 zRP.user_tables = {
     [1] = {
-
-        ["active_character_id"] = 1,
-        ["character_isLoading"] = true,
-        ["character_load"] =  false,
         ["groups"] = {["superadmin"] =true,["admin"] =true,["user"] =true},
 
     }
@@ -27,16 +23,13 @@ zRP.user_tables = {
 zRP.user_tmp_tables = {
 
     [1] = {
-        ["active_character_id"] = 1,
-        ["character_isLoading"] = true,
-        ["character_load"] =  false,
         ["groups"] = {["superadmin"] =true,["admin"] =true,["user"] =true},
 
     }
 }
 
 zRP.user_sources = {
-    ["SOURCE"] = "e9414a06-8688-45ef-a3b1-c3b18650e859"
+    ["SOURCE"] = "1"
 }
 
 zRP.character_tables = {

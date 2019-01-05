@@ -947,6 +947,12 @@ function zRPMenu.police_freeze(player, choice)
     end
 end
 
+RegisterServerEvent("vehicleAiTowing")
+AddEventHandler("vehicleAiTowing", function(veh)
+    local player = source
+    zRPclient._vehicleAiTowing(player, veh)
+end)
+
 function zRPMenu.police_size_vehicle(player, choice)
     local user_id = zRP.getUserId(player)
     if user_id then
@@ -955,13 +961,13 @@ function zRPMenu.police_size_vehicle(player, choice)
             local table = zRPclient.sizeNeasterVehicle(player)
             if table then
                 local reg = table[1]
-                local regist = reg:gsub("P ","")
+                local regist = reg:gsub("P ", "")
                 local veh = table[2]:lower()
                 local nuser_id = zRP.getUserByRegistration(regist)
                 if nuser_id ~= nil then
-                    zRPclient._vehicleAiTowing(player,table[3])
-                    zRP.execute("zRP/remove_vehicle", { user_id = nuser_id, vehicle = veh })
-                    zRP.execute("zRP/add_seized_vehicle", { user_id = nuser_id, vehicle = veh, reason = reason, seized_agent = user_id })
+                    local towing = zRPclient._vehicleAiTowing(player, table[3])
+                    local time = os.time()
+                    zRP.execute("zRP/add_seized_vehicle", { user_id = nuser_id, vehicle = veh, reason = reason, seized_agent = user_id, seized_time = time })
                 end
             end
         end
@@ -970,9 +976,7 @@ function zRPMenu.police_size_vehicle(player, choice)
     -- guardar a indentidade do usuario
     -- colocar na ficha criminal
     -- lugar para retirada
-    print("terminei")
 end
-
 
 zRP.defInventoryItem(lang.bodyarmor.id(), lang.bodyarmor.name(), lang.bodyarmor.desc(),
         function(args)

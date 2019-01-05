@@ -4,11 +4,11 @@
 --- DateTime: 11/17/2018 2:17 PM
 ---
 
-local playerConnecting = module("zRP_base_extensions/Server/Handlers/playerConnecting")
+--[[local playerConnecting = module("zRP_base_extensions/Server/Handlers/playerConnecting")
 
 local playerDropped = module("zRP_base_extensions/Server/Handlers/playerDropped")
 
-local zRPCli_playerSpawned_handler = module("zRP_base_extensions/Server/Handlers/zRPCli_playerSpawned")
+local zRPCli_playerSpawned_handler = module("zRP_base_extensions/Server/Handlers/zRPCli_playerSpawned")]]
 
 RegisterServerEvent("zRP:UUID_GENERATE")
 AddEventHandler("zRP:UUID_GENERATE",
