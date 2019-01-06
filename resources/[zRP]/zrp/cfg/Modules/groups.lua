@@ -1,4 +1,3 @@
-
 local cfg = {}
 
 -- define each group with a set of permissions
@@ -11,137 +10,145 @@ local cfg = {}
 --- (you have direct access to zRP and zRPclient, the tunnel to client, in the config callbacks)
 
 cfg.groups = {
-  ["superadmin"] = {
-    _config = {onspawn = function(player) zRPclient._notify(player,"You are superadmin.") end},
-    "player.group.add",
-    "player.group.remove",
-    "player.givemoney",
-    "player.giveitem"
-  },
-  ["admin"] = {
-    "admin.tickets",
-    "admin.announce",
-    "player.list",
-    "player.whitelist",
-    "player.unwhitelist",
-    "player.kick",
-    "player.ban",
-    "player.unban",
-    "player.noclip",
-    "player.custom_emote",
-    "player.custom_sound",
-    "player.display_custom",
-    "player.coords",
-    "player.tptome",
-    "admin.spawnveh",
-    "police.spikes",
-    "admin.sprites",
-    "admin.srun",
-    "admin.tptowaypoint",
-    "police.bmunjail",
-    "player.userlist",
-    "store.weapons",
-    "player.tpto"
-  },
-  ["god"] = {
-    "admin.god" -- reset survivals/health periodically
-  },
-  -- the group user is auto added to all logged players
-  ["user"] = {
-    "mission.repair.satellite_dishes",
-    "player.phone",
-    "store.bodyarmor",
-    "admin.crun",
-    "police.bmcuff",
-    "admin.deleteveh",
-    "police.drag",
-    "police.bmfine",
-    "player.fixhaircut",
-    "police.freeze",
-    "admin.godmode",
-    "hacker.hack",
-    "player.inspect",
-    "police.bmjail",
-    "carjacker.lockpick",
-    "player.loot",
-    "mobile.charge",
-    "store.money",
-    "mobile.pay",
-    "mugger.mug",
-    "player.menu",
-    "mission.service",
+    ["superadmin"] = {
+        _config = { onspawn = function(player)
+            zRPclient._notify(player, "You are superadmin.")
+        end },
+        "player.group.add",
+        "player.group.remove",
+        "player.givemoney",
+        "player.giveitem"
+    },
+    ["admin"] = {
+        "admin.tickets",
+        "admin.announce",
+        "player.list",
+        "player.whitelist",
+        "player.unwhitelist",
+        "player.kick",
+        "player.ban",
+        "player.unban",
+        "player.noclip",
+        "player.custom_emote",
+        "player.custom_sound",
+        "player.display_custom",
+        "player.coords",
+        "player.tptome",
+        "admin.spawnveh",
+        "police.spikes",
+        "admin.sprites",
+        "admin.srun",
+        "admin.tptowaypoint",
+        "police.bmunjail",
+        "player.userlist",
+        "store.weapons",
+        "player.tpto"
+    },
+    ["god"] = {
+        "admin.god" -- reset survivals/health periodically
+    },
+    -- the group user is auto added to all logged players
+    ["user"] = {
+        "mission.repair.satellite_dishes",
+        "player.phone",
+        "store.bodyarmor",
+        "admin.crun",
+        "police.bmcuff",
+        "admin.deleteveh",
+        "police.drag",
+        "police.bmfine",
+        "player.fixhaircut",
+        "police.freeze",
+        "admin.godmode",
+        "hacker.hack",
+        "player.inspect",
+        "police.bmjail",
+        "carjacker.lockpick",
+        "player.loot",
+        "mobile.charge",
+        "store.money",
+        "mobile.pay",
+        "mugger.mug",
+        "player.menu",
+        "mission.service",
 
-    "player.calladmin",
-    "police.askid",
-    "police.store_weapons",
-    "police.seizable" -- can be seized
-  },
-  ["police"] = {
-    _config = {
-      title = "Police",
-      gtype = "job",
-      onjoin = function(player) zRPclient._setCop(player,true) end,
-      onspawn = function(player) zRPclient._setCop(player,true) end,
-      onleave = function(player) zRPclient._setCop(player,false) end
+        "player.calladmin",
+        "police.askid",
+        "police.store_weapons",
+        "police.seizable" -- can be seized
     },
-    "police.menu",
-    "police.cloakroom",
-    "police.pc",
-    "police.handcuff",
-    "police.drag",
-    "police.putinveh",
-    "police.getoutveh",
-    "police.check",
-    "police.service",
-    "police.bmfine",
-    "police.wanted",
-    "police.seize.weapons",
-    "police.seize.items",
-    "police.jail",
-    "police.fine",
-    "police.announce",
-    "-police.store_weapons",
-    "-police.seizable" -- negative permission, police can't seize itself, even if another group add the permission
-  },
-  ["emergency"] = {
-    _config = {
-      title = "Emergency",
-      gtype = "job"
+    ["police"] = {
+        _config = {
+            title = "Police",
+            gtype = "job",
+            onjoin = function(player)
+                zRPclient._setCop(player, true)
+            end,
+            onspawn = function(player)
+                zRPclient._setCop(player, true)
+            end,
+            onleave = function(player)
+                zRPclient._setCop(player, false)
+            end
+        },
+        "police.menu",
+        "police.cloakroom",
+        "police.pc",
+        "police.handcuff",
+        "police.drag",
+        "police.putinveh",
+        "police.getoutveh",
+        "police.check",
+        "police.service",
+        "police.bmfine",
+        "police.wanted",
+        "police.seize.weapons",
+        "police.seize.items",
+        "police.jail",
+        "police.fine",
+        "police.announce",
+        "-police.store_weapons",
+        "-police.seizable" -- negative permission, police can't seize itself, even if another group add the permission
     },
-    "emergency.revive",
-    "emergency.shop",
-    "emergency.service"
-  },
-  ["repair"] = {
-    _config = {
-      title = "Repair",
-      gtype = "job"
+    ["emergency"] = {
+        _config = {
+            title = "Emergency",
+            gtype = "job"
+        },
+        "emergency.revive",
+        "emergency.shop",
+        "emergency.service"
     },
-    "vehicle.repair",
-    "vehicle.replace",
-    "repair.service"
-  },
-  ["taxi"] = {
-    _config = {
-      title = "Taxi",
-      gtype = "job"
+    ["repair"] = {
+        _config = {
+            title = "Repair",
+            gtype = "job"
+        },
+        "vehicle.repair",
+        "vehicle.replace",
+        "repair.service"
     },
-    "taxi.service"
-  },
-  ["citizen"] = {
-    _config = {
-      title = "Citizen",
-      gtype = "job"
+    ["taxi"] = {
+        _config = {
+            title = "Taxi",
+            gtype = "job"
+        },
+        "taxi.service"
+    },
+    ["citizen"] = {
+        _config = {
+            title = "Citizen",
+            gtype = "job"
+        }
     }
-  }
 }
 
 -- groups are added dynamically using the API or the menu, but you can add group when an user join here
 cfg.users = {
-  [1] = { -- give superadmin and admin group to the first created user on the database
-    "superadmin",
-    "admin"
-  }
+    [1] = { -- give superadmin and admin group to the first created user on the database
+        "superadmin",
+        "admin"
+    }
 }
 
 -- group selectors
@@ -149,13 +156,13 @@ cfg.users = {
 --- x,y,z, blipid, blipcolor, permissions (optional)
 
 cfg.selectors = {
-  ["Job Selector"] = {
-    _config = {x = -268.363739013672, y = -957.255126953125, z = 31.22313880920410, blipid = 351, blipcolor = 47},
-    "police",
-    "taxi",
-    "repair",
-    "citizen"
-  }
+    ["Job Selector"] = {
+        _config = { x = -268.363739013672, y = -957.255126953125, z = 31.22313880920410, blipid = 351, blipcolor = 47 },
+        "police",
+        "taxi",
+        "repair",
+        "citizen"
+    }
 }
 
 return cfg

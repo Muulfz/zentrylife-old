@@ -74,7 +74,7 @@ function zRPMenu.admin_whitelist(player,choice)
   local user_id = zRP.getUserId(player)
   if user_id and zRP.hasPermission(user_id,permlang.menu.admin.admin_whitelist()) then
     local id = zRP.prompt(player,lang.menu.admin.add_whitelist.prompt(),"")
-    id = parseInt(id)
+    id = parsed(id)
     zRP.setWhitelisted(id,true)
     zRPclient._notify(player, lang.menu.admin.add_whitelist.notify({id}))
   end
@@ -220,8 +220,10 @@ function zRPMenu.admin_givemoney(player,choice)
   local user_id = zRP.getUserId(player)
   if user_id then
     local amount = zRP.prompt(player,"Amount:","")
-    amount = parseInt(amount)
+    amount = parseDouble(amount)
     zRP.giveMoney(user_id, amount)
+    zRP.giveMoneyEUR(user_id,amount)
+    zRP.giveMoneyUSD(user_id,amount)
   end
 end
 

@@ -39,7 +39,7 @@ function zRP.openBarbershop(source,parts)
             -- apply change
             local custom = zRPclient.getOverlay(source)
             custom[""..parts[choice]] = {drawables[choice][1],texture[1]}
-            zRPclient.setOverlay(source,custom)
+            zRPclient._setOverlay(source,custom)
         end
 
         local ondrawable = function(player, choice, mod)
@@ -62,7 +62,7 @@ function zRP.openBarbershop(source,parts)
                 -- apply change
                 local custom = zRPclient.getOverlay(source)
                 custom[""..parts[choice]] = {drawable[1],textures[choice][1]}
-                zRPclient.setOverlay(source,custom)
+                zRPclient._setOverlay(source,custom)
 
                 -- update max textures number
                 local n = zRPclient.getTextures(source,drawable[1])
@@ -115,7 +115,7 @@ function zRP.openBarbershop(source,parts)
             else
                 zRPclient.notify(source,lang.money.not_enough())
                 -- revert changes
-                zRPclient.setOverlay(source,old_custom)
+                zRPclient._setOverlay(source,old_custom)
             end
         end
 
@@ -139,8 +139,8 @@ local function build_client_barbershops(source)
                 zRP.closeMenu(source)
             end
 
-            zRPclient.addBlip(source,x,y,z,71,13,lang.barbershop.title())
-            zRPclient.addMarker(source,x,y,z-1,0.7,0.7,0.5,0,255,125,125,150)
+            zRPclient._addBlip(source,x,y,z,71,13,lang.barbershop.title())
+            zRPclient._addMarker(source,x,y,z-1,0.7,0.7,0.5,0,255,125,125,150)
 
             zRP.setArea(source,"zRP:barbershop"..k,x,y,z,1,5,barbershop_enter,barbershop_leave)
         end
@@ -154,7 +154,7 @@ AddEventHandler("zRP:playerSpawn",function(user_id, source, first_spawn)
         local value = zRP.getUData(user_id,"zRP:barbershop")
         if value ~= nil then
             custom = json.decode(value)
-            zRPclient.setOverlay(source,custom)
+            zRPclient._setOverlay(source,custom)
         end
     end
 end)

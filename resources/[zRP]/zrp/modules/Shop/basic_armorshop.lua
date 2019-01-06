@@ -112,8 +112,8 @@ local function build_client_gunshops(source)
                     zRP.closeMenu(source)
                 end
 
-                zRPclient.addBlip(source, x, y, z, gcfg.blipid, gcfg.blipcolor, lang.gunshop.title({ gtype }))
-                zRPclient.addMarker(source, x, y, z - 1, 0.7, 0.7, 0.5, 0, 255, 125, 125, 150)
+                zRPclient._addBlip(source, x, y, z, gcfg.blipid, gcfg.blipcolor, lang.gunshop.title({ gtype }))
+                zRPclient._addMarker(source, x, y, z - 1, 0.7, 0.7, 0.5, 0, 255, 125, 125, 150)
 
                 zRP.setArea(source, "zRP:gunshop" .. k, x, y, z, 1, 1.5, gunshop_enter, gunshop_leave)
             end
@@ -127,7 +127,7 @@ AddEventHandler("zRP:playerSpawn", function(user_id, source, first_spawn)
         local value = zRP.getUData(user_id, "zRP:bodyarmor")
         local armor = json.decode(value)
         if armor then
-            zRPclient.setArmour(source, tonumber(armor), true)
+            zRPclient._setArmour(source, tonumber(armor), true)
         end
     end
 end)

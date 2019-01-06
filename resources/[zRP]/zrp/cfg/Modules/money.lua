@@ -4,6 +4,10 @@ local cfg = {}
 -- start wallet/bank values
 cfg.open_wallet = 150
 cfg.open_bank = 1000
+cfg.open_usd_wallet = 100
+cfg.open_usd_bank = 300
+cfg.open_eur_wallet = 100
+cfg.open_eur_bank = 300
 
 -- money display css
 cfg.display_css = [[

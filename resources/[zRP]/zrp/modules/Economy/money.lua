@@ -23,6 +23,7 @@ end
 -- set money
 function zRP.setMoney(user_id,value)
   local tmp = zRP.getUserTmpTable(user_id)
+  Debug.log("[ECONOMY LOG] User_id: "..user_id.." Player Money modify "..tmp.money.wallet .." TO => "..value )
   if tmp then
     tmp.money.wallet = value
   end
@@ -50,6 +51,7 @@ end
 function zRP.giveMoney(user_id,amount)
   if amount > 0 then
     local money = zRP.getMoney(user_id)
+    money = parseDouble(money)
     zRP.setMoney(user_id,money+amount)
   end
 end
@@ -67,7 +69,8 @@ end
 -- set bank money
 function zRP.setBankMoney(user_id,value)
   local tmp = zRP.getUserTmpTable(user_id)
-  if tmp then
+  Debug.log("[ECONOMY LOG] User_id: "..user_id.." Player Money modify "..tmp.money.bank .." TO => "..value)
+    if tmp then
     tmp.money.bank = value
   end
 end
@@ -123,8 +126,14 @@ end
 AddEventHandler("zRP:playerJoin",function(user_id,source,name,last_login)
   local money = {
       wallet = cfg.open_wallet,
-      bank = cfg.open_bank
+      bank = cfg.open_bank,
+      bitcoin = cfg.open_bitcoin,
+      usd_wallet = cfg.open_usd_wallet,
+      usd_bank = cfg.open_usd_bank,
+      eur_wallet = cfg.open_eur_wallet,
+      eur_bank = cfg.open_eur_bank,
   }
+
   zRP.execute("zRP/money_init_user_json", {user_id = user_id, money = json.encode(money)})
   print(json.encode(money))
   -- load money (wallet,bank)

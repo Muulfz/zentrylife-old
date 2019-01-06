@@ -15,6 +15,7 @@ server_scripts{
   "modules/Character/player_state.lua",
   "modules/Environment/map.lua",
   "modules/Economy/money.lua",
+  "modules/Economy/extra_currency.lua",
   "modules/Character/inventory.lua",
   "modules/Character/identity.lua",
   "modules/Economy/business.lua",

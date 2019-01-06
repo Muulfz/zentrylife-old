@@ -13,7 +13,7 @@ function zRPMenu.player_fixhair(player, choice)
     local value = zRP.getUData(user_id,"zRP:head:overlay")
     if value ~= nil then
         custom = json.decode(value)
-        zRPclient.setOverlay(player,custom,true)
+        zRPclient._setOverlay(player,custom,true)
     end
 end
 

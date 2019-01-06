@@ -41,8 +41,8 @@ local function build_client_carwash(source)
                 zRPclient.notify(source,cfg.lang.goodbye)
             end
 
-            zRPclient.addBlip(source,x,y,z,cfg.blip.id,cfg.blip.color,cfg.lang.title)
-            zRPclient.addMarker(source,x,y,z-1,3,3,0.7,125,125,255,255,150)
+            zRPclient._addBlip(source,x,y,z,cfg.blip.id,cfg.blip.color,cfg.lang.title)
+            zRPclient._addMarker(source,x,y,z-1,3,3,0.7,125,125,255,255,150)
 
             zRP.setArea(source,"zRP:carwash"..k,x,y,z,3,1.5,carwash_enter,carwash_leave)
         end
