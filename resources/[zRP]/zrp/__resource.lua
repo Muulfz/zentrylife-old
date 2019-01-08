@@ -71,6 +71,7 @@ client_scripts{
   "client/Character/player_state.lua",
   "client/Character/survival.lua",
   "client/Environment/map.lua",
+  "client/Environment/item_drop.lua",
   "client/Character/identity.lua",
   "client/Shop/basic_garage.lua",
   "client/Jobs/Government/police.lua",

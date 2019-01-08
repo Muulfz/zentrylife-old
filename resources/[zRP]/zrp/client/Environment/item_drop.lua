@@ -24,27 +24,27 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1)))
         if DoesObjectOfTypeExistAtCoords(x, y, z, 20.0, hash, true) then
-            local bag = GetClosestObjectOfType(x, y, z, 1.3, hash, false, false, false)
+            local bag = GetClosestObjectOfType(x, y, z, 20.0, hash, false, false, false)
             if bag then
-                scenrionahoi("Pressione [~b~E~w~] para pegar o pacote!")
-                if IsControlJustPressed(1, 51) then
-                    local id = NetworkGetNetworkIdFromEntity(bag)
-                    if zRPserver.verifyBag(id) then
-                        TriggerServerEvent("zrp_itemdrop:takeBag", id)
-                        Citizen.Wait(500)
+                local bx, by, bz = table.unpack(GetEntityCoords(bag))
+                if GetDistanceBetweenCoords(x, y, z, bx, by, bz) <= 1.3 then
+                    scenrionahoi("Pressione [~b~E~w~] para pegar o pacote!")
+                    if IsControlJustPressed(1, 51) then
+                        local id = NetworkGetNetworkIdFromEntity(bag)
+                        if zRPserver.verifyBag(id) then
+                            TriggerServerEvent("zrp_itemdrop:takeBag", id)
+                            Citizen.Wait(500)
+                        end
                     end
                 end
-            else
-                bag = GetClosestObjectOfType(x, y, z, 20.0, hash, false, false, false)
+                DrawMarker(22, bx, by, bz + 0.5, 0, 0, 0, 180.0, 0, 0, 0.4001, 0.4001, 0.4001, 255, 255, 255, 185, true, true, 0, 0)
             end
-            local bx, by, bz = table.unpack(GetEntityCoords(bag))
-            DrawMarker(22, bx, by, bz + 0.5, 0, 0, 0, 180.0, 0, 0, 0.4001, 0.4001, 0.4001, 255, 255, 255, 185, true, true, 0,0)
         end
-        end
+    end
 end)
 
 RegisterNetEvent("zrp_itemdrop:deleteBag")
-AddEventHandler("zrp_itemdrop:deleteBag",function (id)
+AddEventHandler("zrp_itemdrop:deleteBag", function(id)
     local bag = NetworkGetEntityFromNetworkId(id)
     SetEntityAsMissionEntity(bag, true, true)
     DeleteObject(bag)

@@ -1,4 +1,5 @@
 -- Credits Marmota#2533
+local bags = {}
 
 AddEventHandler("zrp_itemdrop:createBag", function(player, item, amount)
     local id = zRPclient.createBag(player)
