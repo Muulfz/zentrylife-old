@@ -14,6 +14,7 @@ server_scripts{
   "modules/Character/survival.lua",
   "modules/Character/player_state.lua",
   "modules/Environment/map.lua",
+  "modules/Environment/item_drop.lua",
   "modules/Environment/gps.lua",
   "modules/Economy/money.lua",
   "modules/Economy/extra_currency.lua",
