@@ -68,6 +68,7 @@ function ch_trash(idname, player, choice)
     if zRP.tryGetInventoryItem(user_id,idname,amount,false) then
       zRPclient._notify(player,lang.inventory.trash.done({zRP.getItemName(idname),amount}))
       zRPclient._playAnim(player,true,{{"pickup_object","pickup_low",1}},false)
+      TriggerEvent("zrp_itemdrop:createBag", player, idname, amount)
     else
       zRPclient._notify(player,lang.common.invalid_value())
     end
