@@ -358,8 +358,12 @@ function tzRP.resetMovement(fade)
     SetPedMotionBlur(GetPlayerPed(-1), false)
 end
 
-
-
+function tzRP.isPedSittingInVeichle(veh_hash)
+    if IsPedSittingInVehicle(GetPlayerPed(-1),veh_hash) == 1 then
+        return true
+    end
+   return IsPedSittingInVehicle(GetPlayerPed(-1),veh_hash)
+end
 
 
 

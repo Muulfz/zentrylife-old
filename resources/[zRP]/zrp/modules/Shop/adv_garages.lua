@@ -463,7 +463,6 @@ function zRP.advGaragesOpen(source, gid, pos)
             end, lang.garage.store.description()}
         elseif gtype == "shop" then
             menu[lang.garage.shop.title()] = {function(player,choice)
-                print("AAAA")
                 local user_id = zRP.getUserId(source)
                 local tosub = false
                 if user_id then

@@ -13,10 +13,8 @@ local gunshop_menus = {}
 
 function zRP.updateArmor(armor)
     local user_id = zRP.getUserId(source)
-    print(user_id)
     if user_id ~= nil then
         zRP.setUData(user_id, "zRP:bodyarmor", json.encode(armor))
-        print("FEITO")
     end
 end
 

@@ -305,7 +305,6 @@ end
 function tzRP.setUpgrades(mods)
   local ped = GetPlayerPed(-1)
   local veh = GetVehiclePedIsUsing(ped)
-  print(mods)
   local a = string.find(mods, ":")
   local ct = 0
   SetVehicleModKit(veh,0)

@@ -135,7 +135,6 @@ AddEventHandler("zRP:playerJoin",function(user_id,source,name,last_login)
   }
 
   zRP.execute("zRP/money_init_user_json", {user_id = user_id, money = json.encode(money)})
-  print(json.encode(money))
   -- load money (wallet,bank)
   local tmp = zRP.getUserTmpTable(user_id)
   if tmp then

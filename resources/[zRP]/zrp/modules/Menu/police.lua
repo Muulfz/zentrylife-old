@@ -32,16 +32,14 @@ zRP.registerMenuBuilder("police", function(add, data)
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.drag.perm()) then
-            choices[lang.basic_menu.drag.button()] = {zRPMenu.police_drag, lang.basic_menu.drag.desc()} -- Drags closest handcuffed player
+            choices[lang.basic_menu.drag.button()] = {zRPMenu.police_drag, lansg.basic_menu.drag.desc()} -- Drags closest handcuffed player
         end
 
         if zRP.hasPermission(user_id,lang.basic_menu.freeze.perm()) then
             choices[lang.basic_menu.freeze.button()] = {zRPMenu.police_freeze, lang.basic_menu.freeze.desc()} -- Toggle freeze
         end
 
-        if zRP.hasPermission(user_id,lang.basic_menu.jail.perm()) then
-            choices["APREENDER VEICULO"] = {zRPMenu.police_size_vehicle, "apreende"}
-        end
+
 
         add(choices)
     end

@@ -616,13 +616,32 @@ function tzRP.sizeNeasterVehicle()
         local table = {
             [1] = plate,
             [2] = vehname,
-            [3] = veh
+            [3] = veh,
         }
         return table
     else
         tzRP.notify("Nenhum veiculo proximo")
     end
+end
 
+
+
+function tzRP.getNerestVehicleInfo()
+    local veh = tzRP.getNearestVehicle(5)
+    if veh then
+        local vehname = tzRP.getVehicleName(veh)
+        if vehname ~= "CARNOTFOUND" then
+            local plate = tzRP.getVehiclePlate(veh)
+            local fname = GetLabelText(vehname)
+            local vehtable = {
+                plate = plate,
+                name = vehname,
+                hash = veh,
+                fullname = fname
+            }
+            return vehtable
+        end
+    end
 end
 
 function tzRP.vehicleAiTowing(veh)

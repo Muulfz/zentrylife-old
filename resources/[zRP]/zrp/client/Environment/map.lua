@@ -271,7 +271,6 @@ function tzRP.loadFreeze()
     Citizen.Wait(1)
   end
   Citizen.Wait(30000)
-  print("DESFREZANDO FINALIZANDO")
   SetEntityInvincible(GetPlayerPed(-1),false)
   SetEntityVisible(GetPlayerPed(-1),true)
   FreezeEntityPosition(GetPlayerPed(-1),false)
@@ -280,6 +279,5 @@ end
 
 RegisterNetEvent("zRP:Unfreeze")
 AddEventHandler("zRP:Unfreeze", function()
-  print("DESFREZANDO")
   frozen_finish = true
 end)

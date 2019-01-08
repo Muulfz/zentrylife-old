@@ -131,9 +131,11 @@ zRP.registerMenuBuilder("main", function(add, data)
             choices[lang.basic_menu.service.button()] = {zRPMenu.mission_services,lang.basic_menu.service.desc()} -- toggle the receiving of missions
         end
 
+--[[
         if zRP.hasPermission(user_id,lang.basic_menu.loot.perm()) then
             choices[lang.basic_menu.loot.button()] = {zRPMenu.thief_loot, lang.basic_menu.loot.desc()} -- take the items of nearest player in coma
         end
+]]
 
         if zRP.hasPermission(user_id,lang.basic_menu.mugger.perm()) then
             choices[lang.basic_menu.mugger.button()] = {zRPMenu.thief_mug, lang.basic_menu.mugger.desc()} -- steal nearest player wallet

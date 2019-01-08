@@ -69,6 +69,7 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
             zRP.user_tmp_tables[user_id] = {}
             zRP.user_sources[user_id] = source
 
+
             local data = json.decode(sdata)
             if type(data) == "table" then zRP.user_tables[user_id] = data end
 
@@ -94,7 +95,6 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
             -- reset first spawn
             local tmpdata = zRP.getUserTmpTable(user_id)
             tmpdata.spawns = 0
-
             TriggerEvent("zRP:playerRejoin", user_id, source, name)
             deferrals.done()
           end
@@ -165,9 +165,7 @@ AddEventHandler("zRPcli:playerSpawned", function()
 
     SetTimeout(2000, function() -- trigger spawn event
       TriggerEvent("zRP:playerSpawn",user_id,player,first_spawn)
-      print("DESFREZANDO")
       TriggerClientEvent("zRP:Unfreeze",player)
-      print("DESFREZADO")
     end)
   end
 end)

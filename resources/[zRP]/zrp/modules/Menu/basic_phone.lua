@@ -99,7 +99,7 @@ function zRP.payPhoneNumber(user_id,phone)
 end
 
 
-zRP.registerMenuBuilder("main", function(add, data)
+--[[zRP.registerMenuBuilder("main", function(add, data)
     local player = data.player
     local choices = {}
     choices[lang.phone.title()] = {function() zRP.openMenu(player,zRPMenu.basic_phone()) end}
@@ -108,7 +108,7 @@ zRP.registerMenuBuilder("main", function(add, data)
     if user_id and zRP.hasPermission(user_id, "player.phone") then
         add(choices)
     end
-end)
+end)]]
 
 zRP.registerMenuBuilder("phone", function(add) -- phone menu is created on server start, so it has no permissions.
     Citizen.CreateThread(function()

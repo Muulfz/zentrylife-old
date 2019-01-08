@@ -12,9 +12,6 @@ zRP.AutenticationMsgPack = {}
 
 AddEventHandler("ServerAutenticationUUID",
         function(source, ClientUUID, ServerUUID)
-            print(ClientUUID)
-            print(source)
-            print(ServerUUID)
             zRP.Autentication.ServerClient[ClientUUID] = ServerUUID
             zRP.Autentication.SourceClient[source] = ClientUUID
             local table = { [ServerUUID] = ClientUUID }

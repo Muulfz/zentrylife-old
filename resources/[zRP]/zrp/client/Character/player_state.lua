@@ -410,3 +410,10 @@ end)
 
 
 
+
+function tzRP.isPlayerBlockFull()
+    if tzRP.isInComa() or tzRP.isFrozen() or tzRP.isJailed() or tzRP.isHandcuffed() then
+        return true
+    end
+    return false
+end

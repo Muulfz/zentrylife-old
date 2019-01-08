@@ -22,28 +22,84 @@ function zRP.playerIsCitizen(nplayer)
     return true
 end
 
+function zRP.getNearestVehicle(player)
+    local veh = zRPclient._getNearestVehicle(player,10)
+    return veh
+end
 
 zRP.registerMenuBuilder("quick_menu", function(add,data)
     local player = data.player
     local user_id = zRP.getUserId(player)
+    local is_block = zRPclient.isPlayerBlockFull(player)
+    local veh = zRPclient.getNerestVehicleInfo(player)
     if user_id then
         local choices = {}
+        if not is_block then
+            if zRP.hasPermission(user_id,lang.basic_menu.player.perm()) then
+                choices[lang.basic_menu.player.button()] = {zRPMenu.player_menu,lang.basic_menu.player.desc()} -- opens player submenu
+            end
+            if zRP.hasPermission(user_id,"player.phone") then
+                choices[lang.phone.title()] = {function() zRP.openMenu(player,zRPMenu.basic_phone()) end}
+            end
+        end
+
+        ---CODE if is Block and use
+
+        --------------------------------------------------------
+        ---                  [Players Near]                --
+        ---- PROXIMITY PLAYER FUNCTIONS
         if zRP.hasNearByPlayer(player) then
             local nplayers = zRPclient.getNearestPlayers(player,5)
+            local number = 0
             for k,v in pairs(nplayers) do
-                 local name = zRP.getPlayerName(k)
+                number = number + 1
+                local name = zRP.getUserIdentityForTable(zRP.getUserId(k)).firstname
+                name = number.." - "..name
                 choices[name] = { function(player, choice)
                     local menu = zRP.buildMenu(name, {player = player})
                     menu.name = name
                     menu.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
-
-                    if zRP.hasPermission(user_id,lang.basic_menu.fine.perm()) then
-                        menu[lang.basic_menu.fine.button()] = {zRPMenu.police_fine, lang.basic_menu.fine.desc()} -- Fines closeby player
+                    if not is_block then
+                        if zRP.hasPermission(user_id,lang.basic_menu.fine.perm()) then
+                            menu[lang.basic_menu.fine.button()] = {zRPMenu.police_fine, lang.basic_menu.fine.desc()} -- Fines closeby player
+                        end
+                        if zRP.hasPermission(user_id,lang.basic_menu.fine.perm()) and zRPclient.isInComa(k) then
+                            menu[lang.basic_menu.loot.button()] = {zRPMenu.thief_loot(k), lang.basic_menu.loot.desc()} -- take the items of nearest player in coma
+                        end
                     end
-                   zRP.openMenu(player,menu)
+
+                    ---CODE if is Block and use
+                    zRP.openMenu(player,menu)
                 end}
             end
         end
+        -----------------------------------------------------
+        ---                [VEHICLE]                       --
+        if veh then
+            local name = " [V] " ..veh.fullname
+            choices[name] = { function(player,choice)
+                local menu = zRP.buildMenu(name,{player = player})
+                menu.name = name
+                menu.css = {top="75px", header_color="rgba(0,125,255,0.75)"}
+                if not is_block then
+                    ---- code --
+                    if zRPclient.isPedSittingInVeichle(player,veh.hash) then
+                        --------IF IS SITTING ON VEICULO
+                        if zRP.hasPermission(user_id,"player.phone") then
+                            menu["GPS"] = { function() zRP.openMenu(player,zRPMenu.gps()) end}
+                        end
+                    else
+                        ---- CANT SHOW IF SITTING ON VEICULO
+                        if zRP.hasPermission(user_id,lang.basic_menu.jail.perm()) then
+                            menu["APREENDER VEICULO"] = {zRPMenu.police_size_vehicle, "apreende"}
+                        end
+                    end
+                end
+                ---CODE if is Block and use
+                zRP.openMenu(player,menu)
+            end}
+        end
+
 
         add(choices)
     end

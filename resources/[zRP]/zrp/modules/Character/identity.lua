@@ -11,6 +11,7 @@ local sanitizes = module("cfg/Modules/sanitizes")
 -- return user identity
 function zRP.getUserIdentity(user_id, cbr)
   local rows = zRP.query("zRP/get_user_identity", {user_id = user_id})
+  zRP.user_tables[user_id]["identity"] = rows[1]
   return rows[1]
 end
 
@@ -44,6 +45,11 @@ function zRP.generateStringNumber(format) -- (ex: DDDLLL, D => digit, L => lette
 
   return number
 end
+
+function zRP.getUserIdentityForTable(user_id)
+  return zRP.user_tables[user_id].identity
+end
+
 
 -- return a unique registration number
 function zRP.generateRegistrationNumber(cbr)
@@ -85,6 +91,7 @@ AddEventHandler("zRP:playerJoin",function(user_id,source,name,last_login)
       name = cfg.random_last_names[math.random(1,#cfg.random_last_names)],
       age = math.random(25,40)
     })
+    zRP.getUserIdentity(user_id)
   end
 end)
 

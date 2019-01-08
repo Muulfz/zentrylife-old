@@ -36,10 +36,16 @@ function zRPMenu.thief_mug(player, choice)
     end
 end
 
-function zRPMenu.thief_loot()
+function zRPMenu.thief_loot(nearestplayer)
     local user_id = zRP.getUserId(player)
     if user_id ~= nil then
-        local nplayer = zRPclient.getNearestPlayer(player, 10)
+        local nplayers = zRPclient.getNearestPlayers(player, 15)
+        local nplayer
+        for k, v in pairs(nplayers) do
+            if k == nearestplayer then
+                nplayer = k
+            end
+        end
         local nuser_id = zRP.getUserId(nplayer)
         if nuser_id ~= nil then
             local in_coma = zRPclient.isInComa(nplayer)

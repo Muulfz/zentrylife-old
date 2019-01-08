@@ -17,4 +17,3 @@ local Permlang = Permluang()
 Permlang:loadLocale(config.permlang, module("cfg/lang/permission/"..config.lang) or {})
 zRP.permlang = Permlang.permlang[config.lang]
 
-print(zRP.permlang.teste())
