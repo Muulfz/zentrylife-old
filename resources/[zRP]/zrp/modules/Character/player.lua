@@ -41,10 +41,17 @@ function zRPMenu.player_store_money(player, choice)
     end
 end
 
-function zRPMenu.player_playerCheck(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player,5)
+function zRPMenu.player_playerCheck(player,nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+
     local nuser_id = zRP.getUserId(nplayer)
-    if nuser_id ~= nil then
+    if is_ok then
         zRPclient.notify(nplayer,lang.police.menu.check.checked())
         local weapons = zRPclient.getWeapons(nplayer)
         -- prepare display data (money, items, weapons)
@@ -163,7 +170,7 @@ function zRPMenu.player_mobilepay(player, choice)
     local menu = {}
     menu.name = lang.basic_menu.phone.directory.title()
     menu.css = {top = "75px", header_color = "rgba(0,0,255,0.75)"}
-    menu.onclose = function(player) zRP.openMainMenu(player) end -- nest menu
+    menu.onclose = function(player) zRP.openQuickMenu(player) end -- nest menu
     menu[lang.mpay.type.button()] = {
         -- payment function
         function(player,choice)
@@ -191,7 +198,7 @@ function zRPMenu.player_mobilecharge(player, choice)
     local menu = {}
     menu.name = lang.basic_menu.phone.directory.title()
     menu.css = {top = "75px", header_color = "rgba(0,0,255,0.75)"}
-    menu.onclose = function(player) zRP.openMainMenu(player) end -- nest menu
+    menu.onclose = function(player) zRP.openQuickMenu(player) end -- nest menu
     menu[lang.mcharge.type.button()] = {
         -- payment function
         function(player,choice)
@@ -222,31 +229,9 @@ function zRPMenu.player_menu(player, choice)
     local menu = {}
     menu.name = lang.player.button()
     menu.css = {top = "75px", header_color = "rgba(0,0,255,0.75)"}
-    menu.onclose = function(player) zRP.openMainMenu(player) end -- nest menu
+    menu.onclose = function(player) zRP.openQuickMenu(player) end -- nest menu
 
-    if zRP.hasPermission(user_id,lang.money.store.perm()) then
-        menu[lang.money.store.button()] = {zRPMenu.player_store_money, lang.money.store.desc()} -- transforms money in wallet to money in inventory to be stored in houses and cars
-    end
-
-    if zRP.hasPermission(user_id,lang.fixhaircut.perm()) then
-        menu[lang.fixhaircut.button()] = {zRPMenu.player_fixhair, lang.fixhaircut.desc()}-- just a work around for barbershop green hair bug while I am busy
-    end
-
-    if zRP.hasPermission(user_id,lang.userlist.perm()) then
-        menu[lang.userlist.button()] = {zRPMenu.player_userlist, lang.userlist.desc()} -- a user list for players with zRP ids, player name and identity names only.
-    end
-
-    if zRP.hasPermission(user_id,lang.weapons.store.perm()) then
-        menu[lang.weapons.store.button()] = {zRPMenu.player_store_weapons, lang.weapons.store.desc()}-- store player weapons, like police store weapons from zrp
-    end
-
-    if zRP.hasPermission(user_id,lang.bodyarmor.store.perm()) then
-        menu[lang.bodyarmor.store.button()] = {zRPMenu.player_store_armor, lang.bodyarmor.store.desc()} -- store player armor
-    end
-
-    if zRP.hasPermission(user_id,lang.inspect.perm()) then
-        menu[lang.inspect.button()] = {zRPMenu.player_playerCheck, lang.inspect.desc()} -- checks nearest player inventory, like police check from zrp
-    end
-
+    menu[lang.aptitude.title()] = {zRPMenu.apitude_aptitude,lang.aptitude.description()}
+-------------------------------IMPLEMENTACAO
     zRP.openMenu(player, menu)
 end

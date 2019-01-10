@@ -9,17 +9,6 @@ local htmlEntities = module("lib/htmlEntities")
 local lang = zRP.lang
 
 
--- add choices to the menu
--- character/aptitude.lua
-zRP.registerMenuBuilder("main", function(add, data)
-    local user_id = zRP.getUserId(data.player)
-    if user_id then
-        local choices = {}
-        choices[lang.aptitude.title()] = {zRPMenu.apitude_aptitude,lang.aptitude.description()}
-
-        add(choices)
-    end
-end)
 
 
 zRP.registerMenuBuilder("main", function(add, data)
@@ -77,45 +66,6 @@ zRP.registerMenuBuilder("main", function(add, data)
     end
 end)
 
--- add choices to the main menu (emergency)
-zRP.registerMenuBuilder("main", function(add, data)
-    local user_id = zRP.getUserId(data.player)
-    if user_id then
-        local choices = {}
-        if zRP.hasPermission(user_id,"emergency.revive") then
-            choices[lang.emergency.menu.revive.title()] = {zRPMenu.choice_revive, lang.emergency.menu.revive.description() }
-        end
-
-        add(choices)
-    end
-end)
-
--- add player give money to main menu
-zRP.registerMenuBuilder("main", function(add, data)
-    local user_id = zRP.getUserId(data.player)
-    if user_id then
-        local choices = {}
-        choices[lang.money.give.title()] = {zRPMenu.ch_give, lang.money.give.description()}
-
-        add(choices)
-    end
-end)
-
--- MAIN MENU
-zRP.registerMenuBuilder("main", function(add, data)
-    local player = data.player
-    local user_id = zRP.getUserId(player)
-    if user_id then
-        local choices = {}
-
-        -- build admin menu
-        choices[lang.mission.cancel.title()] = {function(player,choice)
-            zRP.stopMission(player)
-        end}
-
-        add(choices)
-    end
-end)
 
 
 zRP.registerMenuBuilder("main", function(add, data)
@@ -123,13 +73,14 @@ zRP.registerMenuBuilder("main", function(add, data)
     if user_id ~= nil then
         local choices = {}
 
-        if zRP.hasPermission(user_id,lang.basic_menu.player.perm()) then
-            choices[lang.basic_menu.player.button()] = {zRPMenu.player_menu,lang.basic_menu.player.desc()} -- opens player submenu
+        if zRP.hasPermission(user_id,lang.fixhaircut.perm()) then
+            menu[lang.fixhaircut.button()] = {zRPMenu.player_fixhair, lang.fixhaircut.desc()}-- just a work around for barbershop green hair bug while I am busy
         end
 
-        if zRP.hasPermission(user_id,lang.basic_menu.service.perm()) then
-            choices[lang.basic_menu.service.button()] = {zRPMenu.mission_services,lang.basic_menu.service.desc()} -- toggle the receiving of missions
+        if zRP.hasPermission(user_id,lang.userlist.perm()) then
+            menu[lang.userlist.button()] = {zRPMenu.player_userlist, lang.userlist.desc()} -- a user list for players with zRP ids, player name and identity names only.
         end
+
 
 --[[
         if zRP.hasPermission(user_id,lang.basic_menu.loot.perm()) then
@@ -137,23 +88,8 @@ zRP.registerMenuBuilder("main", function(add, data)
         end
 ]]
 
-        if zRP.hasPermission(user_id,lang.basic_menu.mugger.perm()) then
-            choices[lang.basic_menu.mugger.button()] = {zRPMenu.thief_mug, lang.basic_menu.mugger.desc()} -- steal nearest player wallet
-        end
 
-        if zRP.hasPermission(user_id,lang.basic_menu.hacker.perm()) then
-            choices[lang.basic_menu.hacker.button()] = {zRPMenu.hackewr_hack, lang.basic_menu.hacker.desc()} --  1 in 100 chance of stealing 1% of nearest player bank
-        end
-
-        if zRP.hasPermission(user_id,lang.basic_menu.lockpick.perm()) then
-                choices[lang.basic_menu.lockpick.button()] = {zRPMenu.thief_lockpickveh, lang.basic_menu.lockpick.desc()} -- opens a locked vehicle
-        end
         add(choices)
     end
 end)
 
-zRP.registerMenuBuilder("main", function(add, data)
-    local choices = {}
-    choices[lang.robber.title()] = {zRPMenu.player_robPlayer, lang.robber.description()}
-    add(choices)
-end)

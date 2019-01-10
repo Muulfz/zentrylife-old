@@ -576,7 +576,7 @@ function zRPMenu.police_unjail(player, choice)
 end
 
 -- add choices to the menu
-zRP.registerMenuBuilder("main", function(add, data)
+zRP.registerMenuBuilder("quick_menu", function(add, data)
     local player = data.player
 
     local user_id = zRP.getUserId(player)
@@ -763,10 +763,15 @@ function zRPMenu.police_spikes(player, choice)
     end
 end
 
-function zRPMenu.police_drag(player, choice)
-    -- get nearest player
-    local nplayer = zRPclient.getNearestPlayer(player, 5)
-    if nplayer then
+function zRPMenu.police_drag(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
         local handcuffed = zRPclient.isHandcuffed(nplayer)
         if handcuffed then
             zRPclient.policeDrag(nplayer, player)
@@ -778,13 +783,15 @@ function zRPMenu.police_drag(player, choice)
     end
 end
 
-function zRPMenu.police_jail(player, choice)
-    local nplayers = zRPclient.getNearestPlayers(player, 15)
-    local user_list = ""
-    for k, v in pairs(nplayers) do
-        user_list = user_list .. lang.basic_menu.userlist.format({ zRP.getUserId(k), GetPlayerName(k) })
+function zRPMenu.police_jail(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
     end
-    if user_list ~= "" then
+    if is_ok then
         local target_id = zRP.prompt(player, lang.basic_menu.userlist.nearby({ user_list }), "")
         if target_id ~= nil and target_id ~= "" then
             local jail_time = zRP.prompt(player, lang.basic_menu.jail.prompt(), "")
@@ -857,14 +864,16 @@ function zRPMenu.police_unjail(player, choice)
     end
 end
 
-function zRPMenu.police_fine(player, choice)
-    local nplayers = zRPclient.getNearestPlayers(player, 15)
-    local user_list = ""
-    for k, v in pairs(nplayers) do
-        user_list = user_list .. lang.basic_menu.userlist.format({ zRP.getUserId(k), GetPlayerName(k) })
+function zRPMenu.police_fine(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
     end
-    if user_list ~= "" then
-        local target_id = zRP.prompt(player, lang.basic_menu.userlist.nearby({ user_list }), "")
+    if is_ok then
+        local target_id = zRP.getUserId(nplayer)
         if target_id ~= nil and target_id ~= "" then
             local fine = zRP.prompt(player, lang.basic_menu.fine.prompt.amount(), "")
             if fine ~= nil and fine ~= "" then
@@ -907,10 +916,15 @@ function zRPMenu.police_fine(player, choice)
     end
 end
 
-function zRPMenu.police_handcuff(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player, 10)
-    local nuser_id = zRP.getUserId(nplayer)
-    if nuser_id ~= nil then
+function zRPMenu.police_handcuff(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
         zRPclient.toggleHandcuff(nplayer)
         local user_id = zRP.getUserId(player)
         zRP.logInfoToFile(lang.cuff.file(), lang.cuff.log({ user_id, nuser_id }))
@@ -919,6 +933,24 @@ function zRPMenu.police_handcuff(player, choice)
         zRPclient.notify(player, lang.common.no_player_near())
     end
 end
+
+
+function zRPMenu.police_freeze_name(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
+        zRPclient.notify(player, lang.freeze.notify())
+        zRPclient.loadFreeze(nplayer, true, false, false)
+    else
+        zRPclient.notify(player, lang.common.no_player_near())
+    end
+end
+
 
 function zRPMenu.police_freeze(player, choice)
     local user_id = zRP.getUserId(player)
@@ -953,25 +985,37 @@ AddEventHandler("vehicleAiTowing", function(veh)
     zRPclient._vehicleAiTowing(player, veh)
 end)
 
-function zRPMenu.police_size_vehicle(player, choice)
-    local user_id = zRP.getUserId(player)
-    if user_id then
-        local reason = zRP.prompt(player, "Motivo da Apreencao", "")
-        if reason then
-            local table = zRPclient.sizeNeasterVehicle(player)
-            if table then
-                local reg = table[1]
-                local regist = reg:gsub("P ", "")
-                local veh = table[2]:lower()
-                local nuser_id = zRP.getUserByRegistration(regist)
-                if nuser_id ~= nil then
-                    local towing = zRPclient._vehicleAiTowing(player, table[3])
-                    local time = os.time()
-                    zRP.execute("zRP/add_seized_vehicle", { user_id = nuser_id, vehicle = veh, reason = reason, seized_agent = user_id, seized_time = time })
+function zRPMenu.police_size_vehicle(player, veh_info)
+    local check = zRPclient.getNerestVehicleInfo(player)
+    if check == nil then
+        check = {
+            hash = "nil"
+        }
+    end
+    print(check.hash)
+    if check.hash == veh_info.hash  then
+        local user_id = zRP.getUserId(player)
+        if user_id then
+            local reason = zRP.prompt(player, "Motivo da Apreencao", "")
+            if reason then
+                local table = veh_info
+                if table then
+                    local reg = table.plate
+                    local regist = reg:gsub("P ", "")
+                    local veh = table.name:lower()
+                    local nuser_id = zRP.getUserByRegistration(regist)
+                    if nuser_id ~= nil then
+                        local towing = zRPclient._vehicleAiTowing(player, table.hash)
+                        local time = os.time()
+                        zRP.execute("zRP/add_seized_vehicle", { user_id = nuser_id, vehicle = veh, reason = reason, seized_agent = user_id, seized_time = time })
+                    end
                 end
             end
         end
+    else
+        zRPclient._notify(player,"APROXIME DO VEICULO!")
     end
+    zRP.openQuickMenu(player)
     --todo sistema de entregar no patio (mysql guardar se for entregue)
     -- guardar a indentidade do usuario
     -- colocar na ficha criminal

@@ -262,6 +262,7 @@ local frozen = false
 function tzRP.isFrozen()
   return frozen
 end
+
 function tzRP.loadFreeze()
   while not frozen_finish do
     SetEntityInvincible(GetPlayerPed(-1),true)

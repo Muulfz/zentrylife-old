@@ -42,10 +42,10 @@ cfg.controls = {
 }
 
 -- disable menu if handcuffed
-cfg.handcuff_disable_menu = true
+cfg.handcuff_disable_menu = false
 
 -- disable menu if handcuffed
-cfg.handcuff_disable_quick_menu = true
+cfg.handcuff_disable_quick_menu = false
 
 -- when health is under the threshold, player is in coma
 -- set to 0 to disable coma

@@ -3,7 +3,7 @@
 --- Created by Muulfz.
 --- DateTime: 12/21/2018 5:27 PM
 ---
-
+---
 
 local crouched = false
 local proned = false
@@ -39,7 +39,7 @@ Citizen.CreateThread( function()
                         SetPedStrafeClipset(ped, "move_ped_crouched_strafing")
                         crouched = true
                     end
-                elseif ( IsDisabledControlJustPressed(0, proneKey) and not crouched and not IsPedInAnyVehicle(ped, true) and not IsPedFalling(ped) and not IsPedDiving(ped) and not IsPedInCover(ped, false) and not IsPedInParachuteFreeFall(ped) and (GetPedParachuteState(ped) == 0 or GetPedParachuteState(ped) == -1) ) then
+                elseif ( IsDisabledControlJustPressed(0, proneKey) and not crouched and not IsPedInAnyVehicle(ped, true) and not IsPedFalling(ped) and not IsPedDiving(ped) and not IsPedInCover(ped, false) and not IsPedInParachuteFreeFall(ped) and (GetPedParachuteState(ped) == 0 or GetPedParachuteState(ped) == -1)  ) then
                     if proned then
                         ClearPedTasksImmediately(ped)
                         proned = false

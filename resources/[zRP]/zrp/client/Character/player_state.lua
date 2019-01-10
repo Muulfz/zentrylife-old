@@ -116,15 +116,20 @@ end
 
 function tzRP.giveWeapons(weapons, clear_before)
     local player = GetPlayerPed(-1)
+    print(weapons)
 
     -- give weapons to player
 
     if clear_before then
         RemoveAllPedWeapons(player, true)
+        weapon_list = {}
+        print("LIMPADO")
     end
 
     local max = #weapon_list + 1 --todo Maximo de armas
+    print(max)
     for k, weapon in pairs(weapons) do
+        print(k)
         local hash = GetHashKey(k)
         local ammo = weapon.ammo or 0
         local table = { [k] = weapon }
@@ -135,6 +140,20 @@ function tzRP.giveWeapons(weapons, clear_before)
 
 end
 --todo
+
+function tzRP.hasWeapons()
+    if #weapon_list >= 1 then
+        return true
+    end
+    return false
+end
+
+function tzRP.hasArmour()
+    if tzRP.getArmour() >= 95 then
+        return true
+    end
+    return false
+end
 
 function tzRP.getWeaponsLegal()
     local list = {}
@@ -412,7 +431,7 @@ end)
 
 
 function tzRP.isPlayerBlockFull()
-    if tzRP.isInComa() or tzRP.isFrozen() or tzRP.isJailed() or tzRP.isHandcuffed() then
+    if tzRP.isInComa() or tzRP.isFrozen() or tzRP.isJailed()  or tzRP.isHandcuffed() then
         return true
     end
     return false

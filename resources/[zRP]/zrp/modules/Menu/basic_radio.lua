@@ -5,7 +5,7 @@
 ---
 local lang = zRP.lang
 
-zRP.registerMenuBuilder("main", function(add, data)
+zRP.registerMenuBuilder("quick_menu", function(add, data)
     local choices = {}
     local player = data.player
     local user_id = zRP.getUserId(player)
