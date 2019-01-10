@@ -293,7 +293,9 @@ function zRP.openInventory(source)
       local hue = math.floor(math.max(125*(1-weight/max_weight), 0))
       menudata["<div class=\"dprogressbar\" data-value=\""..string.format("%.2f",weight/max_weight).."\" data-color=\"hsl("..hue..",100%,50%)\" data-bgcolor=\"hsl("..hue..",100%,25%)\" style=\"height: 12px; border: 3px solid black;\"></div>"] = {function()end, lang.inventory.info_weight({string.format("%.2f",weight),max_weight})}
       local kitems = {}
-
+      menudata.onclose = function ()
+        zRP.openQuickMenu(source)
+      end
       -- choose callback, nested menu, create the item menu
       local choose = function(player,choice)
         if string.sub(choice,1,1) ~= "@" then -- ignore info choices
@@ -340,12 +342,21 @@ AddEventHandler("zRP:playerJoin", function(user_id,source,name,last_login)
 end)
 
 
--- add open inventory to main menu
-local choices = {}
-choices[lang.inventory.title()] = {function(player, choice) zRP.openInventory(player) end, lang.inventory.description()}
 
-zRP.registerMenuBuilder("main", function(add, data)
-  add(choices)
+zRP.registerMenuBuilder("quick_menu", function(add, data)
+  local player = data.player
+  local user_id = zRP.getUserId(player)
+  local is_block = zRPclient.isPlayerBlockFull(player)
+  if user_id then
+    local choices = {}
+    if not is_block then
+      print("DESBLOQUEADO")
+      choices[lang.inventory.title()] = {function(player, choice) zRP.openInventory(player) end, lang.inventory.description()}
+    else
+      print("BLOQUEADO")
+    end
+    add(choices)
+  end
 end)
 
 -- CHEST SYSTEM

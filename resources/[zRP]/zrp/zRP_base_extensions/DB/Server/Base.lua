@@ -4,7 +4,7 @@
 --- DateTime: 11/17/2018 8:26 PM
 ---
 
-zRP.prepare("zRP/base_tables",[[
+zRP.prepare("zRP/base_tables", [[
 CREATE TABLE IF NOT EXISTS zrp_srv_data(
   dkey VARCHAR(100),
   dvalue TEXT,
@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS zrp_srv_data(
 ]])
 zRPBase.tables[0] = "zRP/base_tables"
 
-
-zRP.prepare("zRP/set_srvdata","REPLACE INTO zrp_srv_data(dkey,dvalue) VALUES(@key,@value)")
-zRP.prepare("zRP/get_srvdata","SELECT dvalue FROM zrp_srv_data WHERE dkey = @key")
+zRP.prepare("zRP/set_srvdata", "REPLACE INTO zrp_srv_data(dkey,dvalue) VALUES(@key,@value)")
+zRP.prepare("zRP/get_srvdata", "SELECT dvalue FROM zrp_srv_data WHERE dkey = @key")
 

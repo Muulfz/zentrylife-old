@@ -6,6 +6,7 @@
 
 
 client_scripts{
+    "@zrp/lib/utils.lua",
     "Player/Moviment.lua",
     "Player/weapons.lua",
 }

@@ -5,12 +5,18 @@
 ---
 local lang = zRP.lang
 
-function zRPMenu.thief_mug(player, choice)
+function zRPMenu.thief_mug(player, nplayer)
     -- get nearest player
     local user_id = zRP.getUserId(player)
     if user_id ~= nil then
-        local nplayer = zRPclient.getNearestPlayer(player, 10)
-        if nplayer ~= nil then
+        local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+        local is_ok = false
+        for k, v in pairs(nplayer_check) do
+            if k == nplayer then
+                is_ok = true
+            end
+        end
+        if is_ok then
             local nuser_id = zRP.getUserId(nplayer)
             if nuser_id ~= nil then
                 -- prompt number
@@ -36,18 +42,19 @@ function zRPMenu.thief_mug(player, choice)
     end
 end
 
-function zRPMenu.thief_loot(nearestplayer)
+function zRPMenu.thief_loot(player,nearestplayer)
     local user_id = zRP.getUserId(player)
     if user_id ~= nil then
-        local nplayers = zRPclient.getNearestPlayers(player, 15)
-        local nplayer
-        for k, v in pairs(nplayers) do
-            if k == nearestplayer then
-                nplayer = k
+        local nplayer_check = zRPclient.getNearestPlayer(player, 15)
+        local nplayer = nearestplayer
+        local is_ok
+        for k, v in pairs(nplayer_check) do
+            if k == nplayer then
+                is_ok = true
             end
         end
         local nuser_id = zRP.getUserId(nplayer)
-        if nuser_id ~= nil then
+        if is_ok then
             local in_coma = zRPclient.isInComa(nplayer)
             if in_coma then
                 local revive_seq = {
