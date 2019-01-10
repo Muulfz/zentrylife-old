@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS zrp_seized_vehicles(
 
 
 zRP.prepare("zRP/add_seized_vehicle","INSERT IGNORE INTO zrp_seized_vehicles(user_id,vehicle,reason,seized_agent,seized_time) VALUES(@user_id, @vehicle, @reason, @seized_agent, @seized_time); update zrp_user_vehicles set seized = true WHERE user_id = @user_id AND vehicle = @vehicle")
-zRP.prepare("zRP/remove_seized_vehicle","DELETE FROM zrp_seized_vehicles WHERE user_id = @user_id AND vehicle = @vehicle; update zrp_user_vehicle set sized = false WHERE user_id = @user_id AND vehicle = @vehicle")
+zRP.prepare("zRP/remove_seized_vehicle","DELETE FROM zrp_seized_vehicles WHERE user_id = @user_id AND vehicle = @vehicle; update zrp_user_vehicle set seized = false WHERE user_id = @user_id AND vehicle = @vehicle")
 
 local adv_garages =  cfg.adv_garages
 local items = cfg.items
@@ -127,7 +127,7 @@ function zRP.advGaragesOpen(source, gid, pos)
                     end
 
                     -- get player owned vehicles (indexed by vehicle type name in lower case)
-                    local _pvehicles = zRP.query("zRP/get_vehicles_unsized", {user_id = user_id})
+                    local _pvehicles = zRP.query("zRP/get_vehicles_unseized", {user_id = user_id})
                     local pvehicles = {}
                     for k,v in pairs(_pvehicles) do
                         pvehicles[string.lower(v.vehicle)] = true
@@ -168,7 +168,7 @@ function zRP.advGaragesOpen(source, gid, pos)
                     end
 
                     -- get player owned vehicles
-                    local pvehicles = zRP.query("zRP/get_vehicles_unsized", {user_id = user_id})
+                    local pvehicles = zRP.query("zRP/get_vehicles_unseized", {user_id = user_id})
                     -- add rents to whitelist
                     for k,v in pairs(tmpdata.rent_vehicles) do
                         if v then -- check true, prevent future neolua issues
