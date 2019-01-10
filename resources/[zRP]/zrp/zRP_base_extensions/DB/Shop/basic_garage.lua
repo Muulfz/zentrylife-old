@@ -2,7 +2,7 @@ zRP.prepare("zRP/vehicles_table", [[
 CREATE TABLE IF NOT EXISTS zrp_user_vehicles(
   user_id INTEGER,
   vehicle VARCHAR(100),
-  upgrades text,
+  upgrades text not null,
   seized BOOLEAN default 0,
   CONSTRAINT pk_user_vehicles PRIMARY KEY(user_id,vehicle),
   CONSTRAINT fk_user_vehicles_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
@@ -26,9 +26,9 @@ zRP.prepare("zRP/sale_table", [[
 CREATE TABLE IF NOT EXISTS zrp_sale_vehicles(
   user_id INTEGER,
   vehicle VARCHAR(100),
-  price integer,
-  description varchar(255),
-  upgrades text,
+  price integer default 1,
+  description varchar(131) not null,
+  upgrades text not null,
   CONSTRAINT pk_sale_vehicles PRIMARY KEY(user_id,vehicle),
   CONSTRAINT fk_sale_vehicles_users FOREIGN KEY(user_id) REFERENCES zrp_users(id) ON DELETE CASCADE
 );
