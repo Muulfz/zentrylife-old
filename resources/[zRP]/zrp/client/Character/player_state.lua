@@ -103,6 +103,8 @@ function tzRP.getWeapons()
         end
     end
 
+    tzRP.legalWeaponsChecker(weapons)
+
     return weapons
 end
 
@@ -116,33 +118,26 @@ end
 
 function tzRP.giveWeapons(weapons, clear_before)
     local player = GetPlayerPed(-1)
-    print(weapons)
 
     -- give weapons to player
 
     if clear_before then
         RemoveAllPedWeapons(player, true)
         weapon_list = {}
-        print("LIMPADO")
     end
 
-    local max = #weapon_list + 1 --todo Maximo de armas
-    print(max)
     for k, weapon in pairs(weapons) do
-        print(k)
         local hash = GetHashKey(k)
         local ammo = weapon.ammo or 0
-        local table = { [k] = weapon }
-        weapon_list[max] = table
         GiveWeaponToPed(player, hash, ammo, false)
-        max = max + 1
+        weapon_list[k] = weapon
     end
 
 end
 --todo
 
 function tzRP.hasWeapons()
-    if #weapon_list >= 1 then
+    for k,v in pairs(weapon_list) do
         return true
     end
     return false
@@ -156,40 +151,24 @@ function tzRP.hasArmour()
 end
 
 function tzRP.getWeaponsLegal()
-    local list = {}
-    for i = 1, #weapon_list do
-        list = weapon_list[i]
-    end
-    return list
+    return weapon_list
 end
 
-function tzRP.legalWeaponsChecker()
-    local weapon = tzRP.getWeapons()
+function tzRP.legalWeaponsChecker(weapon)
+    local weapon = weapon
     local weapons_legal = tzRP.getWeaponsLegal()
     local ilegal = false
     for v, b in pairs(weapon) do
-        local possibleilegal = false
-        local finish = false
-        for i = 1, #weapon_list do
-            if weapon_list[i][v] then
-                possibleilegal = false
-                finish = true
-            else
-                if not finish then
-                    possibleilegal = true
-                end
-            end
-        end
-        if possibleilegal then
+        if not weapon_list[v] then
             ilegal = true
-        else
         end
     end
     if ilegal then
         --todo Colocar um aviso de hacker no player
-        tzRP.replaceWeapons(weapons_legal)
-    else
+        tzRP.giveWeapons(weapons_legal, true)
+        weapon = {}
     end
+    return weapon
 end
 
 --todo editar loja de venda
@@ -389,32 +368,32 @@ function tzRP.loadFreeze(notify, god, ghost)
 end
 
 function frozenT()
-        if frozen then
-            if unfrozen then
-                SetEntityInvincible(GetPlayerPed(-1), false)
-                SetEntityVisible(GetPlayerPed(-1), true)
-                FreezeEntityPosition(GetPlayerPed(-1), false)
-                frozen = false
-                invisible = false
-                invincible = false
-            else
-                if invincible then
-                    SetEntityInvincible(GetPlayerPed(-1), true)
-                end
-                if invisible then
-                    SetEntityVisible(GetPlayerPed(-1), false)
-                end
-                FreezeEntityPosition(GetPlayerPed(-1), true)
+    if frozen then
+        if unfrozen then
+            SetEntityInvincible(GetPlayerPed(-1), false)
+            SetEntityVisible(GetPlayerPed(-1), true)
+            FreezeEntityPosition(GetPlayerPed(-1), false)
+            frozen = false
+            invisible = false
+            invincible = false
+        else
+            if invincible then
+                SetEntityInvincible(GetPlayerPed(-1), true)
             end
+            if invisible then
+                SetEntityVisible(GetPlayerPed(-1), false)
+            end
+            FreezeEntityPosition(GetPlayerPed(-1), true)
         end
-        Citizen.Wait(0)
+    end
+    Citizen.Wait(0)
 end
 
 Citizen.CreateThread(function()
-    tzRP.legalWeaponsChecker()
+    tzRP.legalWeaponsChecker(tzRP.getWeapons())
     tzRP.loadFreeze()
     while true do
-        tzRP.legalWeaponsChecker()
+        tzRP.legalWeaponsChecker(tzRP.getWeapons())
         --frozenT()
         spikesPolice()
         playerDrag()
@@ -427,11 +406,8 @@ Citizen.CreateThread(function()
     tattoThread()
 end)
 
-
-
-
 function tzRP.isPlayerBlockFull()
-    if tzRP.isInComa() or tzRP.isFrozen() or tzRP.isJailed()  or tzRP.isHandcuffed() then
+    if tzRP.isInComa() or tzRP.isFrozen() or tzRP.isJailed() or tzRP.isHandcuffed() then
         return true
     end
     return false

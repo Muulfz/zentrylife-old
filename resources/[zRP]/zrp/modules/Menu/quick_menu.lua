@@ -94,10 +94,39 @@ zRP.registerMenuBuilder("quick_menu", function(add,data)
                             if zRP.hasPermission(user_id,lang.basic_menu.cuff.perm()) then
                                 menu["DES ALGEMAR"] = { function()zRPMenu.police_handcuff(player,k)end, lang.basic_menu.handcuff.desc()} -- Toggle cuffs AND CLOSE MENU for nearby player
                             end
+
+                            if zRP.hasPermission(user_id, "police.putinveh") and veh then
+                                menu[lang.police.menu.putinveh.title()] = { function() zRPMenu.police_putinveh(player,k,veh) end, lang.police.menu.putinveh.description() }
+                            end
+                            if zRP.hasPermission(user_id, "police.getoutveh") then
+                                menu[lang.police.menu.getoutveh.title()] = { function()zRPMenu.police_getoutveh(player,k)end, lang.police.menu.getoutveh.description() }
+                            end
                         else
                             if zRP.hasPermission(user_id,lang.basic_menu.cuff.perm()) then
                                 menu[lang.basic_menu.cuff.button()] = { function()zRPMenu.police_handcuff(player,k)end, lang.basic_menu.handcuff.desc()} -- Toggle cuffs AND CLOSE MENU for nearby player
                             end
+                        end
+                        if zRP.hasPermission(user_id, "police.check") then
+                            menu[lang.police.menu.check.title()] = { function() zRPMenu.police_check(player,k) end, lang.police.menu.check.description()}
+                        end
+                        if zRP.hasPermission(user_id, "police.seize.weapons") then
+                            menu[lang.police.menu.seize.weapons.title()] = { function() zRPMenu.police_seize_weapons(player,k) end, lang.police.menu.seize.weapons.description() }
+                        end
+
+                        if zRP.hasPermission(user_id, "police.seize.items") then
+                            menu[lang.police.menu.seize.items.title()] = { function() zRPMenu.police_seize_items(player,k) end, lang.police.menu.seize.items.description() }
+                        end
+
+                        if zRP.hasPermission(user_id, "police.jail") then
+                            menu[lang.police.menu.jail.title()] = { function() zRPMenu.police_jail(player,k) end, lang.police.menu.jail.description() }
+                        end
+
+                        if zRP.hasPermission(user_id, "police.fine") then
+                            menu[lang.police.menu.fine.title()] = { function() zRPMenu.police_fine(player,k) end, lang.police.menu.fine.description() }
+                        end
+
+                        if zRP.hasPermission(user_id, "police.askid") then
+                            choices[lang.police.menu.askid.title()] = { function() zRPMenu.police_askid(player,k) end, lang.police.menu.askid.description() }
                         end
                     end
                     ---CODE if is Block and use
@@ -126,6 +155,7 @@ zRP.registerMenuBuilder("quick_menu", function(add,data)
                         if zRP.hasPermission(user_id,lang.basic_menu.jail.perm()) then
                             menu["APREENDER VEICULO"] = { function() zRPMenu.police_size_vehicle(player,veh) end, "apreende"}
                         end
+
                     end
                 end
                 zRP.openMenu(player,menu)
@@ -134,7 +164,7 @@ zRP.registerMenuBuilder("quick_menu", function(add,data)
         --------------------------------------------------------------
         ---                        [WEAPONS]                       ---
         --------------------------------------------------------------
-        if zRPclient.hasWeapons(player) or zRPclient.hasArmour(player) then
+        if zRPclient.hasWeapons(player) --[[or zRPclient.hasArmour(player) --]]then
             choices["ARMAS"] = { function(player, choice)
                 local menu = zRP.buildMenu("armas",{player = player})
                 menu.name = "Armas"

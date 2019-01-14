@@ -9,6 +9,9 @@ local crouched = false
 local proned = false
 local crouchKey = 26
 local proneKey = 36
+local ped
+local movefwd
+local movebwd
 
 Citizen.CreateThread( function()
     while true do
@@ -122,13 +125,12 @@ local playerNamesDist = 10
 
 Citizen.CreateThread(function()
     while true do
-        for id = 0, 31 do
+        for id = 0, 255 do
             if  ((NetworkIsPlayerActive( id )) and GetPlayerPed( id ) ~= GetPlayerPed( -1 )) then
-                ped = GetPlayerPed( id )
 
-                x1, y1, z1 = table.unpack( GetEntityCoords( GetPlayerPed( -1 ), true ) )
-                x2, y2, z2 = table.unpack( GetEntityCoords( GetPlayerPed( id ), true ) )
-                distance = math.floor(GetDistanceBetweenCoords(x1,  y1,  z1,  x2,  y2,  z2,  true))
+                local x1, y1, z1 = table.unpack( GetEntityCoords( GetPlayerPed( -1 ), true ) )
+                local x2, y2, z2 = table.unpack( GetEntityCoords( GetPlayerPed( id ), true ) )
+                local distance = math.floor(GetDistanceBetweenCoords(x1,  y1,  z1,  x2,  y2,  z2,  true))
                 local takeaway = 0.95
 
                 if ((distance < playerNamesDist) and IsEntityVisible(GetPlayerPed(id))) ~= GetPlayerPed( -1 ) then
