@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marmota</title>
+    <style type="text/css">
+        body
+        {
+            background-color: transparent;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        iframe
+        {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            border: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src = "nui://game/ui/jquery.js"></script>
+    <script rel = "script" type = "text/javascript">
+        $(document).ready(function(){
+            window.addEventListener('message', function(event) {
+                let data = event.data;
+                if (data.func === 'main') {
+                    if (data.type === 'change') {
+                        $("#iFrame").attr('src', `${data.frame}/index.html`);
+                    } else {
+                        $("#iFrame").attr('src', '');
+                    }
+                } else {
+                    $("#iFrame").contentWindow.receiveNUIMessage(data);
+                }
+            });
+        });
+        document.onkeydown = function (data) {
+            if (data.which === 27) {
+                $.post('http://zrp_interface/close');
+            }
+        };
+    </script>
+</head>
+<body>
+    <iframe id = "iFrame" src = ""></iframe>
+</body>
+</html>

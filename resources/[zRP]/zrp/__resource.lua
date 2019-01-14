@@ -16,6 +16,7 @@ server_scripts{
   "modules/Environment/map.lua",
   "modules/Environment/item_drop.lua",
   "modules/Environment/gps.lua",
+  "modules/Environment/id_display.lua",
   "modules/Economy/money.lua",
   "modules/Economy/extra_currency.lua",
   "modules/Character/inventory.lua",
@@ -57,7 +58,7 @@ server_scripts{
   "modules/Missions/basic_mission.lua",
   "modules/Jobs/paycheck.lua",
   "modules/Economy/currency.lua",
-  "modules/Economy/currency_utils.lua",
+  "modules/Economy/currency_utils.lua"
 
 }
 
@@ -72,6 +73,7 @@ client_scripts{
   "client/Character/survival.lua",
   "client/Environment/map.lua",
   "client/Environment/item_drop.lua",
+  "client/Environment/id_display.lua",
   "client/Character/identity.lua",
   "client/Shop/basic_garage.lua",
   "client/Jobs/Government/police.lua",

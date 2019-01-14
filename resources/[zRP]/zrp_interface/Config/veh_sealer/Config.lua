@@ -1,5 +1,5 @@
 local cfg = {
-    cars = {
+    vehicles = {
         ["Esportivos"] = {
             ["adder"] = { name = "Adder", price = 1000, image = "https://media.gtanet.com/images/7807-adder.jpg"},
             ["ninef2"] = { name = "9F Cabrio", price = 2000, image = "http://media.gtanet.com/images/7805-9fcabrio.jpg"},

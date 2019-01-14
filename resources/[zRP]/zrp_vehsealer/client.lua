@@ -39,11 +39,14 @@ end)
 
 RegisterNUICallback('close', function(data, cb)
     toggleMenu()
-    cb('ok')
 end)
 
 RegisterNUICallback('buy', function(data, cb)
     cb(tServer.buyVehicle(data.model))
+end)
+
+RegisterNUICallback('buySaleVehicle', function(data, cb)
+    cb(tServer.buySaleVehicle(data.user_id ,data.model))
 end)
 
 RegisterNUICallback('getVehicles', function (data, cb)
@@ -59,13 +62,13 @@ RegisterNUICallback('getSaleVehicle', function (data, cb)
 end)
 
 RegisterNUICallback('editSaleVehicle', function (data, cb)
-    cb({tServer.editSaleVehicle(data.model, data.price, data.description)})
+    cb(tServer.editSaleVehicle(data.model, data.price, data.description))
 end)
 
 RegisterNUICallback('removeSaleVehicle', function (data, cb)
-    cb({tServer.removeSaleVehicle(data.model)})
+    cb(tServer.removeSaleVehicle(data.model))
 end)
 
 RegisterNUICallback('sell', function (data, cb)
-    cb({tServer.createAd(data.model, data.price, data.description)})
+    cb(tServer.createAd(data.model, data.price, data.description))
 end)

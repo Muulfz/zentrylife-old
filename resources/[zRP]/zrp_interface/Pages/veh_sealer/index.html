@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type = "text/css" href = "../Utils/CSS/bootstrap.css"/>
+    <link rel="stylesheet" type = "text/css" href = "CSS/style.css"/>
+    <script src = "nui://game/ui/jquery.js" rel = "script" type = "text/javascript"></script>
+    <script rel = "script" type = "text/javascript" src = "../Utils/JS/bootstrap.js"></script>
+    <script rel = "script" type = "text/javascript" src = "JS/index.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Thasadith" rel="stylesheet">
+</head>
+<body>
+<div class = "container-fluid" style="display: grid;">
+    <div class = "container">
+        <header>
+            <div id = "class-name" class = "no-pm align-middle">Concessionária</div>
+            <div id = "class-rest" class = "no-pm align-middle">Categoria</div>
+        </header>
+        <nav>
+            <div id = "class-list"></div>
+            <div onclick = "onClickSellClassBtn()" id = "class-sell" class = "class">Vender</div>
+        </nav>
+        <article>
+            <iframe name = "cars" onload = "carsFrameLoaded()" id = "cars" src = "cars.html"></iframe>
+        </article>
+    </div>
+</div>
+</body>
+</html>

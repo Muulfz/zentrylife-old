@@ -2,31 +2,31 @@ let cars = undefined;
 let mainClass = undefined;
 
 document.onkeydown = function (data) {
-    if (data.which === 27 /*&& !swal.isVisible()*/) {
-        $.post('http://zrp_vehsealer/close');
+    if (data.which === 27) {
+        $.post('http://zrp_interface/close');
     }
 };
 
 $(document).ready(function () {
-    window.addEventListener('message', function (event) {
-        let data = event.data;
-        if (data.func === 'create') {
-            cars = data.cars;
-            for (let i = 0; i < data.classes.length; i++) {
-                $("#class-list").append(`
-                    <div onclick = "appendClassToCarList(this.id)" id = "${data.classes[i]}" class = "class">${data.classes[i]}</div>
-                `);
-            }
+    $.post("http://zrp_interface/veh_sealer/onLoad", JSON.stringify({})).done(function (data) {
+        cars = data.cars;
+        for (let i = 0; i < data.classes.length; i++) {
             $("#class-list").append(`
-                   <div onclick = "onClickSaleClassBtn()" id = "Usados" class = "class">Usados</div>
-                `);
-            mainClass = data.classes[0];
-        } else {
-            appendClassToCarList(mainClass);
-            $("body").css("display", data.show ? "block" : "none");
+                <div onclick = "appendClassToCarList(this.id)" id = "${data.classes[i]}" class = "class">${data.classes[i]}</div>
+            `);
         }
+        $("#class-list").append(`
+           <div onclick = "onClickSaleClassBtn()" id = "Usados" class = "class">Usados</div>
+        `);
+        mainClass = data.classes[0];
+        //setTimeout(appendClassToCarList(mainClass), 1000)
     });
 });
+
+function carsFrameLoaded() {
+    appendClassToCarList(mainClass);
+}
+
 
 function appendClassToCarList(id) {
     $("#class-rest").text(id);
@@ -50,7 +50,7 @@ function appendClassToCarList(id) {
 }
 
 function onClickSaleClassBtn() {
-    $.post('http://zrp_vehsealer/getSaleVehicles', JSON.stringify({})).done(function (data) {
+    $.post('http://zrp_interface/veh_sealer/getSaleVehicles', JSON.stringify({})).done(function (data) {
         $("#class-rest").text("Usados");
         let list = $("#cars").contents().find("#car-list");
         list.empty();
@@ -74,7 +74,7 @@ function onClickSaleClassBtn() {
 }
 
 function onClickSellClassBtn() {
-    $.post('http://zrp_vehsealer/getVehicles', JSON.stringify({})).done(function (data) {
+    $.post('http://zrp_interface/veh_sealer/getVehicles', JSON.stringify({})).done(function (data) {
         $("#class-rest").text("Vender");
         let list = $("#cars").contents().find("#car-list");
         list.empty();

@@ -2,6 +2,7 @@ body {
     background-color: transparent;
     margin: 0px;
     padding: 0px;
+    display: block;
 }
 
 .container-fluid {
@@ -43,6 +44,8 @@ body {
     font-size: 1.8vw;
     text-align: center;
     font-family: 'Thasadith', sans-serif;
+    color: white;
+
 }
 
 .no-pm {
@@ -58,6 +61,7 @@ header #class-name {
     font-size: 1.8vw;
     vertical-align: middle;
     text-align: center;
+    color: white;
     font-family: 'Thasadith', sans-serif;
 }
 
@@ -75,20 +79,18 @@ nav {
 .class {
     height: 10%;
     font-size: 0.83vw;
-    line-height: 320%;
     background-color: #e2e3e5;
     width: 100%;
     text-align: center;
-    vertical-align: middle;
+    padding: 5.5% 0;
     transition: background-color 0.3s;
 }
+
+
 .class:hover {
     cursor: pointer;
     background-color: #d5d6d8;
 }
-#class-last {
-}
-
 
 #class-sell {
     position: absolute;
@@ -127,38 +129,30 @@ iframe {
     box-shadow: 2.5px 0 10px 0px #aaaaaa;
 }
 
-.car img {
+.car-img {
     border-radius: 15px 0 0 15px;
     height: 100%;
     width: 60%;
 }
 
-.car .car-container {
+.car-container {
     float: right;
     height: 60%;
     width: 40%;
 }
 
-.car .car-container p {
+.car-container p {
     text-align: center;
     font-size: 2.3vw;
 }
 
-.car .car-container .price {
+.car-container .price {
     text-align: left;
     padding-left: 9%;
     font-size: 1.9vw;
 }
 
-.car .car-desc {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 40%;
-    width: 100%;
-}
-
-.btn-success {
+.car-btn {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -166,6 +160,31 @@ iframe {
     text-align: center;
     width: 40%;
     font-size: 2vw;
+}
+
+.used-car {
+    position: relative;
+    margin-top: 4vw;
+    background-color: #EBEDEF;
+    border-radius: 15px;
+    height: 25.0vw;
+    box-shadow: 2.5px 0 10px 0px #aaaaaa;
+}
+
+.used-car-container {
+    position: relative;
+    height: 60%;
+}
+
+.used-car-desc {
+    position: absolute;
+    bottom: 0;
+    height: 40%;
+    width: 100%;
+    padding: 0.5vw 3vw;
+    text-indent: 3vw;
+    text-align: justify;
+    font-size: 1.9vw;
 }
 
 ::-webkit-scrollbar {

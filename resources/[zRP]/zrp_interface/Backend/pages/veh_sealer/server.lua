@@ -1,35 +1,27 @@
-local Proxy = module("zrp", "lib/Proxy")
-local Tunnel = module("zrp", "lib/Tunnel")
-
-local cfg = module("zrp_vehsealer", "Config")
-
-local zRP = Proxy.getInterface("zRP", "zrp_vehsealer")
-
-local t = {}
-
-Tunnel.bindInterface("zrp_vehsealer", t)
+local cfg = module("zrp_interface", "Config/veh_sealer/Config")
 
 local client_vehicles = {}
 local client_classes = {}
 
 local server_vehicles = {}
 
-    for k, v in pairs(cfg.cars) do
-        table.insert(client_classes, k)
-        for x, y in pairs(v) do
-            table.insert(client_vehicles, { class = k, model = string.upper(x), name = y.name, price = y.price, image = y.image })
-        server_vehicles[string.upper(x)] = y
+for k, v in pairs(cfg.vehicles) do
+    table.insert(client_classes, k)
+    for x, y in pairs(v) do
+        table.insert(client_vehicles, { class = k, model = string.lower(x), name = y.name, price = y.price, image = y.image })
+        server_vehicles[string.lower(x)] = y
     end
 end
 
 --print(json.encode(server_vehicles))
 
-SetTimeout(1000, function()
-    --print(json.encode(client_cars), json.encode(client_classes))
-    TriggerClientEvent("zrp_vehsealer:createTables", -1, client_vehicles, client_classes)
+AddEventHandler("zRP:playerSpawn", function (user_id, source, first_spawn)
+    if first_spawn then
+        TriggerClientEvent("veh_sealer:createTables", source, client_vehicles, client_classes)
+    end
 end)
 
-function t.buyVehicle(model)
+function tzRPI.buyVehicle(model)
     local user_id = zRP.getUserId(source)
     local vehicle = server_vehicles[model]
     if user_id and vehicle then
@@ -44,7 +36,7 @@ function t.buyVehicle(model)
     end
 end
 
-function t.buySaleVehicle(owner_id, model)
+function tzRPI.buySaleVehicle(owner_id, model)
     local user_id = zRP.getUserId(source)
     if user_id then
         local vehicle = zRP.query("zRP/get_sale_vehicle", {user_id = owner_id, vehicle = model})[1]
@@ -73,18 +65,18 @@ function t.buySaleVehicle(owner_id, model)
     end
 end
 
-function t.getPlayerVehicles()
+function tzRPI.getPlayerVehicles()
     local user_id = zRP.getUserId(source)
     if user_id then
         return generate_user_not_seized_vehicles(user_id)
     end
 end
 
-function t.getSaleVehicles()
+function tzRPI.getSaleVehicles()
     return generate_sale_vehicles(zRP.getUserId(source))
 end
 
-function t.getSaleVehicle(model, user_id)
+function tzRPI.getSaleVehicle(model, user_id)
     if not user_id then
         user_id = zRP.getUserId(source)
     end
@@ -92,7 +84,7 @@ function t.getSaleVehicle(model, user_id)
     return {price = rows[1].price or 0, description = rows[1].description or ""}
 end
 
-function t.editSaleVehicle(model, price, description)
+function tzRPI.editSaleVehicle(model, price, description)
     local user_id = zRP.getUserId(source)
     if user_id then
         zRP.execute("zRP/set_sale_vehicle", {user_id = user_id, vehicle = model, price = price, description = description})
@@ -100,7 +92,7 @@ function t.editSaleVehicle(model, price, description)
     end
 end
 
-function t.removeSaleVehicle(model)
+function tzRPI.removeSaleVehicle(model)
     local user_id = zRP.getUserId(source)
     if user_id then
         local user_vehicle = zRP.query("zRP/get_sale_vehicle", {user_id = user_id, vehicle = model})[1]
@@ -112,7 +104,7 @@ function t.removeSaleVehicle(model)
     end
 end
 
-function t.createAd(model, price, description)
+function tzRPI.createAd(model, price, description)
     local user_id = zRP.getUserId(source)
     if user_id then
         local user_vehicle = zRP.query("zRP/get_full_vehicle", {user_id = user_id, vehicle = model})[1]
@@ -129,12 +121,12 @@ end
 
 function user_has_vehicle(user_id, vehicle)
     for k, v in pairs(zRP.query("zRP/get_vehicles", {user_id = user_id})) do
-        if string.upper(v.vehicle) == vehicle then
+        if string.lower(v.vehicle) == vehicle then
             return true
         end
     end
     for k, v in pairs(zRP.query("zRP/get_sale_vehicles", {user_id = user_id})) do
-        if string.upper(v.vehicle) == vehicle then
+        if string.lower(v.vehicle) == vehicle then
             return true
         end
     end
@@ -144,7 +136,7 @@ end
 function generate_user_not_seized_vehicles(user_id)
     local vehicles = {}
     for k, v in pairs(zRP.query("zRP/get_vehicles_unseized", {user_id = user_id})) do
-        local model = string.upper(v.vehicle)
+        local model = string.lower(v.vehicle)
         local vehicle = server_vehicles[model]
         if vehicle then
             table.insert(vehicles, {model = model, name = vehicle.name, image = vehicle.image})
@@ -156,7 +148,7 @@ end
 function generate_sale_vehicles(user_id)
     local vehicles = {}
     for k, v in pairs(zRP.query("zRP/get_all_sale_vehicles", {})) do
-        local model = string.upper(v.vehicle)
+        local model = string.lower(v.vehicle)
         local vehicle = server_vehicles[model]
         if user_id == v.user_id then
             v.user_id = 0

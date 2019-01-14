@@ -5,9 +5,9 @@ const toast = swal.mixin({
     timer: 3000
 });
 
-document.onkeyup = function (data) {
+document.onkeydown = function (data) {
     if (data.which == 27) {
-        $.post('http://zrp_vehsealer/close');
+        $.post('http://zrp_interface/close');
     }
 };
 
@@ -23,7 +23,7 @@ function onClickCarBtn(id) {
         cancelButtonText: "Cancelar"
     }).then(function (result) {
         if (result.value) {
-            $.post('http://zrp_vehsealer/buy', JSON.stringify({model: id})).done(function (data) {
+            $.post('http://zrp_interface/veh_sealer/buy', JSON.stringify({model: id})).done(function (data) {
                 if (data === 'ok') {
                     swal(
                         'Compra efetuada com sucesso!',
@@ -55,7 +55,7 @@ function onClickSaleCarBtn(id) {
     }).then(function (result) {
         if (result.value) {
             let array = id.split("|");
-            $.post('http://zrp_vehsealer/buySaleVehicle', JSON.stringify({model: array[1], user_id: parseInt(array[0])})).done(function (data) {
+            $.post('http://zrp_interface/veh_sealer/buySaleVehicle', JSON.stringify({model: array[1], user_id: parseInt(array[0])})).done(function (data) {
                 if (data[0] === 'ok') {
                     swal(
                         'Compra efetuada com sucesso!',
@@ -93,7 +93,7 @@ function onClickSaleCarBtn(id) {
 }
 
 function onClickEditSaleCarBtn(id) {
-    $.post('http://zrp_vehsealer/getSaleVehicle', JSON.stringify({model: id})).done(function (data) {
+    $.post('http://zrp_interface/veh_sealer/getSaleVehicle', JSON.stringify({model: id})).done(function (data) {
         swal({
             title: 'Editar anuncio',
             showCancelButton: true,
@@ -125,7 +125,7 @@ function onClickEditSaleCarBtn(id) {
                         cancelButtonText: "Cancelar"
                     }).then(function (result) {
                         if (result.value) {
-                            $.post('http://zrp_vehsealer/removeSaleVehicle', JSON.stringify({model: id})).done(function (data) {
+                            $.post('http://zrp_interface/veh_sealer/removeSaleVehicle', JSON.stringify({model: id})).done(function (data) {
                                 if (data[0] === 'ok') {
                                     swal({
                                         toast: true,
@@ -179,7 +179,7 @@ function onClickEditSaleCarBtn(id) {
                         title: 'Descricao invalida'
                     });
                 } else {
-                    $.post('http://zrp_vehsealer/editSaleVehicle', JSON.stringify({
+                    $.post('http://zrp_interface/veh_sealer/editSaleVehicle', JSON.stringify({
                         model: id,
                         price: price,
                         description: desc
@@ -270,7 +270,7 @@ function onClickSellBtn(id) {
                     title: 'Descricao invalida'
                 });
             } else {
-                $.post('http://zrp_vehsealer/sell', JSON.stringify({
+                $.post('http://zrp_interface/veh_sealer/sell', JSON.stringify({
                     model: id,
                     price: price,
                     description: desc
