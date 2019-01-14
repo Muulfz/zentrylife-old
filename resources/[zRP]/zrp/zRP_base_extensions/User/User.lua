@@ -120,7 +120,6 @@ function zRP.getSpawns(user_id)
 
     return 0
 end
-
 function zRP.getUserId(source)
     if source ~= nil then
         local ids = GetPlayerIdentifiers(source)

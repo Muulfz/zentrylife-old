@@ -293,9 +293,7 @@ function zRP.openInventory(source)
       local hue = math.floor(math.max(125*(1-weight/max_weight), 0))
       menudata["<div class=\"dprogressbar\" data-value=\""..string.format("%.2f",weight/max_weight).."\" data-color=\"hsl("..hue..",100%,50%)\" data-bgcolor=\"hsl("..hue..",100%,25%)\" style=\"height: 12px; border: 3px solid black;\"></div>"] = {function()end, lang.inventory.info_weight({string.format("%.2f",weight),max_weight})}
       local kitems = {}
-      menudata.onclose = function ()
-        zRP.openQuickMenu(source)
-      end
+
       -- choose callback, nested menu, create the item menu
       local choose = function(player,choice)
         if string.sub(choice,1,1) ~= "@" then -- ignore info choices
@@ -305,8 +303,8 @@ function zRP.openInventory(source)
 
           -- add computed choices
           for k,v in pairs(choices) do
-            submenudata[k] = v
-          end
+          submenudata[k] = v
+        end
 
           -- nest menu
           submenudata.onclose = function()

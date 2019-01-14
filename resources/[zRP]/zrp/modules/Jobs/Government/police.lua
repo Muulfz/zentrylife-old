@@ -63,7 +63,7 @@ end
 local menu_pc = { name = lang.police.pc.title(), css = { top = "75px", header_color = "rgba(0,125,255,0.75)" } }
 
 -- search identity by registration
-local function ch_searchreg(player, choice)
+ function zRPMenu.police_searchreg(player, choice)
     local reg = zRP.prompt(player, lang.police.pc.searchreg.prompt(), "")
     local user_id = zRP.getUserByRegistration(reg)
     if user_id then
@@ -103,7 +103,7 @@ local function ch_searchreg(player, choice)
 end
 
 -- show police records by registration
-local function ch_show_police_records(player, choice)
+function zRPMenu.police_show_police_records(player, choice)
     local reg = zRP.prompt(player, lang.police.pc.searchreg.prompt(), "")
     local user_id = zRP.getUserByRegistration(reg)
     if user_id then
@@ -115,7 +115,7 @@ local function ch_show_police_records(player, choice)
 end
 
 -- delete police records by registration
-local function ch_delete_police_records(player, choice)
+function zRPMenu.police_delete_police_records(player, choice)
     local reg = zRP.prompt(player, lang.police.pc.searchreg.prompt(), "")
     local user_id = zRP.getUserByRegistration(reg)
     if user_id then
@@ -127,7 +127,7 @@ local function ch_delete_police_records(player, choice)
 end
 
 -- close business of an arrested owner
-local function ch_closebusiness(player, choice)
+function zRPMenu.police_closebusiness(player, choice)
     local nplayer = zRPclient.getNearestPlayer(player, 5)
     local nuser_id = zRP.getUserId(nplayer)
     if nuser_id then
@@ -147,7 +147,7 @@ local function ch_closebusiness(player, choice)
 end
 
 -- track vehicle
-local function ch_trackveh(player, choice)
+function zRPMenu.police_trackveh(player, choice)
     local reg = zRP.prompt(player, lang.police.pc.trackveh.prompt_reg(), "")
     local user_id = zRP.getUserByRegistration(reg)
     if user_id then
@@ -174,11 +174,11 @@ local function ch_trackveh(player, choice)
     end
 end
 
-menu_pc[lang.police.pc.searchreg.title()] = { ch_searchreg, lang.police.pc.searchreg.description() }
-menu_pc[lang.police.pc.trackveh.title()] = { ch_trackveh, lang.police.pc.trackveh.description() }
-menu_pc[lang.police.pc.records.show.title()] = { ch_show_police_records, lang.police.pc.records.show.description() }
-menu_pc[lang.police.pc.records.delete.title()] = { ch_delete_police_records, lang.police.pc.records.delete.description() }
-menu_pc[lang.police.pc.closebusiness.title()] = { ch_closebusiness, lang.police.pc.closebusiness.description() }
+menu_pc[lang.police.pc.searchreg.title()] = { zRPMenu.police_searchreg, lang.police.pc.searchreg.description() }
+menu_pc[lang.police.pc.trackveh.title()] = { zRPMenu.police_trackveh, lang.police.pc.trackveh.description() }
+menu_pc[lang.police.pc.records.show.title()] = { zRPMenu.police_show_police_records, lang.police.pc.records.show.description() }
+menu_pc[lang.police.pc.records.delete.title()] = { zRPMenu.police_delete_police_records, lang.police.pc.records.delete.description() }
+menu_pc[lang.police.pc.closebusiness.title()] = { zRPMenu.police_closebusiness, lang.police.pc.closebusiness.description() }
 
 menu_pc.onclose = function(player)
     -- close pc gui
@@ -197,39 +197,6 @@ local function pc_leave(source, area)
 end
 
 -- main menu choices
-
----- handcuff
-local choice_handcuff = { function(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player, 10)
-    if nplayer then
-        local nuser_id = zRP.getUserId(nplayer)
-        if nuser_id then
-            zRPclient._toggleHandcuff(nplayer)
-        else
-            zRPclient._notify(player, lang.common.no_player_near())
-        end
-    end
-end, lang.police.menu.handcuff.description() }
-
----- drag
-local choice_drag = { function(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player, 10)
-    if nplayer then
-        local nuser_id = zRP.getUserId(nplayer)
-        if nuser_id then
-            local followed = zRPclient.getFollowedPlayer(nplayer)
-            if followed ~= player then
-                -- drag
-                zRPclient._followPlayer(nplayer, player)
-            else
-                -- stop follow
-                zRPclient._followPlayer(nplayer)
-            end
-        else
-            zRPclient._notify(player, lang.common.no_player_near())
-        end
-    end
-end, lang.police.menu.drag.description() }
 
 ---- putinveh
 --[[
@@ -260,10 +227,15 @@ local choice_putinveh = {function(player,choice)
 end,lang.police.menu.putinveh.description()}
 --]]
 
-local choice_putinveh = { function(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player, 10)
-    local nuser_id = zRP.getUserId(nplayer)
-    if nuser_id then
+function zRPMenu.police_putinveh(player, nplayer, veh)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
         if zRPclient.isHandcuffed(nplayer) then
             -- check handcuffed
             zRPclient._putInNearestVehicleAsPassenger(nplayer, 5)
@@ -273,12 +245,17 @@ local choice_putinveh = { function(player, choice)
     else
         zRPclient._notify(player, lang.common.no_player_near())
     end
-end, lang.police.menu.putinveh.description() }
+end
 
-local choice_getoutveh = { function(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player, 10)
-    local nuser_id = zRP.getUserId(nplayer)
-    if nuser_id then
+function zRPMenu.police_getoutveh(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
         if zRPclient.isHandcuffed(nplayer) then
             -- check handcuffed
             zRPclient._ejectVehicle(nplayer)
@@ -288,10 +265,10 @@ local choice_getoutveh = { function(player, choice)
     else
         zRPclient._notify(player, lang.common.no_player_near())
     end
-end, lang.police.menu.getoutveh.description() }
+end
 
 ---- askid
-local choice_askid = { function(player, choice)
+function zRPMenu.police_askid (player, nplayer)
     local nplayer = zRPclient.getNearestPlayer(player, 10)
     local nuser_id = zRP.getUserId(nplayer)
     if nuser_id then
@@ -334,13 +311,20 @@ local choice_askid = { function(player, choice)
     else
         zRPclient._notify(player, lang.common.no_player_near())
     end
-end, lang.police.menu.askid.description() }
+end
 
 ---- police check
-local choice_check = { function(player, choice)
-    local nplayer = zRPclient.getNearestPlayer(player, 5)
-    local nuser_id = zRP.getUserId(nplayer)
-    if nuser_id then
+function zRPMenu.police_check(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
+        local user_id = zRP.getUserId(player)
+        local nuser_id = zRP.getUserId(nplayer)
         zRPclient._notify(nplayer, lang.police.menu.check.checked())
         local weapons = zRPclient.getWeapons(nplayer)
         -- prepare display data (money, items, weapons)
@@ -368,12 +352,18 @@ local choice_check = { function(player, choice)
     else
         zRPclient._notify(player, lang.common.no_player_near())
     end
-end, lang.police.menu.check.description() }
+end
 
-local choice_seize_weapons = { function(player, choice)
-    local user_id = zRP.getUserId(player)
-    if user_id then
-        local nplayer = zRPclient.getNearestPlayer(player, 5)
+function zRPMenu.police_seize_weapons(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
+        local user_id = zRP.getUserId(player)
         local nuser_id = zRP.getUserId(nplayer)
         if nuser_id and zRP.hasPermission(nuser_id, "police.seizable") then
             if zRPclient.isHandcuffed(nplayer) then
@@ -397,12 +387,18 @@ local choice_seize_weapons = { function(player, choice)
             zRPclient._notify(player, lang.common.no_player_near())
         end
     end
-end, lang.police.menu.seize.weapons.description() }
+end
 
-local choice_seize_items = { function(player, choice)
-    local user_id = zRP.getUserId(player)
-    if user_id then
-        local nplayer = zRPclient.getNearestPlayer(player, 5)
+function zRPMenu.police_seize_items(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
+        local user_id = zRP.getUserId(player)
         local nuser_id = zRP.getUserId(nplayer)
         if nuser_id and zRP.hasPermission(nuser_id, "police.seizable") then
             if zRPclient.isHandcuffed(nplayer) then
@@ -448,13 +444,19 @@ local choice_seize_items = { function(player, choice)
             zRPclient._notify(player, lang.common.no_player_near())
         end
     end
-end, lang.police.menu.seize.items.description() }
+end
 
 -- toggle jail nearest player
-local choice_jail = { function(player, choice)
-    local user_id = zRP.getUserId(player)
-    if user_id then
-        local nplayer = zRPclient.getNearestPlayer(player, 5)
+function zRPMenu.police_jail(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
+        local user_id = zRP.getUserId(player)
         local nuser_id = zRP.getUserId(nplayer)
         if nuser_id then
             if zRPclient.isJailed(nplayer) then
@@ -490,12 +492,18 @@ local choice_jail = { function(player, choice)
             zRPclient._notify(player, lang.common.no_player_near())
         end
     end
-end, lang.police.menu.jail.description() }
+end
 
-local choice_fine = { function(player, choice)
-    local user_id = zRP.getUserId(player)
-    if user_id then
-        local nplayer = zRPclient.getNearestPlayer(player, 5)
+function zRPMenu.police_fine(player, nplayer)
+    local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+    local is_ok = false
+    for k, v in pairs(nplayer_check) do
+        if k == nplayer then
+            is_ok = true
+        end
+    end
+    if is_ok then
+        local user_id = zRP.getUserId(player)
         local nuser_id = zRP.getUserId(nplayer)
         if nuser_id then
             local money = zRP.getMoney(nuser_id) + zRP.getBankMoney(nuser_id)
@@ -531,7 +539,7 @@ local choice_fine = { function(player, choice)
             zRPclient._notify(player, lang.common.no_player_near())
         end
     end
-end, lang.police.menu.fine.description() }
+end
 
 local choice_store_weapons = { function(player, choice)
     local user_id = zRP.getUserId(player)
@@ -589,54 +597,14 @@ zRP.registerMenuBuilder("quick_menu", function(add, data)
                 local menu = zRP.buildMenu("police", { player = player })
                 menu.name = lang.police.title()
                 menu.css = { top = "75px", header_color = "rgba(0,125,255,0.75)" }
-
-                if zRP.hasPermission(user_id, "police.handcuff") then
-                    menu[lang.police.menu.handcuff.title()] = choice_handcuff
+                if zRP.hasPermission(user_id, "police.store_weapons") then
+                    choices[lang.police.menu.store_weapons.title()] = choice_store_weapons
                 end
-
-                if zRP.hasPermission(user_id, "police.drag") then
-                    menu[lang.police.menu.drag.title()] = choice_drag
-                end
-
-                if zRP.hasPermission(user_id, "police.putinveh") then
-                    menu[lang.police.menu.putinveh.title()] = choice_putinveh
-                end
-
-                if zRP.hasPermission(user_id, "police.getoutveh") then
-                    menu[lang.police.menu.getoutveh.title()] = choice_getoutveh
-                end
-
-                if zRP.hasPermission(user_id, "police.check") then
-                    menu[lang.police.menu.check.title()] = choice_check
-                end
-
-                if zRP.hasPermission(user_id, "police.seize.weapons") then
-                    menu[lang.police.menu.seize.weapons.title()] = choice_seize_weapons
-                end
-
-                if zRP.hasPermission(user_id, "police.seize.items") then
-                    menu[lang.police.menu.seize.items.title()] = choice_seize_items
-                end
-
-                if zRP.hasPermission(user_id, "police.jail") then
-                    menu[lang.police.menu.jail.title()] = choice_jail
-                end
-
-                if zRP.hasPermission(user_id, "police.fine") then
-                    menu[lang.police.menu.fine.title()] = choice_fine
-                end
-
                 zRP.openMenu(player, menu)
             end }
         end
 
-        if zRP.hasPermission(user_id, "police.askid") then
-            choices[lang.police.menu.askid.title()] = choice_askid
-        end
 
-        if zRP.hasPermission(user_id, "police.store_weapons") then
-            choices[lang.police.menu.store_weapons.title()] = choice_store_weapons
-        end
 
         add(choices)
     end

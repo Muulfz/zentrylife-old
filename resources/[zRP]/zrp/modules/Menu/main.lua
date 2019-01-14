@@ -7,7 +7,8 @@
 
 local htmlEntities = module("lib/htmlEntities")
 local lang = zRP.lang
-
+local cfgemote = module("cfg/Modules/emotes")
+local emotes = cfgemote.emotes
 
 
 
@@ -39,7 +40,7 @@ zRP.registerMenuBuilder("main", function(add, data)
 end)
 
 -- add identity to main menu
-zRP.registerMenuBuilder("main", function(add, data)
+zRP.registerMenuBuilder("quick_menu", function(add, data)
     local player = data.player
 
     local user_id = zRP.getUserId(player)
