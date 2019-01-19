@@ -8,7 +8,8 @@ namespace ZentryCSharp_Utils.Server {
         public static string Motd = "Cake is a lie";
 
         public ServerScript() {
-            EventHandlers["zRP:UUID_GENERATOR"] += new Action(new GuidGenerator().UUID_Generator);
+            //EventHandlers["zRP:UUID_GENERATOR"] += new Action(new GuidGenerator().UUID_Generator);
+            EventHandlers["energy_tax_round"] += new Action<dynamic>(o => new EnergyTaxRound(o).convertUTF8());
             eaiFeio();
             Tick += OnTick;
         }

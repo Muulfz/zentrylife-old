@@ -191,6 +191,7 @@ local revive_seq = {
 }
 
 function zRPMenu.choice_revive(player, nplayer)
+    local user_id = zRP.getUserId(player)
     local nplayer_check = zRPclient.getNearestPlayers(player, 15)
     local is_ok = false
     for k, v in pairs(nplayer_check) do

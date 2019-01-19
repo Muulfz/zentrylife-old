@@ -10,6 +10,7 @@ function zRP.getUserIdByIdentifiers(ids)
     if ids and #ids then
         -- search identifiers
         for i = 1, #ids do
+            print(ids[i])
             if not config.ignore_ip_identifier or (string.find(ids[i], "ip:") == nil) then
                 -- ignore ip identifier
                 local rows = zRP.query("zRP/userid_byidentifier", { identifier = ids[i] })

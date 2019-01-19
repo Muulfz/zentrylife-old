@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\Muulfz\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Muulfz\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_ZentryCSharp_Utils.211854826.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Muulfz\source\repos\__resource.lua" t="Include" />
-    <e p="C:\Users\Muulfz\source\repos\ZentryCSharp_Utils" t="IncludeFlat">
+    <e p="C:\Users\Muulfz\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_ZentryCSharp_Utils.2022098461.00" t="ExcludeRecursive" />
+    <e p="D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\source\__resource.lua" t="Include" />
+    <e p="D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\source\ZentryCSharp_Utils" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="Solution Items" t="Include" />
       <e p="ZentryCSharp_Utils.Client" t="IncludeRecursive">
@@ -27,7 +27,9 @@
         </e>
         <e p="EventHandleManager.cs" t="Include" />
         <e p="Events" t="Include">
+          <e p="EnergyTaxRound.cs" t="Include" />
           <e p="GuidGenerator.cs" t="Include" />
+          <e p="JsonApi.cs" t="Include" />
         </e>
         <e p="Handles" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
@@ -48,5 +50,6 @@
       <e p="ZentryCSharp_Utils.sln" t="IncludeFlat" />
     </e>
     <e p="D:\Users\Muulfz\Projects\Fivem\NewZentryLife\resources\[Premium]\ZentryCSharp_Utils" t="ExcludeRecursive" />
+    <e p="D:\Users\Muulfz\Projects\Fivem\ZRP-Premium\resources\[Premium]\ZentryCSharp_Utils" t="ExcludeRecursive" />
   </component>
 </project>

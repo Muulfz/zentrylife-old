@@ -560,3 +560,53 @@ AddEventHandler("zRP:playerSpawn",function(user_id, source, first_spawn)
 end)
 
 
+function zRP.sendItem(user_id, nuser_id, name)
+  local player = zRP.getUserSource(user_id)
+  local amount = zRP.prompt(zRP.getUserSource(user_id), "Quantidade", "")
+  amount = parseInt(amount)
+  print(name)
+  if zRP.tryGetInventoryItem(user_id,name,amount,false) then
+    zRP.giveInventoryItem(nuser_id,name,amount,true)
+  else
+    zRPclient._notify(player,"Sem item suficiente")
+  end
+  zRP.openQuickMenu(player)
+end
+
+--[[
+function zRPMenu.givePlayerItem(player, nplayer)
+  local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+  local is_ok = false
+  for k, v in pairs(nplayer_check) do
+    if k == nplayer then
+      is_ok = true
+    end
+  end
+  if is_ok then
+    local menuitem = {}
+    local user_id = zRP.getUserId(player)
+    local nuser_id = zRP.getUserId(nplayer)
+    print("1")
+    --local menuitem = zRP.buildMenu("send_player",{ player = player})
+    menuitem.name = "Enviar para Player"
+    menuitem.css = { top="75px", header_color="rgba(0,125,255,0.75)"}
+    menuitem.close = function(player)
+      zRP.openQuickMenu(player)
+    end
+    print("2")
+    local data = zRP.getUserDataTable(user_id)
+    for k, v in pairs(data.inventory) do
+      local name, description, weight = zRP.getItemDefinition(k)
+      print(name)
+      menuitem[name] = { function() zRP.sendItem(user_id, nuser_id, k) end, lang.inventory.iteminfo({ v.amount, description, string.format("%.2f", weight) }) }
+    end
+    menuitem["<= Voltar"] = { function() zRP.openQuickMenu(player) end, "Voltar ao menu inicial"}
+    print("MENU ABRINDO")
+    print(menuitem)
+    zRP.openMenu(player, menuitem)
+    print("ABRIUUU")
+  else
+    zRP.openQuickMenu(player)
+    zRPclient._notify(player, "Player Esta longe")
+  end
+end]]

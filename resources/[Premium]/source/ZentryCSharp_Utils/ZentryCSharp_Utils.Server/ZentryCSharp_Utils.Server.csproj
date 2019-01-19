@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="Discord\DiscordManager.cs" />
     <Compile Include="EventHandleManager.cs" />
+    <Compile Include="Events\EnergyTaxRound.cs" />
     <Compile Include="Events\GuidGenerator.cs" />
+    <Compile Include="Events\JsonApi.cs" />
     <Compile Include="ServerScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

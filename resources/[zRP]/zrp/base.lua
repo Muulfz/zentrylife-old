@@ -28,16 +28,40 @@ end
 zRPclient = Tunnel.getInterface("zRP") -- server -> client tunnel
 
 
-local user = module("zRP_base_extensions/User/Manager") --TODO PCALL
+if pcall(function()
+  local user = module("zRP_base_extensions/User/Manager")
+end) then
+  print("[zRP] User System Module are Loader")
+else
+  print("[zRP] User System are not found")
+end
 
-local db_manager = module("zRP_base_extensions/DB/Manager") --TODO PCALL
+if pcall(function()
+  local db_manager = module("zRP_base_extensions/DB/Manager")
+end) then
+  print("[zRP] DB System Module are Loader")
+else
+  print("[zRP] DB System are not found")
+end
+
 
 
 -- identification system
+if pcall(function()
+  local player = module("zRP_base_extensions/Player/Manager")
+end) then
+  print("[zRP] Player System Module are Loader")
+else
+  print("[zRP] Player System are not found")
+end
 
-local player = module("zRP_base_extensions/Player/Manager") -- TODO PCALL
-
-local server = module("zRP_base_extensions/Server/Manager") --TODO PCALL
+if pcall(function()
+  local server = module("zRP_base_extensions/Server/Manager")
+end) then
+  print("[zRP] Server System Module are Loader")
+else
+  print("[zRP] Server System are not found")
+end
 
 -- handlers
 

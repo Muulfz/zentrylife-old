@@ -62,7 +62,7 @@ zRP.registerMenuBuilder("quick_menu", function(add,data)
                     local menu = zRP.buildMenu(name, {player = player})
                     menu.name = name
                     menu.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
-                    menu.onclose = function(player) zRP.openQuickMenu(player) end -- nest menu
+                    menu["<= Voltar"] = { function() zRP.openQuickMenu(player) end, "Voltar ao menu inicial"}
                     if not is_block then
                         if zRP.hasPermission(user_id,lang.basic_menu.fine.perm()) then
                             menu[lang.basic_menu.fine.button()] = { function() zRPMenu.police_fine(player,k) end, lang.basic_menu.fine.desc()} -- Fines closeby player
@@ -81,6 +81,30 @@ zRP.registerMenuBuilder("quick_menu", function(add,data)
                         end
                         if zRP.hasPermission(user_id,"emergency.revive") and zRPclient.isInComa(k) then
                             menu[lang.emergency.menu.revive.title()] = { function() zRPMenu.choice_revive(player,k) end, lang.emergency.menu.revive.description() }
+                        end
+                        if zRP.hasPermission(user_id,"player.phone")then
+                            menu[lang.money.give.title()] = { function() zRPMenu.ch_give(player, k) end, lang.money.give.description()}
+                        end
+                        if zRP.hasPermission(user_id,"player.phone") then
+                            menu["GIVE ITEM"] = { function(player,choice)
+                                local itemmenu = zRP.buildMenu("item_menu",{player = player})
+                                itemmenu.name = "Enviar para Player"
+                                itemmenu.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
+                                if not is_block then
+                                    local user_id = zRP.getUserId(player)
+                                    local nuser_id = zRP.getUserId(k)
+                                    local data = zRP.getUserDataTable(user_id)
+                                    itemmenu["<= Voltar"] = { function() zRP.openQuickMenu(player) end, "Voltar ao menu inicial"}
+                                    for k, v in pairs(data.inventory) do
+                                        local name, description, weight = zRP.getItemDefinition(k)
+                                        if name ~= nil then
+                                            itemmenu[name] = { function() zRP.sendItem(user_id, nuser_id, k) end, lang.inventory.iteminfo({ v.amount, description}) }
+                                        end
+                                    end
+                                end
+
+                                zRP.openMenu(player,itemmenu)
+                            end}
                         end
                         if zRPclient.isHandcuffed(k) then
                             if zRP.hasPermission(user_id,lang.basic_menu.jail.perm()) then
@@ -192,7 +216,7 @@ zRP.registerMenuBuilder("quick_menu", function(add,data)
                 menu.onclose = function(player) zRP.openQuickMenu(player) end -- nest menu
                 if not is_block then
                     if zRP.hasPermission(user_id,lang.money.store.perm()) and zRP.getMoney(user_id) > 0 then
-                        menu[lang.money.give.title()] = {zRPMenu.ch_give, lang.money.give.description()}
+
                         menu[lang.money.store.button()] = {zRPMenu.player_store_money, lang.money.store.desc()} -- transforms money in wallet to money in inventory to be stored in houses and cars
                     end
                     menu[lang.basic_menu.mpay.button()] = {zRPMenu.player_mobilepay, lang.basic_menu.mpay.desc()} -- transfer money through phone

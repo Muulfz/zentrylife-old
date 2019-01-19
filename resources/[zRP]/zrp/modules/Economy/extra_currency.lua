@@ -27,7 +27,7 @@ end
 
 -- try a payment
 -- return true or false (debited if true)
-function zRP.tryPayment(user_id,amount)
+function zRP.tryPaymentUSD(user_id,amount)
     local money = zRP.getMoneyUSD(user_id)
     if amount >= 0 and money >= amount then
         zRP.setMoneyUSD(user_id,money-amount)

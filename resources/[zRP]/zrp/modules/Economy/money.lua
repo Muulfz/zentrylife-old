@@ -171,11 +171,17 @@ AddEventHandler("zRP:playerSpawn",function(user_id, source, first_spawn)
   end
 end)
 
-function zRPMenu.ch_give(player,choice)
+function zRPMenu.ch_give(player,nplayer)
   -- get nearest player
   local user_id = zRP.getUserId(player)
-  if user_id then
-    local nplayer = zRPclient.getNearestPlayer(player,10)
+  local nplayer_check = zRPclient.getNearestPlayers(player, 15)
+  local is_ok = false
+  for k, v in pairs(nplayer_check) do
+    if k == nplayer then
+      is_ok = true
+    end
+  end
+  if is_ok then
     if nplayer then
       local nuser_id = zRP.getUserId(nplayer)
       if nuser_id then
